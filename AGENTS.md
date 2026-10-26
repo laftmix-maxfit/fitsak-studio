@@ -26,7 +26,7 @@ English is the root (`/`), Ukrainian is `/ua/`. Both must stay identical in cont
 
 ## Analytics
 
-GA4 loads only when `GA_MEASUREMENT_ID` is a real ID (not `G-XXXXXXXXXX`). Consent Mode v2: all storage `denied` by default; only `analytics_storage` can become `granted` after Accept. Choice is stored in `localStorage` key `fs_consent`. `?internal=1` stores `fs_internal=1` and adds `traffic_type: "internal"` to the GA config; `?internal=0` clears it. Microsoft Clarity loads only if `CLARITY_ID` is set **and** consent is granted.
+GA4 (`gtag.js`) loads only when `GA_MEASUREMENT_ID` is a real ID (not `G-XXXXXXXXXX`) **and** the visitor has accepted; no gtag snippet in HTML, no events are queued before consent. Consent Mode v2: all storage `denied` by default; only `analytics_storage` can become `granted` after Accept. Choice is stored in `localStorage` key `fs_consent`. `?internal=1` stores `fs_internal=1` and adds `traffic_type: "internal"` to the GA config; `?internal=0` clears it. Microsoft Clarity loads only if `CLARITY_ID` is set **and** consent is granted.
 
 Every event is sent only if `typeof gtag === "function"`, inside try/catch, with no personal data, and always carries `page_language` (`en` or `ua`).
 

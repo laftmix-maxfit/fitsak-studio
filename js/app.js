@@ -29,6 +29,7 @@
   function track(name, params) {
     try {
       if (typeof gtag !== "function") return;
+      if (gaOn && !gaLoaded) return; // no consent yet: nothing is queued or sent
       var p = params || {};
       p.page_language = LANG;
       gtag("event", name, p);
@@ -54,9 +55,14 @@
       analytics_storage: "denied",
       wait_for_update: 500
     });
-    if (store("get", CONSENT_KEY) === "granted") {
-      gtag("consent", "update", { analytics_storage: "granted" });
-    }
+  }
+
+  // gtag.js is fetched only after the visitor accepts; nothing from Google loads before that
+  var gaLoaded = false;
+  function loadGa() {
+    if (!gaOn || gaLoaded) return;
+    gaLoaded = true;
+    gtag("consent", "update", { analytics_storage: "granted" });
     gtag("js", new Date());
     var conf = { page_language: LANG };
     if (store("get", INTERNAL_KEY) === "1") conf.traffic_type = "internal";
@@ -100,13 +106,14 @@
 
   function applyConsent(state) {
     try {
-      if (typeof gtag === "function") gtag("consent", "update", { analytics_storage: state });
+      if (state === "granted") loadGa();
+      else if (gaLoaded && typeof gtag === "function") gtag("consent", "update", { analytics_storage: "denied" });
     } catch (e) { /* ignore */ }
     setClarity(state === "granted");
   }
 
   var saved = store("get", CONSENT_KEY);
-  if (saved === "granted") setClarity(true);
+  if (saved === "granted") { loadGa(); setClarity(true); }
   showBanner(saved !== "granted" && saved !== "denied");
 
   /* ---------- contacts from config ---------- */

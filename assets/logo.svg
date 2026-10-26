@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 134 25" width="134" height="25" role="img" aria-label="Fitsak Studio">
+  <style>
+    text { font-family: system-ui, "Segoe UI", Roboto, Arial, sans-serif; font-size: 21px; fill: #14181a; }
+    .b { font-weight: 800; }
+    .r { font-weight: 400; fill: #b93a0b; }
+    @media (prefers-color-scheme: dark) { text { fill: #ecebe5; } .r { fill: #ff9964; } }
+  </style>
+  <text x="0" y="19" textLength="132" lengthAdjust="spacing"><tspan class="b">Fitsak</tspan> <tspan class="r">Studio</tspan></text>
+</svg>

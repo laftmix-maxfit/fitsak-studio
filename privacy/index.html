@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en" data-site-lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy — Fitsak Studio</title>
+<meta name="description" content="What analytics Fitsak Studio uses, which cookies it sets and how to withdraw your consent.">
+<meta name="color-scheme" content="light dark">
+<link rel="canonical" href="https://laftmix-maxfit.github.io/fitsak-studio/privacy/">
+<link rel="alternate" hreflang="en" href="https://laftmix-maxfit.github.io/fitsak-studio/privacy/">
+<link rel="alternate" hreflang="uk" href="https://laftmix-maxfit.github.io/fitsak-studio/ua/privacy/">
+<link rel="alternate" hreflang="x-default" href="https://laftmix-maxfit.github.io/fitsak-studio/privacy/">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<link rel="stylesheet" href="../css/style.css?v=1">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="../">
+      <img src="../assets/logo.svg" width="134" height="25" alt="Fitsak Studio">
+      <span class="brand__by">Maksym Fitsak</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <a class="lang" href="../ua/privacy/" hreflang="uk" lang="uk" data-lang-switch="ua">UA</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main" class="wrap">
+  <div class="prose">
+    <h1>Privacy</h1>
+    <p>Last updated: 26 October 2026. This site is run by Maksym Fitsak (Fitsak Studio), based in Czechia. There are no accounts, no forms and no backend: I do not collect your name, email or any other personal details through this site.</p>
+
+    <h2>Analytics</h2>
+    <p>I use Google Analytics 4 to understand which pages and buttons are useful. It records things like page views, clicks on buttons and links, how far you scroll, the page language, and approximate location and device type. I do not send names, emails or other personal data to it.</p>
+    <p>The site uses Google Consent Mode v2. By default analytics storage is denied. If you press Reject, no analytics cookies are set. Google may still receive limited, cookieless pings without any identifier stored on your device.</p>
+    <p>If you press Accept, Google Analytics sets cookies in your browser:</p>
+    <div class="table-scroll">
+      <table>
+        <thead><tr><th>Cookie</th><th>Purpose</th><th>Lifetime</th></tr></thead>
+        <tbody>
+          <tr><td><code>_ga</code></td><td>Tells one visitor from another</td><td>up to 2 years</td></tr>
+          <tr><td><code>_ga_&lt;ID&gt;</code></td><td>Keeps session state</td><td>up to 2 years</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Advertising storage and personalisation are always denied on this site.</p>
+
+    <h2>Session recording</h2>
+    <p>I may switch on Microsoft Clarity (heatmaps and anonymised session replays) in the future. If I do, it will load only after you accept, and this page will be updated.</p>
+
+    <h2>What is stored in your browser</h2>
+    <ul>
+      <li><code>fs_consent</code> — your Accept/Reject choice (localStorage).</li>
+      <li><code>fs_internal</code> — set only in my own browsers, to exclude my visits from the statistics.</li>
+    </ul>
+
+    <h2>Change or withdraw your consent</h2>
+    <p>Use the <button type="button" class="linklike" data-consent-open>Cookie settings</button> link here or in the footer of any page and choose again. To remove cookies already set, clear this site’s data in your browser settings.</p>
+
+    <h2>Questions</h2>
+    <p>Write to me via the contact section on the <a href="../#contact">main page</a>.</p>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Fitsak Studio — Maksym Fitsak</p>
+    <nav aria-label="Footer">
+      <a href="../">Home</a>
+      <button type="button" class="linklike" data-consent-open>Cookie settings</button>
+      <a href="../ua/privacy/" hreflang="uk" lang="uk" data-lang-switch="ua">Українською</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="consent" id="consent" role="dialog" aria-label="Cookie consent" hidden>
+  <p>I use Google Analytics to see which pages work. It sets cookies only if you accept.</p>
+  <div class="consent__actions">
+    <button type="button" class="btn" data-consent="denied">Reject</button>
+    <button type="button" class="btn" data-consent="granted">Accept</button>
+  </div>
+</div>
+
+<script src="../js/config.js?v=1" defer></script>
+<script src="../js/app.js?v=1" defer></script>
+</body>
+</html>

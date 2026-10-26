@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://laftmix-maxfit.github.io/fitsak-studio/sitemap.xml
+Sitemap: https://fitsak.com/sitemap.xml

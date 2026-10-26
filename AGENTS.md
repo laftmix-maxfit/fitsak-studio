@@ -22,7 +22,7 @@ English is the root (`/`), Ukrainian is `/ua/`. Both must stay identical in cont
 | Base URL for canonical/hreflang/OG/JSON-LD/sitemap/robots | `site.json`, applied with `node scripts/set-base-url.mjs <https-url>` |
 | Rule check (forbidden APIs, `?v=`, canonical) | `node scripts/lint.mjs` |
 | Deploy and domain steps | `docs/DEPLOY.md` |
-| Do **not** create `CNAME` until the domain is bought and the owner says so | — |
+| Custom domain | `CNAME` file (`fitsak.com`); change it together with `site.json` |
 
 ## Analytics
 

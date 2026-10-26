@@ -26,21 +26,16 @@ All asset paths are relative, so the site works both under `/fitsak-studio/` and
 
 Edit only `js/config.js`: `GA_MEASUREMENT_ID`, `CONTACT_EMAIL`, `CONTACT_TELEGRAM` (no `@`), `CLARITY_ID` (optional). Bump `?v=` for `config.js` in all four HTML pages so browsers fetch the new file.
 
-## 4. Custom domain (fitsak.com or fitsakstudio.com)
+## 4. Custom domain (fitsak.com)
 
-1. Buy the domain. Decide on the main host: `fitsak.com` (apex) or `www.fitsak.com`.
-2. DNS at your registrar, for an **apex** domain, four `A` records and (optional) four `AAAA`:
+Status: DNS is set (four A records for the apex and `CNAME www -> laftmix-maxfit.github.io`), the `CNAME` file contains `fitsak.com`, and the base URL in `site.json` is `https://fitsak.com`.
 
-   | Type | Name | Value |
-   | --- | --- | --- |
-   | A | @ | 185.199.108.153 |
-   | A | @ | 185.199.109.153 |
-   | A | @ | 185.199.110.153 |
-   | A | @ | 185.199.111.153 |
-   | CNAME | www | laftmix-maxfit.github.io |
+After the `claude/custom-domain` branch is merged into `main` («пуш»):
 
-   Check the current addresses in the GitHub docs ("Managing a custom domain for your GitHub Pages site") before adding them.
-3. Tell me the domain. I will, in a separate SEO branch: create the `CNAME` file, run `node scripts/set-base-url.mjs https://fitsak.com` (updates canonical, hreflang, OG, JSON-LD, sitemap and robots), and bump `?v=`.
-4. After merge: repo → Settings → Pages → Custom domain → enter the domain → Save → tick *Enforce HTTPS* once the certificate is issued (can take up to an hour).
-5. In Google Search Console, add the domain property and submit `sitemap.xml`.
-6. In GA4, add the new domain if you filter by hostname.
+1. Repo -> Settings -> Pages -> Custom domain: enter `fitsak.com` -> Save (or `gh api -X PUT repos/laftmix-maxfit/fitsak-studio/pages -f cname=fitsak.com`). GitHub checks DNS and issues a certificate (can take up to an hour).
+2. Tick *Enforce HTTPS* once it becomes available (or `gh api -X PUT repos/laftmix-maxfit/fitsak-studio/pages -F https_enforced=true`).
+3. `www.fitsak.com` redirects to `fitsak.com` automatically when the apex is the custom domain.
+4. Google Search Console: add the `fitsak.com` domain property and submit `https://fitsak.com/sitemap.xml`.
+5. GA4: if you filter by hostname, add `fitsak.com`.
+
+To change the domain later: edit `CNAME`, run `node scripts/set-base-url.mjs https://new-domain`, run `node scripts/lint.mjs`.

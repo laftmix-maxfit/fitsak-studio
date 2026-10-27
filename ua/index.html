@@ -27,7 +27,7 @@
 <meta property="og:locale" content="uk_UA">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../css/style.css?v=1">
+<link rel="stylesheet" href="../css/style.css?v=2">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -200,6 +200,48 @@
         </article>
       </div>
       <p class="note">Ціни — відправна точка. Остаточну ціну називаю після короткого безкоштовного аудиту.</p>
+    </div>
+  </section>
+
+  <section class="section" id="examples" data-section="examples">
+    <div class="wrap">
+      <p class="eyebrow">Приклади відстеження</p>
+      <h2 class="h2">Як виглядає налаштування</h2>
+      <div class="examples">
+        <article class="example">
+          <h3>Інтернет-магазин</h3>
+          <p class="example__q">Де покупці відпадають між переглядом товару й оплатою?</p>
+          <ol class="funnel">
+            <li><code>view_item</code><span>відкриває сторінку товару</span></li>
+            <li><code>add_to_cart</code><span>додає в кошик</span></li>
+            <li><code>begin_checkout</code><span>починає оформлення</span></li>
+            <li><code>purchase</code><span>оплачує: сума та номер замовлення</span></li>
+          </ol>
+          <p class="example__note">Відвал — це різниця між будь-якими двома кроками у звіті-воронці GA4.</p>
+        </article>
+        <article class="example">
+          <h3>Запис і послуги</h3>
+          <p class="example__q">Які канали приносять записи і на якому кроці люди кидають форму?</p>
+          <ol class="funnel">
+            <li><code>cta_click</code><span>натискає «Записатися»</span></li>
+            <li><code>form_open</code><span>відкривається форма запису</span></li>
+            <li><code>form_field</code><span>заповнює поле (лише назва поля, без значення)</span></li>
+            <li><code>generate_lead</code><span>надсилає заявку</span></li>
+          </ol>
+          <p class="example__note">Також відстежую <code>phone_click</code> і <code>messenger_click</code> — для тих, хто дзвонить або пише.</p>
+        </article>
+        <article class="example">
+          <h3>Лендинг під рекламу</h3>
+          <p class="example__q">Які оголошення й ключові слова дають реальні заявки, а не просто кліки?</p>
+          <ol class="funnel">
+            <li><code>utm / gclid</code><span>приходить з реклами, джерело зберігається</span></li>
+            <li><code>scroll_depth</code><span>читає сторінку: 25, 50, 75%</span></li>
+            <li><code>cta_click</code><span>натискає головну кнопку</span></li>
+            <li><code>generate_lead</code><span>надсилає форму з <code>lead_id</code>, щоб знайти заявку у вашій CRM</span></li>
+          </ol>
+        </article>
+      </div>
+      <p class="note">Приклади схем, які я налаштовую. Реальний проект — <a href="#case">кейс NONA</a> вище.</p>
     </div>
   </section>
 

@@ -27,7 +27,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/style.css?v=1">
+<link rel="stylesheet" href="css/style.css?v=2">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -199,6 +199,48 @@
         </article>
       </div>
       <p class="note">Prices are starting points. I give the final price after a short free audit.</p>
+    </div>
+  </section>
+
+  <section class="section" id="examples" data-section="examples">
+    <div class="wrap">
+      <p class="eyebrow">Tracking examples</p>
+      <h2 class="h2">What a setup looks like</h2>
+      <div class="examples">
+        <article class="example">
+          <h3>Online store</h3>
+          <p class="example__q">Where do shoppers drop off between seeing a product and paying?</p>
+          <ol class="funnel">
+            <li><code>view_item</code><span>opens a product page</span></li>
+            <li><code>add_to_cart</code><span>adds it to the cart</span></li>
+            <li><code>begin_checkout</code><span>starts checkout</span></li>
+            <li><code>purchase</code><span>pays: order value and ID</span></li>
+          </ol>
+          <p class="example__note">Drop-off is the gap between any two steps in a GA4 funnel report.</p>
+        </article>
+        <article class="example">
+          <h3>Booking &amp; service business</h3>
+          <p class="example__q">Which channels bring bookings, and where do people give up on the form?</p>
+          <ol class="funnel">
+            <li><code>cta_click</code><span>clicks “Book”</span></li>
+            <li><code>form_open</code><span>the booking form opens</span></li>
+            <li><code>form_field</code><span>fills in a field (field name only, never the value)</span></li>
+            <li><code>generate_lead</code><span>sends the request</span></li>
+          </ol>
+          <p class="example__note">Also tracked: <code>phone_click</code> and <code>messenger_click</code>, for people who call or write instead.</p>
+        </article>
+        <article class="example">
+          <h3>Landing page with ads</h3>
+          <p class="example__q">Which ads and keywords bring real leads, not just clicks?</p>
+          <ol class="funnel">
+            <li><code>utm / gclid</code><span>arrives from an ad, source is kept</span></li>
+            <li><code>scroll_depth</code><span>reads the page: 25, 50, 75%</span></li>
+            <li><code>cta_click</code><span>clicks the main button</span></li>
+            <li><code>generate_lead</code><span>sends the form with <code>lead_id</code> to match it in your CRM</span></li>
+          </ol>
+        </article>
+      </div>
+      <p class="note">Examples of setups I build. Real project: see the <a href="#case">NONA case</a> above.</p>
     </div>
   </section>
 

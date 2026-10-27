@@ -125,6 +125,22 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .card .btn { align-self: flex-start; }
 .note { color: var(--muted); font-size: 0.9375rem; margin-top: 18px; }
 
+/* tracking examples */
+.examples { display: grid; gap: 14px; margin-top: 28px; }
+.example { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 24px; display: flex; flex-direction: column; gap: 14px; }
+.example h3 { font-size: 1.125rem; }
+.example__q { color: var(--muted); font-size: 1rem; }
+.example code { font-family: ui-monospace, "SFMono-Regular", Consolas, monospace; font-size: 0.9em; overflow-wrap: anywhere; }
+.funnel li { position: relative; padding: 0 0 14px 24px; }
+.funnel li:last-child { padding-bottom: 0; }
+.funnel li::before { content: ""; position: absolute; left: 0; top: 6px; width: 11px; height: 11px; border-radius: 50%; border: 2px solid var(--accent); background: var(--surface); }
+.funnel li::after { content: ""; position: absolute; left: 5px; top: 19px; bottom: 2px; width: 1px; background: var(--line); }
+.funnel li:last-child::before { background: var(--accent); }
+.funnel li:last-child::after { display: none; }
+.funnel li > code { display: block; font-weight: 700; font-size: 0.9375rem; color: var(--ink); }
+.funnel span { display: block; font-size: 0.875rem; color: var(--muted); }
+.example__note { font-size: 0.875rem; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 12px; margin-top: auto; }
+
 /* how */
 .steps { display: grid; gap: 14px; margin-top: 28px; counter-reset: step; }
 .steps li { counter-increment: step; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 22px; }
@@ -184,7 +200,7 @@ body.is-contact-visible .sticky-cta, body.has-consent .sticky-cta { display: non
   .nav__links { display: flex; }
   .hero { padding: 80px 0 88px; }
   .hero__grid { grid-template-columns: 1.4fr 1fr; gap: 56px; }
-  .problems, .steps, .cards { grid-template-columns: repeat(3, 1fr); }
+  .problems, .steps, .cards, .examples { grid-template-columns: repeat(3, 1fr); }
   .metrics { grid-template-columns: repeat(3, 1fr); }
   .shots { grid-template-columns: 260px 1fr; align-items: start; }
   .shot--desktop { grid-column: 1 / -1; }

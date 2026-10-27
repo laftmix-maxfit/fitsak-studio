@@ -37,7 +37,7 @@ Every event is sent only if `typeof gtag === "function"`, inside try/catch, with
 | `service_click` | `service_name` (`ga4_lead_tracking`, `google_ads_audit`, `fast_landing_page`), `page_language` | Click on a service card button |
 | `contact_click` | `channel` (`fiverr`, `email`, `telegram`, `email_copy`), `page_language` | Click on a contact button; `email_copy` after a successful copy |
 | `scroll_depth` | `percent` (25, 50, 75), `page_language` | Page scrolled to that depth, once each |
-| `section_view` | `section_name` (`hero`, `problem`, `case`, `services`, `how`, `about`, `contact`), `page_language` | Section visible as for `case_view`, once each |
+| `section_view` | `section_name` (`hero`, `problem`, `case`, `services`, `examples`, `how`, `about`, `contact`), `page_language` | Section visible as for `case_view`, once each (`examples` = "Tracking examples" block) |
 | `language_switch` | `to_language` (`en`, `ua`), `page_language` (language being left) | Click on a language link |
 | `outbound_click` | `link_domain`, `page_language` | Click on an http(s) link to another host (domain only, never the full URL) |
 

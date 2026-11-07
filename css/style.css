@@ -220,3 +220,18 @@ body.is-contact-visible .sticky-cta, body.has-consent .sticky-cta { display: non
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+.case__body { display: grid; gap: 24px; margin-bottom: 32px; }
+.case__h { font-size: 1.125rem; margin-bottom: 8px; }
+.case__h--results { margin-bottom: 14px; }
+.case__list { display: grid; gap: 10px; }
+.case__list li { position: relative; padding-left: 20px; }
+.case__list li::before { content: ""; position: absolute; left: 0; top: 0.7em; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); }
+.case__result { margin-top: 14px; max-width: 62ch; }
+.quote { margin: 24px 0 0; padding: 18px 22px; border-left: 3px solid var(--accent); background: var(--surface); border-radius: var(--radius); }
+.quote[hidden] { display: none; }
+.quote blockquote { margin: 0 0 8px; font-size: 1.125rem; }
+.quote figcaption { color: var(--muted); font-size: 0.9375rem; }
+@media (min-width: 720px) {
+  .case__body { grid-template-columns: 1fr 1.4fr; gap: 40px; }
+}

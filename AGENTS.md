@@ -38,7 +38,7 @@ Every event is sent only if `typeof gtag === "function"`, inside try/catch, with
 | `contact_click` | `channel` (`fiverr`, `email`, `telegram`, `email_copy`), `page_language` | Click on a contact button; `email_copy` after a successful copy |
 | `scroll_depth` | `percent` (25, 50, 75), `page_language` | Page scrolled to that depth, once each |
 | `section_view` | `section_name` (`hero`, `problem`, `case`, `services`, `examples`, `how`, `about`, `audit`, `contact`), `page_language` | Section visible as for `case_view`, once each (`examples` = "Tracking examples" block, `audit` = audit request form) |
-| `form_start` | `form_package` (`audit`, `analytics`, `repair`, `landing`, `ads`), `page_language` | First real interaction (focus or typing) in the audit form. Once per page view; programmatic focus from a package button does not count |
+| `audit_form_start` | `form_package` (`audit`, `analytics`, `repair`, `landing`, `ads`), `page_language` | First real interaction (focus or typing) in the audit form. Once per page view; programmatic focus from a package button does not count |
 | `generate_lead` | `form_package`, `lead_id` (`L` + time + 4 chars, also in the lead email), `lead_source` (`utm_source` or `direct`), `page_language` | Audit form accepted by Web3Forms. Never carries name, website, contact or message |
 | `language_switch` | `to_language` (`en`, `ua`), `page_language` (language being left) | Click on a language link |
 | `outbound_click` | `link_domain`, `page_language` | Click on an http(s) link to another host (domain only, never the full URL) |

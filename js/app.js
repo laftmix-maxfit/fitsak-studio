@@ -297,7 +297,7 @@
     function formStart() {
       if (startSent || suppressStart) return;
       startSent = true;
-      track("form_start", { form_package: packageSelect.value });
+      track("audit_form_start", { form_package: packageSelect.value });
     }
     form.addEventListener("focusin", formStart);
     form.addEventListener("input", formStart);
@@ -453,7 +453,7 @@
       e.preventDefault();
       selectPackage(d.package);
       scrollToAudit();
-      suppressStart = true; // only a real interaction counts as form_start
+      suppressStart = true; // only a real interaction counts as audit_form_start
       try { firstField.focus({ preventScroll: true }); } catch (err) { firstField.focus(); }
       suppressStart = false;
     }

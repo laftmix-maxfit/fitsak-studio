@@ -13,7 +13,7 @@
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="../apple-touch-icon.png">
-<link rel="stylesheet" href="../css/style.css?v=3">
+<link rel="stylesheet" href="../css/style.css?v=4">
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -32,22 +32,29 @@
 <main id="main" class="wrap">
   <div class="prose">
     <h1>Privacy</h1>
-    <p>Last updated: 26 October 2026. This site is run by Maksym Fitsak (Fitsak Studio), based in Czechia. There are no accounts, no forms and no backend: I do not collect your name, email or any other personal details through this site.</p>
+    <p>Last updated: 9 November 2026. This site is run by Maksym Fitsak (Fitsak Studio), based in Czechia. There are no accounts and no backend of my own. The only place where you can send me personal details is the audit request form, described below.</p>
+
+    <h2>Audit request form</h2>
+    <p>If you send the free audit form, I receive: your name, your website address, your email, Telegram or phone number (whichever you enter), the optional message, the package you chose, the page language, a request number and, if you arrived from an ad or a campaign link, its source (UTM tags and the Google click ID).</p>
+    <p>I use this only to reply to your request and to prepare the audit. The legal basis is your request: steps taken at your request before a possible contract. You also tick a consent box before sending.</p>
+    <p>The form is sent through Web3Forms, a service that forwards it to my email; it handles the data only to deliver the message. I keep requests in my mailbox for up to 12 months, or delete them earlier if you ask. To have your data corrected or deleted, write to me via the contact section on the <a href="../#contact">main page</a>.</p>
+    <p>Analytics receives only the package, the request number and the traffic source of a sent form. It never receives your name, website, contact or message.</p>
 
     <h2>Analytics</h2>
     <p>I use Google Analytics 4 to understand which pages and buttons are useful. It records things like page views, clicks on buttons and links, how far you scroll, the page language, and approximate location and device type. I do not send names, emails or other personal data to it.</p>
-    <p>The site uses Google Consent Mode v2. By default analytics storage is denied. If you press Reject, no analytics cookies are set. Nothing is loaded from Google until you accept.</p>
-    <p>If you press Accept, Google Analytics sets cookies in your browser:</p>
+    <p>The site uses Google Consent Mode v2. By default analytics and advertising storage are denied. If you press Reject, no cookies are set. Nothing is loaded from Google until you accept.</p>
+    <p>If you press Accept, Google Analytics and Google Ads conversion measurement set cookies in your browser:</p>
     <div class="table-scroll">
       <table>
         <thead><tr><th>Cookie</th><th>Purpose</th><th>Lifetime</th></tr></thead>
         <tbody>
           <tr><td><code>_ga</code></td><td>Tells one visitor from another</td><td>up to 2 years</td></tr>
           <tr><td><code>_ga_&lt;ID&gt;</code></td><td>Keeps session state</td><td>up to 2 years</td></tr>
+          <tr><td><code>_gcl_au</code></td><td>Google Ads: measures conversions after an ad click</td><td>up to 90 days</td></tr>
         </tbody>
       </table>
     </div>
-    <p>Advertising storage and personalisation are always denied on this site.</p>
+    <p>After Accept, ad storage and ad user data are allowed for conversion measurement only; ad personalisation stays denied. Before you accept, Google may still add ad click information (such as a click ID) to links inside this site so that conversions can be measured without cookies.</p>
 
     <h2>Session recording</h2>
     <p>I may switch on Microsoft Clarity (heatmaps and anonymised session replays) in the future. If I do, it will load only after you accept, and this page will be updated.</p>
@@ -56,6 +63,8 @@
     <ul>
       <li><code>fs_consent</code> — your Accept/Reject choice (localStorage).</li>
       <li><code>fs_internal</code> — set only in my own browsers, to exclude my visits from the statistics.</li>
+      <li><code>fs_utm_source</code>, <code>fs_utm_medium</code>, <code>fs_utm_campaign</code>, <code>fs_utm_content</code>, <code>fs_utm_term</code>, <code>fs_gclid</code> — campaign tags from the link you arrived with, kept in sessionStorage until you close the tab and attached to the audit form if you send it.</li>
+      <li><code>fs_debug</code> — set only in my own browsers while I test analytics.</li>
     </ul>
 
     <h2>Change or withdraw your consent</h2>
@@ -78,14 +87,14 @@
 </footer>
 
 <div class="consent" id="consent" role="dialog" aria-label="Cookie consent" hidden>
-  <p>I use Google Analytics to see which pages work. It sets cookies only if you accept.</p>
+  <p>I use Google Analytics and Google Ads measurement to see what works. Cookies are set only if you accept.</p>
   <div class="consent__actions">
     <button type="button" class="btn" data-consent="denied">Reject</button>
     <button type="button" class="btn" data-consent="granted">Accept</button>
   </div>
 </div>
 
-<script src="../js/config.js?v=3" defer></script>
-<script src="../js/app.js?v=2" defer></script>
+<script src="../js/config.js?v=4" defer></script>
+<script src="../js/app.js?v=3" defer></script>
 </body>
 </html>

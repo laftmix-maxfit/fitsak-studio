@@ -27,7 +27,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/style.css?v=3">
+<link rel="stylesheet" href="css/style.css?v=4">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -77,7 +77,7 @@
         <a href="#services">Services</a>
         <a href="#about">About</a>
       </span>
-      <a class="btn btn--small btn--primary nav__contact" href="#contact" data-cta="header_contact">Contact me</a>
+      <a class="btn btn--small btn--primary nav__contact" href="#audit" data-cta="header_audit">Get audit</a>
       <a class="lang" href="ua/" hreflang="uk" lang="uk" data-lang-switch="ua">UA</a>
     </nav>
   </div>
@@ -92,8 +92,8 @@
         <h1>I help small businesses and online stores see where their customers come from — and get more of them.</h1>
         <p class="hero__sub"><strong>GA4 conversion tracking</strong> · <strong>Google Ads</strong> · <strong>fast landing pages</strong></p>
         <div class="actions">
-          <a class="btn btn--primary" href="#case" data-cta="hero_case">See case study</a>
-          <a class="btn" href="#contact" data-cta="hero_contact">Contact me</a>
+          <a class="btn btn--primary" href="#audit" data-cta="hero_audit">Get a free audit</a>
+          <a class="btn" href="#case" data-cta="hero_case">See case study</a>
         </div>
       </div>
       <aside class="proof" aria-label="Result highlight">
@@ -191,19 +191,19 @@
           <h3>GA4 Lead Tracking</h3>
           <p class="card__price"><span>from</span>$15</p>
           <p>Events from the first click to the enquiry — scrolls, sections, forms, key buttons — set up and checked in GA4 so you can see what actually works.</p>
-          <a class="btn btn--small" href="#contact" data-service="ga4_lead_tracking">Ask about this</a>
+          <a class="btn btn--small" href="#audit" data-service="ga4_lead_tracking" data-package="analytics">Ask about this</a>
         </article>
         <article class="card">
           <h3>Google Ads audit &amp; cleanup</h3>
           <p class="card__price"><span>from</span>$40</p>
           <p>I go through search terms and settings, add negative keywords and give you a clear list of what wastes budget and what to change.</p>
-          <a class="btn btn--small" href="#contact" data-service="google_ads_audit">Ask about this</a>
+          <a class="btn btn--small" href="#audit" data-service="google_ads_audit" data-package="ads">Ask about this</a>
         </article>
         <article class="card">
           <h3>Fast landing page</h3>
           <p class="card__price"><span>from</span>$150</p>
           <p>A focused one-page site that loads fast on a phone and is ready for tracking from day one.</p>
-          <a class="btn btn--small" href="#contact" data-service="fast_landing_page">Ask about this</a>
+          <a class="btn btn--small" href="#audit" data-service="fast_landing_page" data-package="landing">Ask about this</a>
         </article>
       </div>
       <p class="note">Prices are starting points. I give the final price after a short free audit.</p>
@@ -278,6 +278,57 @@
     </div>
   </section>
 
+  <section class="section" id="audit" data-section="audit">
+    <div class="wrap">
+      <p class="eyebrow">Free audit</p>
+      <h2 class="h2">Free audit of your site</h2>
+      <p class="lead">I’ll find 3–5 specific problems with your site or ads and tell you what they cost you. Reply within 24 hours.</p>
+
+      <form class="form" id="audit-form" novalidate>
+        <div class="field">
+          <label for="f-name">Name</label>
+          <input id="f-name" name="name" type="text" required autocomplete="name" aria-describedby="f-name-err">
+          <p class="field__error" id="f-name-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-website">Website</label>
+          <input id="f-website" name="website" type="text" inputmode="url" required autocomplete="url" autocapitalize="none" spellcheck="false" aria-describedby="f-website-err">
+          <p class="field__error" id="f-website-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-contact">Email, Telegram or phone</label>
+          <input id="f-contact" name="contact" type="text" required autocapitalize="none" spellcheck="false" aria-describedby="f-contact-err">
+          <p class="field__error" id="f-contact-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="f-message">What do you want to improve?</label>
+          <textarea id="f-message" name="message" rows="4" maxlength="1000"></textarea>
+        </div>
+        <div class="field">
+          <label for="f-package">Package</label>
+          <select id="f-package" name="package">
+            <option value="audit" selected>Free audit</option>
+            <option value="analytics">Turnkey analytics</option>
+            <option value="repair">Site repair</option>
+            <option value="landing">Landing page + analytics</option>
+            <option value="ads">Google Ads management</option>
+          </select>
+        </div>
+        <div class="field field--check">
+          <label class="check" for="f-consent">
+            <input id="f-consent" name="consent" type="checkbox" required aria-describedby="f-consent-err">
+            <span>I agree to the <a href="privacy/" target="_blank" rel="noopener">processing of my data</a> to reply to my request</span>
+          </label>
+          <p class="field__error" id="f-consent-err" hidden></p>
+        </div>
+        <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
+        <div class="form-error" id="audit-error" role="alert"></div>
+        <button class="btn btn--primary" type="submit">Get my audit</button>
+      </form>
+      <div class="form-success" id="audit-success" role="status" aria-live="polite"></div>
+    </div>
+  </section>
+
   <section class="section" id="contact" data-section="contact">
     <div class="wrap">
       <p class="eyebrow">Contact</p>
@@ -309,17 +360,17 @@
   </div>
 </footer>
 
-<div class="sticky-cta"><a class="btn btn--primary" href="#contact" data-cta="sticky_contact">Contact me</a></div>
+<div class="sticky-cta"><a class="btn btn--primary" href="#audit" data-cta="sticky_audit">Get audit</a></div>
 
 <div class="consent" id="consent" role="dialog" aria-label="Cookie consent" hidden>
-  <p>I use Google Analytics to see which pages work. It sets cookies only if you accept. <a href="privacy/">Details</a></p>
+  <p>I use Google Analytics and Google Ads measurement to see what works. Cookies are set only if you accept. <a href="privacy/">Details</a></p>
   <div class="consent__actions">
     <button type="button" class="btn" data-consent="denied">Reject</button>
     <button type="button" class="btn" data-consent="granted">Accept</button>
   </div>
 </div>
 
-<script src="js/config.js?v=3" defer></script>
-<script src="js/app.js?v=2" defer></script>
+<script src="js/config.js?v=4" defer></script>
+<script src="js/app.js?v=3" defer></script>
 </body>
 </html>

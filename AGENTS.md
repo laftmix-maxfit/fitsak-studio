@@ -34,7 +34,7 @@ Every event is sent only if `typeof gtag === "function"`, inside try/catch, with
 | --- | --- | --- |
 | `cta_click` | `cta_location` (`header_audit`, `hero_audit`, `hero_case`, `hero_proof`, `sticky_audit`), `page_language` | Click on an element with `data-cta` |
 | `case_view` | `page_language` | Case section (`#case`) at least 50% visible, or filling half the screen. Once per page view |
-| `service_click` | `service_name` (`ga4_lead_tracking`, `google_ads_audit`, `fast_landing_page`), `page_language` | Click on a service card button |
+| `service_click` | `service_name` (`audit`, `analytics`, `repair`, `landing`, `ads`; same as `data-package` and the form select), `page_language` | Click on a service card button |
 | `contact_click` | `channel` (`fiverr`, `email`, `telegram`, `email_copy`), `page_language` | Click on a contact button; `email_copy` after a successful copy |
 | `scroll_depth` | `percent` (25, 50, 75), `page_language` | Page scrolled to that depth, once each |
 | `section_view` | `section_name` (`hero`, `problem`, `case`, `services`, `examples`, `how`, `about`, `audit`, `contact`), `page_language` | Section visible as for `case_view`, once each (`examples` = "Tracking examples" block, `audit` = audit request form) |

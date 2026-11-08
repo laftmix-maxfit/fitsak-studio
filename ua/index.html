@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fitsak Studio — GA4, Google Ads і швидкі лендинги для малого бізнесу</title>
-<meta name="description" content="Максим Фіцак (Fitsak Studio) допомагає малому бізнесу та інтернет-магазинам: GA4 конверсійна аналітика, чистка Google Ads, швидкі лендинги. Послуги від $15.">
+<meta name="description" content="Максим Фіцак (Fitsak Studio) допомагає малому бізнесу та інтернет-магазинам: GA4 конверсійна аналітика, чистка Google Ads, швидкі лендинги. Безкоштовний аудит, аналітика від $150.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101312" media="(prefers-color-scheme: dark)">
@@ -27,7 +27,7 @@
 <meta property="og:locale" content="uk_UA">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../css/style.css?v=5">
+<link rel="stylesheet" href="../css/style.css?v=6">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -54,9 +54,11 @@
       "areaServed": "Worldwide",
       "availableLanguage": ["Ukrainian", "English", "Czech"],
       "makesOffer": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "GA4 Lead Tracking" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 15, "priceCurrency": "USD" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Аудит і чистка Google Ads" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 40, "priceCurrency": "USD" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Швидкий лендинг" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 150, "priceCurrency": "USD" } }
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Безкоштовний аудит" }, "priceSpecification": { "@type": "PriceSpecification", "price": 0, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Аналітика під ключ" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 150, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ремонт сайту" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 500, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Лендинг + аналітика" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 500, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ведення Google Ads" } }
       ]
     }
   ]
@@ -185,25 +187,40 @@
   <section class="section" id="services" data-section="services">
     <div class="wrap">
       <p class="eyebrow">Послуги</p>
-      <h2 class="h2">Три речі, які я роблю</h2>
-      <div class="cards">
-        <article class="card">
-          <h3>GA4 Lead Tracking</h3>
-          <p class="card__price"><span>від</span>$15</p>
-          <p>Події від першого кліку до заявки — скрол, секції, форми, ключові кнопки. Налаштовую й перевіряю в GA4, щоб ви бачили, що справді працює.</p>
-          <a class="btn btn--small" href="#audit" data-service="ga4_lead_tracking" data-package="analytics">Запитати про це</a>
+      <h2 class="h2">Пакети</h2>
+      <div class="cards cards--packages">
+        <article class="card card--main">
+          <div class="card__head">
+            <span class="badge">Почніть звідси</span>
+            <h3>Безкоштовний аудит</h3>
+            <p class="card__price">$0</p>
+          </div>
+          <p>3–5 конкретних проблем сайту чи реклами і скільки вони вам коштують.</p>
+          <a class="btn btn--primary" href="#audit" data-service="audit" data-package="audit">Отримати аудит</a>
         </article>
         <article class="card">
-          <h3>Аудит і чистка Google Ads</h3>
-          <p class="card__price"><span>від</span>$40</p>
-          <p>Розбираю пошукові запити й налаштування, додаю мінус-слова і даю чіткий список: що зливає бюджет і що змінити.</p>
-          <a class="btn btn--small" href="#audit" data-service="google_ads_audit" data-package="ads">Запитати про це</a>
-        </article>
-        <article class="card">
-          <h3>Швидкий лендинг</h3>
+          <h3>Аналітика під ключ</h3>
           <p class="card__price"><span>від</span>$150</p>
-          <p>Зосереджена односторінкова сторінка, яка швидко вантажиться на телефоні й від першого дня готова до аналітики.</p>
-          <a class="btn btn--small" href="#audit" data-service="fast_landing_page" data-package="landing">Запитати про це</a>
+          <p>GA4/GTM, події від кліку до заявки, перевірка й звіт.</p>
+          <a class="btn btn--small" href="#audit" data-service="analytics" data-package="analytics">Обговорити</a>
+        </article>
+        <article class="card">
+          <h3>Ремонт сайту</h3>
+          <p class="card__price"><span>від</span>$500</p>
+          <p>Помилки, мобільна версія, швидкість, форми й трекінг. Звіт до/після.</p>
+          <a class="btn btn--small" href="#audit" data-service="repair" data-package="repair">Обговорити</a>
+        </article>
+        <article class="card">
+          <h3>Лендинг + аналітика</h3>
+          <p class="card__price"><span>від</span>$500</p>
+          <p>Перші 3 клієнти — $100 в обмін на чесний відгук. До 30.11.2026, передоплата 50%.</p>
+          <a class="btn btn--small" href="#audit" data-service="landing" data-package="landing">Обговорити</a>
+        </article>
+        <article class="card">
+          <h3>Ведення Google Ads</h3>
+          <p class="card__price card__price--text"><span>щомісяця</span>ціна після аудиту</p>
+          <p>Кампанії, мінус-слова, звіт щомісяця.</p>
+          <a class="btn btn--small" href="#audit" data-service="ads" data-package="ads">Обговорити</a>
         </article>
       </div>
       <p class="note">Ціни — відправна точка. Остаточну ціну називаю після короткого безкоштовного аудиту.</p>
@@ -272,7 +289,7 @@
         <p>Маю музичну освіту, а тепер працюю з даними, рекламою та сайтами для малого бізнесу. Люблю цифри, які пояснюють реальну поведінку клієнтів, а не дашборди заради дашбордів.</p>
         <p>Користуюся сучасними AI-інструментами, щоб працювати швидше, і кожен результат перевіряю вручну, перш ніж віддати вам.</p>
         <ul class="facts">
-          <li>Українська</li><li>English</li><li>Čeština</li><li>Живу в Чехії</li>
+          <li>Українська</li><li>English (письмово)</li><li>Čeština (письмово)</li><li>Живу в Чехії</li>
         </ul>
       </div>
     </div>
@@ -373,6 +390,6 @@
 </div>
 
 <script src="../js/config.js?v=4" defer></script>
-<script src="../js/app.js?v=4" defer></script>
+<script src="../js/app.js?v=5" defer></script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fitsak Studio — GA4 tracking, Google Ads &amp; fast landing pages</title>
-<meta name="description" content="Maksym Fitsak (Fitsak Studio) helps small businesses and online stores with GA4 conversion tracking, Google Ads cleanup and fast landing pages. Services from $15.">
+<meta name="description" content="Maksym Fitsak (Fitsak Studio) helps small businesses and online stores with GA4 conversion tracking, Google Ads cleanup and fast landing pages. Free audit, analytics from $150.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101312" media="(prefers-color-scheme: dark)">
@@ -27,7 +27,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=6">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -53,9 +53,11 @@
       "areaServed": "Worldwide",
       "availableLanguage": ["Ukrainian", "English", "Czech"],
       "makesOffer": [
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "GA4 Lead Tracking" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 15, "priceCurrency": "USD" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads audit & cleanup" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 40, "priceCurrency": "USD" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fast landing page" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 150, "priceCurrency": "USD" } }
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Free audit" }, "priceSpecification": { "@type": "PriceSpecification", "price": 0, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Turnkey analytics" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 150, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Site repair" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 500, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Landing page + analytics" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 500, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads management" } }
       ]
     }
   ]
@@ -185,25 +187,40 @@
   <section class="section" id="services" data-section="services">
     <div class="wrap">
       <p class="eyebrow">Services</p>
-      <h2 class="h2">Three things I do</h2>
-      <div class="cards">
-        <article class="card">
-          <h3>GA4 Lead Tracking</h3>
-          <p class="card__price"><span>from</span>$15</p>
-          <p>Events from the first click to the enquiry — scrolls, sections, forms, key buttons — set up and checked in GA4 so you can see what actually works.</p>
-          <a class="btn btn--small" href="#audit" data-service="ga4_lead_tracking" data-package="analytics">Ask about this</a>
+      <h2 class="h2">Packages</h2>
+      <div class="cards cards--packages">
+        <article class="card card--main">
+          <div class="card__head">
+            <span class="badge">Start here</span>
+            <h3>Free audit</h3>
+            <p class="card__price">$0</p>
+          </div>
+          <p>3–5 specific problems with your site or ads and what they cost you.</p>
+          <a class="btn btn--primary" href="#audit" data-service="audit" data-package="audit">Get audit</a>
         </article>
         <article class="card">
-          <h3>Google Ads audit &amp; cleanup</h3>
-          <p class="card__price"><span>from</span>$40</p>
-          <p>I go through search terms and settings, add negative keywords and give you a clear list of what wastes budget and what to change.</p>
-          <a class="btn btn--small" href="#audit" data-service="google_ads_audit" data-package="ads">Ask about this</a>
-        </article>
-        <article class="card">
-          <h3>Fast landing page</h3>
+          <h3>Turnkey analytics</h3>
           <p class="card__price"><span>from</span>$150</p>
-          <p>A focused one-page site that loads fast on a phone and is ready for tracking from day one.</p>
-          <a class="btn btn--small" href="#audit" data-service="fast_landing_page" data-package="landing">Ask about this</a>
+          <p>GA4/GTM, events from click to enquiry, checks and a report.</p>
+          <a class="btn btn--small" href="#audit" data-service="analytics" data-package="analytics">Discuss</a>
+        </article>
+        <article class="card">
+          <h3>Site repair</h3>
+          <p class="card__price"><span>from</span>$500</p>
+          <p>Errors, mobile version, speed, forms and tracking. Before/after report.</p>
+          <a class="btn btn--small" href="#audit" data-service="repair" data-package="repair">Discuss</a>
+        </article>
+        <article class="card">
+          <h3>Landing page + analytics</h3>
+          <p class="card__price"><span>from</span>$500</p>
+          <p>First 3 clients — $100 in exchange for an honest review. Until 30 Nov 2026, 50% prepayment.</p>
+          <a class="btn btn--small" href="#audit" data-service="landing" data-package="landing">Discuss</a>
+        </article>
+        <article class="card">
+          <h3>Google Ads management</h3>
+          <p class="card__price card__price--text"><span>monthly</span>price after audit</p>
+          <p>Campaigns, negative keywords, a monthly report.</p>
+          <a class="btn btn--small" href="#audit" data-service="ads" data-package="ads">Discuss</a>
         </article>
       </div>
       <p class="note">Prices are starting points. I give the final price after a short free audit.</p>
@@ -272,7 +289,7 @@
         <p>I have a music education and now work with data, ads and websites for small businesses. I like numbers that explain real customer behaviour, not dashboards for their own sake.</p>
         <p>I work with modern AI tools to move faster, and I check every result by hand before it reaches you.</p>
         <ul class="facts">
-          <li>Ukrainian</li><li>English</li><li>Czech</li><li>Based in Czechia</li>
+          <li>Ukrainian</li><li>English (written)</li><li>Czech (written)</li><li>Based in Czechia</li>
         </ul>
       </div>
     </div>
@@ -373,6 +390,6 @@
 </div>
 
 <script src="js/config.js?v=4" defer></script>
-<script src="js/app.js?v=4" defer></script>
+<script src="js/app.js?v=5" defer></script>
 </body>
 </html>

@@ -175,6 +175,8 @@
       website: "Enter your site address, for example example.com",
       contact: "Enter an email, a Telegram @username or a phone number",
       consent: "Your consent is needed to send the request",
+      tooLong: "Please keep it under 1000 characters",
+      pkg: "Choose a package from the list",
       success: "Thank you! Request no. {id} received. I’ll reply within 24 hours.",
       errPre: "Couldn’t send. Try again or write on ",
       errMid: " / by "
@@ -185,6 +187,8 @@
       website: "Вкажіть адресу сайту, наприклад example.com",
       contact: "Вкажіть email, @нік у Telegram або телефон",
       consent: "Для надсилання потрібна ваша згода",
+      tooLong: "Не більше 1000 символів",
+      pkg: "Оберіть пакет зі списку",
       success: "Дякую! Заявка № {id} отримана. Відповім протягом 24 годин.",
       errPre: "Не вдалося надіслати. Спробуйте ще раз або напишіть у ",
       errMid: " / на "
@@ -240,6 +244,12 @@
   function fieldError(el) {
     var v = (el.type === "checkbox") ? "" : String(el.value || "").trim();
     if (el.name === "consent") return el.checked ? "" : T.consent;
+    // optional or preset fields: never "required", but reported the same way when wrong
+    if (el.name === "message") return el.value.length > 1000 ? T.tooLong : "";
+    if (el.name === "package") {
+      for (var i = 0; i < el.options.length; i++) if (el.options[i].value === el.value) return "";
+      return T.pkg;
+    }
     if (!v) return T.required;
     if (el.name === "website" && !isSite(v)) return T.website;
     if (el.name === "contact" && !(isEmail(v) || isTelegram(v) || isPhone(v))) return T.contact;
@@ -286,7 +296,11 @@
   }
 
   function initForm() {
-    var fields = [form.elements.name, form.elements.website, form.elements.contact, form.elements.consent];
+    // in page order, so the first invalid one gets the focus
+    var fields = [
+      form.elements.name, form.elements.website, form.elements.contact,
+      form.elements.message, form.elements.package, form.elements.consent
+    ];
     var submitBtn = form.querySelector("[type=submit]");
     var errorBox = document.getElementById("audit-error");
     var successBox = document.getElementById("audit-success");

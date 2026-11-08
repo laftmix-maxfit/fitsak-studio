@@ -27,7 +27,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/style.css?v=4">
+<link rel="stylesheet" href="css/style.css?v=5">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -142,7 +142,7 @@
         </div>
       </div>
 
-      <h3 class="case__h case__h--results">Results after 12 days of ads (27 Oct – 7 Nov 2026)</h3>
+      <h3 class="case__h case__h--results">Results after 12 days of ads (<span class="nowrap">27 Oct – 7 Nov 2026</span>)</h3>
       <ul class="metrics">
         <li class="metric">
           <p class="metric__num">~$25</p>
@@ -286,38 +286,40 @@
 
       <form class="form" id="audit-form" novalidate>
         <div class="field">
-          <label for="f-name">Name</label>
+          <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
           <input id="f-name" name="name" type="text" required autocomplete="name" aria-describedby="f-name-err">
           <p class="field__error" id="f-name-err" hidden></p>
         </div>
         <div class="field">
-          <label for="f-website">Website</label>
+          <label for="f-website">Website <span class="req" aria-hidden="true">*</span></label>
           <input id="f-website" name="website" type="text" inputmode="url" required autocomplete="url" autocapitalize="none" spellcheck="false" aria-describedby="f-website-err">
           <p class="field__error" id="f-website-err" hidden></p>
         </div>
         <div class="field">
-          <label for="f-contact">Email, Telegram or phone</label>
+          <label for="f-contact">Email, Telegram or phone <span class="req" aria-hidden="true">*</span></label>
           <input id="f-contact" name="contact" type="text" required autocapitalize="none" spellcheck="false" aria-describedby="f-contact-err">
           <p class="field__error" id="f-contact-err" hidden></p>
         </div>
         <div class="field">
           <label for="f-message">What do you want to improve?</label>
-          <textarea id="f-message" name="message" rows="4" maxlength="1000"></textarea>
+          <textarea id="f-message" name="message" rows="4" maxlength="1000" aria-describedby="f-message-err"></textarea>
+          <p class="field__error" id="f-message-err" hidden></p>
         </div>
         <div class="field">
           <label for="f-package">Package</label>
-          <select id="f-package" name="package">
+          <select id="f-package" name="package" aria-describedby="f-package-err">
             <option value="audit" selected>Free audit</option>
             <option value="analytics">Turnkey analytics</option>
             <option value="repair">Site repair</option>
             <option value="landing">Landing page + analytics</option>
             <option value="ads">Google Ads management</option>
           </select>
+          <p class="field__error" id="f-package-err" hidden></p>
         </div>
         <div class="field field--check">
           <label class="check" for="f-consent">
             <input id="f-consent" name="consent" type="checkbox" required aria-describedby="f-consent-err">
-            <span>I agree to the <a href="privacy/" target="_blank" rel="noopener">processing of my data</a> to reply to my request</span>
+            <span>I agree to the <a href="privacy/" target="_blank" rel="noopener">processing of my data</a> to reply to my request <span class="req" aria-hidden="true">*</span></span>
           </label>
           <p class="field__error" id="f-consent-err" hidden></p>
         </div>
@@ -371,6 +373,6 @@
 </div>
 
 <script src="js/config.js?v=4" defer></script>
-<script src="js/app.js?v=3" defer></script>
+<script src="js/app.js?v=4" defer></script>
 </body>
 </html>

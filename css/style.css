@@ -249,7 +249,9 @@ body.is-contact-visible .sticky-cta, body.has-consent .sticky-cta { display: non
   background: var(--surface); border: 1.5px solid var(--muted); border-radius: 10px;
 }
 .field textarea { min-height: 112px; resize: vertical; }
-.field input[aria-invalid=true] { border-color: var(--error); }
+.field input[aria-invalid=true], .field textarea[aria-invalid=true], .field select[aria-invalid=true] { border-color: var(--error); }
+.req { color: var(--error); }
+.nowrap { white-space: nowrap; }
 .field__error { color: var(--error); font-size: 0.9375rem; font-weight: 600; }
 .field__error[hidden] { display: none; }
 .check { display: flex; gap: 12px; align-items: flex-start; font-weight: 400 !important; font-size: 1rem !important; cursor: pointer; }

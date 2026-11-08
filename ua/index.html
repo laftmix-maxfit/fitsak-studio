@@ -27,7 +27,7 @@
 <meta property="og:locale" content="uk_UA">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../css/style.css?v=4">
+<link rel="stylesheet" href="../css/style.css?v=5">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -143,7 +143,7 @@
         </div>
       </div>
 
-      <h3 class="case__h case__h--results">Результат за 12 днів реклами (27.10–7.11.2026)</h3>
+      <h3 class="case__h case__h--results">Результат за 12 днів реклами (<span class="nowrap">27.10–7.11.2026</span>)</h3>
       <ul class="metrics">
         <li class="metric">
           <p class="metric__num">~1 045<small>грн</small></p>
@@ -286,38 +286,40 @@
 
       <form class="form" id="audit-form" novalidate>
         <div class="field">
-          <label for="f-name">Ім’я</label>
+          <label for="f-name">Ім’я <span class="req" aria-hidden="true">*</span></label>
           <input id="f-name" name="name" type="text" required autocomplete="name" aria-describedby="f-name-err">
           <p class="field__error" id="f-name-err" hidden></p>
         </div>
         <div class="field">
-          <label for="f-website">Сайт</label>
+          <label for="f-website">Сайт <span class="req" aria-hidden="true">*</span></label>
           <input id="f-website" name="website" type="text" inputmode="url" required autocomplete="url" autocapitalize="none" spellcheck="false" aria-describedby="f-website-err">
           <p class="field__error" id="f-website-err" hidden></p>
         </div>
         <div class="field">
-          <label for="f-contact">Email, Telegram або телефон</label>
+          <label for="f-contact">Email, Telegram або телефон <span class="req" aria-hidden="true">*</span></label>
           <input id="f-contact" name="contact" type="text" required autocapitalize="none" spellcheck="false" aria-describedby="f-contact-err">
           <p class="field__error" id="f-contact-err" hidden></p>
         </div>
         <div class="field">
           <label for="f-message">Що хочете покращити?</label>
-          <textarea id="f-message" name="message" rows="4" maxlength="1000"></textarea>
+          <textarea id="f-message" name="message" rows="4" maxlength="1000" aria-describedby="f-message-err"></textarea>
+          <p class="field__error" id="f-message-err" hidden></p>
         </div>
         <div class="field">
           <label for="f-package">Пакет</label>
-          <select id="f-package" name="package">
+          <select id="f-package" name="package" aria-describedby="f-package-err">
             <option value="audit" selected>Безкоштовний аудит</option>
             <option value="analytics">Аналітика під ключ</option>
             <option value="repair">Ремонт сайту</option>
             <option value="landing">Лендинг + аналітика</option>
             <option value="ads">Ведення Google Ads</option>
           </select>
+          <p class="field__error" id="f-package-err" hidden></p>
         </div>
         <div class="field field--check">
           <label class="check" for="f-consent">
             <input id="f-consent" name="consent" type="checkbox" required aria-describedby="f-consent-err">
-            <span>Погоджуюсь на <a href="privacy/" target="_blank" rel="noopener">обробку даних</a> для відповіді на заявку</span>
+            <span>Погоджуюсь на <a href="privacy/" target="_blank" rel="noopener">обробку даних</a> для відповіді на заявку <span class="req" aria-hidden="true">*</span></span>
           </label>
           <p class="field__error" id="f-consent-err" hidden></p>
         </div>
@@ -371,6 +373,6 @@
 </div>
 
 <script src="../js/config.js?v=4" defer></script>
-<script src="../js/app.js?v=3" defer></script>
+<script src="../js/app.js?v=4" defer></script>
 </body>
 </html>

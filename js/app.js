@@ -186,9 +186,7 @@
       required: "Please fill in this field",
       website: "Enter your site address, for example example.com",
       contact: "Enter an email, a Telegram @username or a phone number",
-      consent: "Your consent is needed to send the request",
       tooLong: "Please keep it under {n} characters",
-      pkg: "Choose a package from the list",
       success: {
         audit: "Thank you! Request no. {id} received. I’ll reply within 24 hours.",
         consult: "Thank you! Request no. {id} received. I’ll write within 24 hours."
@@ -205,9 +203,7 @@
       required: "Заповніть це поле",
       website: "Вкажіть адресу сайту, наприклад example.com",
       contact: "Вкажіть email, @нік у Telegram або телефон",
-      consent: "Для надсилання потрібна ваша згода",
       tooLong: "Не більше {n} символів",
-      pkg: "Оберіть пакет зі списку",
       success: {
         audit: "Дякую! Заявка № {id} отримана. Відповім протягом 24 годин.",
         consult: "Дякую! Заявка № {id} отримана. Напишу протягом 24 годин."
@@ -222,7 +218,7 @@
   };
   var T = MSG[LANG];
 
-  var leadForms = []; // { form, section, select }
+  var leadForms = []; // { form, section, pkg }
   var suppressStart = false;
 
   function scrollToSection(section) {
@@ -230,12 +226,12 @@
     section.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
   }
 
+  // the package lives in <input type="hidden" name="package">; unknown values leave the default alone
+  var PACKAGES = ["audit", "deep_audit", "analytics", "repair", "landing", "ads", "site", "support", "consult"];
   function selectPackage(entry, value) {
-    if (!entry || !entry.select) return false;
-    for (var i = 0; i < entry.select.options.length; i++) {
-      if (entry.select.options[i].value === value) { entry.select.value = value; return true; }
-    }
-    return false;
+    if (!entry || !entry.pkg || PACKAGES.indexOf(value) < 0) return false;
+    entry.pkg.value = value;
+    return true;
   }
 
   function newLeadId() {
@@ -265,11 +261,6 @@
 
   // returns an error message, or "" when the field is fine
   function fieldError(el) {
-    if (el.name === "consent") return el.checked ? "" : T.consent;
-    if (el.name === "package") {
-      for (var i = 0; i < el.options.length; i++) if (el.options[i].value === el.value) return "";
-      return T.pkg;
-    }
     var max = parseInt(el.getAttribute("maxlength"), 10);
     if (max && el.value.length > max) return T.tooLong.replace("{n}", String(max));
     var v = String(el.value || "").trim();
@@ -320,7 +311,8 @@
 
   function initForm(entry) {
     var form = entry.form;
-    var select = entry.select;
+    var pkgInput = entry.pkg;
+    var defaultPkg = pkgInput.getAttribute("value") || pkgInput.value;
     var type = form.getAttribute("data-form-type") === "consult" ? "consult" : "audit";
     // controls in page order (radios and the honeypot are not validated)
     var fields = Array.prototype.filter.call(form.elements, function (el) {
@@ -338,10 +330,19 @@
     function formStart() {
       if (startSent || suppressStart) return;
       startSent = true;
-      track("audit_form_start", { form_package: select.value, form_type: type });
+      track("audit_form_start", { form_package: pkgInput.value, form_type: type });
     }
     form.addEventListener("focusin", formStart);
     form.addEventListener("input", formStart);
+
+    var detailsSent = false;
+    Array.prototype.forEach.call(form.querySelectorAll("details.form-more"), function (d) {
+      d.addEventListener("toggle", function () {
+        if (!d.open || detailsSent) return;
+        detailsSent = true;
+        track("form_details_open", { form_type: type });
+      });
+    });
 
     fields.forEach(function (el) {
       var clear = function () { showFieldError(el, ""); };
@@ -352,7 +353,10 @@
     // back to a clean, visible form (used when the dialog is opened again after a sent request)
     entry.sent = false;
     entry.reset = function () {
+      entry.sent = false;
       form.reset();
+      pkgInput.value = defaultPkg;
+      Array.prototype.forEach.call(form.querySelectorAll("details"), function (d) { d.open = false; });
       form.hidden = false;
       clearBox(errorBox);
       if (successBox) successBox.classList.remove("is-shown");
@@ -390,13 +394,18 @@
         showFieldError(el, msg);
         if (msg && !firstBad) firstBad = el;
       });
-      if (firstBad) { firstBad.focus(); return; }
+      if (firstBad) {
+        var closed = firstBad.closest("details");
+        if (closed && !closed.open) closed.open = true;
+        firstBad.focus();
+        return;
+      }
 
       var bot = form.elements.botcheck;
       if (bot && bot.checked) return; // honeypot: a person cannot tick a hidden box
 
       var key = String(cfg.WEB3FORMS_KEY || "");
-      var pkg = select.value;
+      var pkg = pkgInput.value;
       var leadId = newLeadId();
       var payload = {
         access_key: key,
@@ -413,7 +422,6 @@
         source: leadSource(),
         gclid: campaign("gclid")
       };
-      if (form.elements.preferred) payload.preferred = form.elements.preferred.value;
       if (form.elements.business) payload.business = form.elements.business.value.trim();
 
       sending = true;
@@ -459,11 +467,11 @@
   }
 
   each("form[data-form-type]", function (f) {
-    var select = f.elements.package;
+    var pkgInput = f.elements.package;
     var section = f.closest ? f.closest("section, dialog") : null;
-    if (!select || !section) return;
+    if (!pkgInput || !section) return;
     f.noValidate = true; // app.js shows its own messages; without app.js the browser validates natively
-    var entry = { form: f, section: section, select: select };
+    var entry = { form: f, section: section, pkg: pkgInput };
     leadForms.push(entry);
     initForm(entry);
   });
@@ -501,7 +509,7 @@
     suppressStart = true; // only a real interaction counts as audit_form_start
     try { first.focus({ preventScroll: true }); } catch (err) { first.focus(); }
     suppressStart = false;
-    track("consult_open", { cta_location: trigger.getAttribute("data-cta") || "", form_package: dialogEntry.select.value });
+    track("consult_open", { cta_location: trigger.getAttribute("data-cta") || "", form_package: dialogEntry.pkg.value });
     return true;
   }
 

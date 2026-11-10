@@ -27,7 +27,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/style.css?v=9">
+<link rel="stylesheet" href="css/style.css?v=10">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -316,6 +316,7 @@
         <input type="hidden" name="subject" value="Fitsak: заявка на аудит (no-JS)">
         <input type="hidden" name="from_name" value="fitsak.com">
         <input type="hidden" name="redirect" value="https://fitsak.com/?sent=1">
+        <input type="hidden" name="package" value="audit">
         <div class="field">
           <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
           <input id="f-name" name="name" type="text" required autocomplete="name" aria-describedby="f-name-err">
@@ -331,36 +332,19 @@
           <input id="f-contact" name="contact" type="text" required autocapitalize="none" spellcheck="false" aria-describedby="f-contact-err">
           <p class="field__error" id="f-contact-err" hidden></p>
         </div>
+        <details class="form-more">
+          <summary>Add a comment (optional)</summary>
+          <div class="form-more__body">
         <div class="field">
           <label for="f-message">What do you want to improve?</label>
           <textarea id="f-message" name="message" rows="4" maxlength="1000" aria-describedby="f-message-err"></textarea>
           <p class="field__error" id="f-message-err" hidden></p>
         </div>
-        <div class="field">
-          <label for="f-package">Package</label>
-          <select id="f-package" name="package" aria-describedby="f-package-err">
-            <option value="audit" selected>Free audit</option>
-            <option value="deep_audit">Deep Google Ads + GA4 audit (PDF)</option>
-            <option value="analytics">Turnkey analytics</option>
-            <option value="repair">Site repair</option>
-            <option value="landing">Landing page + analytics</option>
-            <option value="ads">Google Ads management</option>
-            <option value="site">Website, 5–10 pages</option>
-            <option value="support">Support</option>
-            <option value="consult">Free consultation</option>
-          </select>
-          <p class="field__error" id="f-package-err" hidden></p>
-        </div>
-        <div class="field field--check">
-          <label class="check" for="f-consent">
-            <input id="f-consent" name="consent" type="checkbox" required aria-describedby="f-consent-err">
-            <span>I agree to the <a href="privacy/" target="_blank" rel="noopener">processing of my data</a> to reply to my request <span class="req" aria-hidden="true">*</span></span>
-          </label>
-          <p class="field__error" id="f-consent-err" hidden></p>
-        </div>
+          </div>
+        </details>
         <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
         <div class="form-error" id="audit-error" role="alert"></div>
-        <button class="btn btn--primary" type="submit">Get my audit</button>
+        <div class="form__actions"><button class="btn btn--primary" type="submit">Get my audit</button><p class="form__consent">By sending, you agree to the <a href="privacy/" target="_blank" rel="noopener">processing of your data</a> to reply to your request.</p></div>
       </form>
       <div class="form-success" id="audit-success" role="status" aria-live="polite"></div>
     </div>
@@ -408,6 +392,6 @@
 </div>
 
 <script src="js/config.js?v=4" defer></script>
-<script src="js/app.js?v=7" defer></script>
+<script src="js/app.js?v=8" defer></script>
 </body>
 </html>

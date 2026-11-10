@@ -27,7 +27,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../css/style.css?v=9">
+<link rel="stylesheet" href="../css/style.css?v=10">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -287,6 +287,7 @@
       <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
       <input type="hidden" name="from_name" value="fitsak.com">
       <input type="hidden" name="redirect" value="https://fitsak.com/sites/?sent=1">
+      <input type="hidden" name="package" value="consult">
         <div class="field">
           <label for="n-name">Name <span class="req" aria-hidden="true">*</span></label>
           <input id="n-name" name="name" type="text" required autocomplete="name" aria-describedby="n-name-err">
@@ -297,55 +298,29 @@
           <input id="n-contact" name="contact" type="text" required autocapitalize="none" spellcheck="false" aria-describedby="n-contact-err">
           <p class="field__error" id="n-contact-err" hidden></p>
         </div>
-        <fieldset class="choice">
-          <legend>How would you prefer to talk?</legend>
-          <div class="choice__row">
-            <label class="choice__opt"><input type="radio" name="preferred" value="telegram" checked><span>Telegram</span></label>
-            <label class="choice__opt"><input type="radio" name="preferred" value="viber"><span>Viber</span></label>
-            <label class="choice__opt"><input type="radio" name="preferred" value="call"><span>Call</span></label>
-            <label class="choice__opt"><input type="radio" name="preferred" value="email"><span>Email</span></label>
-          </div>
-        </fieldset>
+        <div class="field">
+          <label for="n-website">Website (if any)</label>
+          <input id="n-website" name="website" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" aria-describedby="n-website-err">
+          <p class="field__error" id="n-website-err" hidden></p>
+        </div>
+        <details class="form-more">
+          <summary>Add details (optional)</summary>
+          <div class="form-more__body">
         <div class="field">
           <label for="n-business">What does your business do?</label>
           <input id="n-business" name="business" type="text" maxlength="200" aria-describedby="n-business-err">
           <p class="field__error" id="n-business-err" hidden></p>
         </div>
         <div class="field">
-          <label for="n-website">Current website (if any)</label>
-          <input id="n-website" name="website" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" aria-describedby="n-website-err">
-          <p class="field__error" id="n-website-err" hidden></p>
-        </div>
-        <div class="field">
           <label for="n-message">What should the new site do?</label>
           <textarea id="n-message" name="message" rows="4" maxlength="1000" aria-describedby="n-message-err"></textarea>
           <p class="field__error" id="n-message-err" hidden></p>
         </div>
-        <div class="field">
-          <label for="n-package">Package</label>
-          <select id="n-package" name="package" aria-describedby="n-package-err">
-            <option value="consult" selected>Free consultation</option>
-            <option value="landing">Landing page</option>
-            <option value="site">Website, 5–10 pages</option>
-            <option value="support">Support</option>
-            <option value="audit">Free audit</option>
-            <option value="deep_audit">Deep Google Ads + GA4 audit (PDF)</option>
-            <option value="analytics">Turnkey analytics</option>
-            <option value="repair">Site repair</option>
-            <option value="ads">Google Ads management</option>
-          </select>
-          <p class="field__error" id="n-package-err" hidden></p>
-        </div>
-        <div class="field field--check">
-          <label class="check" for="n-consent">
-            <input id="n-consent" name="consent" type="checkbox" required aria-describedby="n-consent-err">
-            <span>I agree to the <a href="../privacy/" target="_blank" rel="noopener">processing of my data</a> to reply to my request <span class="req" aria-hidden="true">*</span></span>
-          </label>
-          <p class="field__error" id="n-consent-err" hidden></p>
-        </div>
+          </div>
+        </details>
         <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
         <div class="form-error" role="alert"></div>
-        <button class="btn btn--primary" type="submit">Book a free consultation</button>
+        <div class="form__actions"><button class="btn btn--primary" type="submit">Book a free consultation</button><p class="form__consent">By sending, you agree to the <a href="../privacy/" target="_blank" rel="noopener">processing of your data</a> to reply to your request.</p></div>
       </form>
 
       </noscript>
@@ -388,6 +363,7 @@
       <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
       <input type="hidden" name="from_name" value="fitsak.com">
       <input type="hidden" name="redirect" value="https://fitsak.com/sites/?sent=1">
+      <input type="hidden" name="package" value="consult">
         <div class="field">
           <label for="c-name">Name <span class="req" aria-hidden="true">*</span></label>
           <input id="c-name" name="name" type="text" required autocomplete="name" aria-describedby="c-name-err">
@@ -398,55 +374,29 @@
           <input id="c-contact" name="contact" type="text" required autocapitalize="none" spellcheck="false" aria-describedby="c-contact-err">
           <p class="field__error" id="c-contact-err" hidden></p>
         </div>
-        <fieldset class="choice">
-          <legend>How would you prefer to talk?</legend>
-          <div class="choice__row">
-            <label class="choice__opt"><input type="radio" name="preferred" value="telegram" checked><span>Telegram</span></label>
-            <label class="choice__opt"><input type="radio" name="preferred" value="viber"><span>Viber</span></label>
-            <label class="choice__opt"><input type="radio" name="preferred" value="call"><span>Call</span></label>
-            <label class="choice__opt"><input type="radio" name="preferred" value="email"><span>Email</span></label>
-          </div>
-        </fieldset>
+        <div class="field">
+          <label for="c-website">Website (if any)</label>
+          <input id="c-website" name="website" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" aria-describedby="c-website-err">
+          <p class="field__error" id="c-website-err" hidden></p>
+        </div>
+        <details class="form-more">
+          <summary>Add details (optional)</summary>
+          <div class="form-more__body">
         <div class="field">
           <label for="c-business">What does your business do?</label>
           <input id="c-business" name="business" type="text" maxlength="200" aria-describedby="c-business-err">
           <p class="field__error" id="c-business-err" hidden></p>
         </div>
         <div class="field">
-          <label for="c-website">Current website (if any)</label>
-          <input id="c-website" name="website" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" aria-describedby="c-website-err">
-          <p class="field__error" id="c-website-err" hidden></p>
-        </div>
-        <div class="field">
           <label for="c-message">What should the new site do?</label>
           <textarea id="c-message" name="message" rows="4" maxlength="1000" aria-describedby="c-message-err"></textarea>
           <p class="field__error" id="c-message-err" hidden></p>
         </div>
-        <div class="field">
-          <label for="c-package">Package</label>
-          <select id="c-package" name="package" aria-describedby="c-package-err">
-            <option value="consult" selected>Free consultation</option>
-            <option value="landing">Landing page</option>
-            <option value="site">Website, 5–10 pages</option>
-            <option value="support">Support</option>
-            <option value="audit">Free audit</option>
-            <option value="deep_audit">Deep Google Ads + GA4 audit (PDF)</option>
-            <option value="analytics">Turnkey analytics</option>
-            <option value="repair">Site repair</option>
-            <option value="ads">Google Ads management</option>
-          </select>
-          <p class="field__error" id="c-package-err" hidden></p>
-        </div>
-        <div class="field field--check">
-          <label class="check" for="c-consent">
-            <input id="c-consent" name="consent" type="checkbox" required aria-describedby="c-consent-err">
-            <span>I agree to the <a href="../privacy/" target="_blank" rel="noopener">processing of my data</a> to reply to my request <span class="req" aria-hidden="true">*</span></span>
-          </label>
-          <p class="field__error" id="c-consent-err" hidden></p>
-        </div>
+          </div>
+        </details>
         <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
         <div class="form-error" role="alert"></div>
-        <div class="form__submit"><button class="btn btn--primary" type="submit">Book a free consultation</button></div>
+        <div class="form__submit"><button class="btn btn--primary" type="submit">Book a free consultation</button><p class="form__consent">By sending, you agree to the <a href="../privacy/" target="_blank" rel="noopener">processing of your data</a> to reply to your request.</p></div>
       </form>
 
     <div class="form-success" role="status" aria-live="polite">
@@ -457,6 +407,6 @@
 </dialog>
 
 <script src="../js/config.js?v=4" defer></script>
-<script src="../js/app.js?v=7" defer></script>
+<script src="../js/app.js?v=8" defer></script>
 </body>
 </html>

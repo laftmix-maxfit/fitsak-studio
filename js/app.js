@@ -167,17 +167,20 @@
   each("[data-telegram-link]", function (el) { el.href = "https://t.me/" + encodeURIComponent(tg); });
   if (isSet(cfg.FIVERR_URL, "")) each("[data-fiverr-link]", function (el) { el.href = cfg.FIVERR_URL; });
 
-  /* ---------- audit form ---------- */
-  var T = {
+  /* ---------- lead forms: audit (main pages) and consultation (/sites/) ---------- */
+  var MSG = {
     en: {
       sending: "Sending…",
       required: "Please fill in this field",
       website: "Enter your site address, for example example.com",
       contact: "Enter an email, a Telegram @username or a phone number",
       consent: "Your consent is needed to send the request",
-      tooLong: "Please keep it under 1000 characters",
+      tooLong: "Please keep it under {n} characters",
       pkg: "Choose a package from the list",
-      success: "Thank you! Request no. {id} received. I’ll reply within 24 hours.",
+      success: {
+        audit: "Thank you! Request no. {id} received. I’ll reply within 24 hours.",
+        consult: "Thank you! Request no. {id} received. I’ll write within 24 hours."
+      },
       errPre: "Couldn’t send. Try again or write on ",
       errMid: " / by "
     },
@@ -187,30 +190,30 @@
       website: "Вкажіть адресу сайту, наприклад example.com",
       contact: "Вкажіть email, @нік у Telegram або телефон",
       consent: "Для надсилання потрібна ваша згода",
-      tooLong: "Не більше 1000 символів",
+      tooLong: "Не більше {n} символів",
       pkg: "Оберіть пакет зі списку",
-      success: "Дякую! Заявка № {id} отримана. Відповім протягом 24 годин.",
+      success: {
+        audit: "Дякую! Заявка № {id} отримана. Відповім протягом 24 годин.",
+        consult: "Дякую! Заявка № {id} отримана. Напишу протягом 24 годин."
+      },
       errPre: "Не вдалося надіслати. Спробуйте ще раз або напишіть у ",
       errMid: " / на "
     }
-  }[LANG];
+  };
+  var T = MSG[LANG];
 
-  var form = document.getElementById("audit-form");
-  var auditSection = document.getElementById("audit");
-  var packageSelect = form ? form.elements.package : null;
-  var firstField = form ? form.elements.name : null;
+  var leadForms = []; // { form, section, select }
   var suppressStart = false;
 
-  function scrollToAudit() {
-    if (!auditSection) return;
+  function scrollToSection(section) {
     var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    auditSection.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
+    section.scrollIntoView({ behavior: calm ? "auto" : "smooth", block: "start" });
   }
 
-  function selectPackage(value) {
-    if (!packageSelect) return false;
-    for (var i = 0; i < packageSelect.options.length; i++) {
-      if (packageSelect.options[i].value === value) { packageSelect.value = value; return true; }
+  function selectPackage(entry, value) {
+    if (!entry || !entry.select) return false;
+    for (var i = 0; i < entry.select.options.length; i++) {
+      if (entry.select.options[i].value === value) { entry.select.value = value; return true; }
     }
     return false;
   }
@@ -242,15 +245,15 @@
 
   // returns an error message, or "" when the field is fine
   function fieldError(el) {
-    var v = (el.type === "checkbox") ? "" : String(el.value || "").trim();
     if (el.name === "consent") return el.checked ? "" : T.consent;
-    // optional or preset fields: never "required", but reported the same way when wrong
-    if (el.name === "message") return el.value.length > 1000 ? T.tooLong : "";
     if (el.name === "package") {
       for (var i = 0; i < el.options.length; i++) if (el.options[i].value === el.value) return "";
       return T.pkg;
     }
-    if (!v) return T.required;
+    var max = parseInt(el.getAttribute("maxlength"), 10);
+    if (max && el.value.length > max) return T.tooLong.replace("{n}", String(max));
+    var v = String(el.value || "").trim();
+    if (!v) return el.required ? T.required : ""; // optional fields may stay empty
     if (el.name === "website" && !isSite(v)) return T.website;
     if (el.name === "contact" && !(isEmail(v) || isTelegram(v) || isPhone(v))) return T.contact;
     return "";
@@ -295,15 +298,18 @@
     return parts.length ? parts.join("&") : "direct";
   }
 
-  function initForm() {
-    // in page order, so the first invalid one gets the focus
-    var fields = [
-      form.elements.name, form.elements.website, form.elements.contact,
-      form.elements.message, form.elements.package, form.elements.consent
-    ];
+  function initForm(entry) {
+    var form = entry.form;
+    var select = entry.select;
+    var type = form.getAttribute("data-form-type") === "consult" ? "consult" : "audit";
+    // controls in page order (radios and the honeypot are not validated)
+    var fields = Array.prototype.filter.call(form.elements, function (el) {
+      return el.name && el.name !== "botcheck" && el.type !== "radio" && el.type !== "submit" &&
+        el.tagName !== "BUTTON" && el.tagName !== "FIELDSET";
+    });
     var submitBtn = form.querySelector("[type=submit]");
-    var errorBox = document.getElementById("audit-error");
-    var successBox = document.getElementById("audit-success");
+    var errorBox = form.querySelector(".form-error");
+    var successBox = entry.section.querySelector(".form-success");
     var startSent = false;
     var sending = false;
     var submitLabel = submitBtn ? submitBtn.textContent : "";
@@ -311,7 +317,7 @@
     function formStart() {
       if (startSent || suppressStart) return;
       startSent = true;
-      track("audit_form_start", { form_package: packageSelect.value });
+      track("audit_form_start", { form_package: select.value, form_type: type });
     }
     form.addEventListener("focusin", formStart);
     form.addEventListener("input", formStart);
@@ -339,22 +345,25 @@
       if (bot && bot.checked) return; // honeypot: a person cannot tick a hidden box
 
       var key = String(cfg.WEB3FORMS_KEY || "");
-      var pkg = packageSelect.value;
+      var pkg = select.value;
       var leadId = newLeadId();
       var payload = {
         access_key: key,
-        subject: "Fitsak: заявка на аудит (" + pkg + ")",
+        subject: "Fitsak: " + (form.getAttribute("data-subject") || "заявка") + " (" + pkg + ")",
         from_name: "fitsak.com",
         name: form.elements.name.value.trim(),
-        website: form.elements.website.value.trim(),
+        website: form.elements.website ? form.elements.website.value.trim() : "",
         contact: form.elements.contact.value.trim(),
-        message: form.elements.message.value.trim(),
+        message: form.elements.message ? form.elements.message.value.trim() : "",
         package: pkg,
+        form_type: type,
         page_language: LANG,
         lead_id: leadId,
         source: leadSource(),
         gclid: campaign("gclid")
       };
+      if (form.elements.preferred) payload.preferred = form.elements.preferred.value;
+      if (form.elements.business) payload.business = form.elements.business.value.trim();
 
       sending = true;
       submitBtn.disabled = true;
@@ -386,12 +395,13 @@
         form.hidden = true;
         clearBox(successBox);
         var p = document.createElement("p");
-        p.textContent = T.success.replace("{id}", leadId);
+        p.textContent = T.success[type].replace("{id}", leadId);
         successBox.appendChild(p);
         successBox.classList.add("is-shown");
-        // no name, site, contact or message goes to analytics
+        // no name, site, contact, business or message goes to analytics
         track("generate_lead", {
           form_package: pkg,
+          form_type: type,
           lead_id: leadId,
           lead_source: campaign("utm_source") || "direct"
         });
@@ -400,16 +410,29 @@
         showSendError(errorBox);
       });
     });
+  }
 
-    // ?package=X in an external link: applied once on load
-    if (params) {
-      var wanted = params.get("package");
-      if (wanted && selectPackage(wanted)) {
-        window.addEventListener("load", scrollToAudit, { once: true });
+  each("form[data-form-type]", function (f) {
+    var select = f.elements.package;
+    var section = f.closest ? f.closest("section") : null;
+    if (!select || !section) return;
+    var entry = { form: f, section: section, select: select };
+    leadForms.push(entry);
+    initForm(entry);
+  });
+
+  // ?package=X in an external link: applied once on load, to the first form that offers it
+  if (params && leadForms.length) {
+    var wanted = params.get("package");
+    if (wanted) {
+      for (var li = 0; li < leadForms.length; li++) {
+        if (selectPackage(leadForms[li], wanted)) {
+          (function (sec) { window.addEventListener("load", function () { scrollToSection(sec); }, { once: true }); })(leadForms[li].section);
+          break;
+        }
       }
     }
   }
-  if (form && packageSelect) initForm();
 
   /* ---------- clicks ---------- */
   function fallbackCopy(text) {
@@ -462,13 +485,19 @@
     if (d.contact) track("contact_click", { channel: d.contact });
     if (d.langSwitch) track("language_switch", { to_language: d.langSwitch });
 
-    // a package button picks the package, scrolls to the form and focuses the first field
-    if (d.package && form && packageSelect) {
+    // a package button picks the package in the form of this page, scrolls to it and focuses the first field
+    var href = t.getAttribute("href") || "";
+    if (d.package && leadForms.length && href.charAt(0) === "#") {
+      var target = leadForms[0];
+      for (var k = 0; k < leadForms.length; k++) {
+        if (leadForms[k].section.id === href.slice(1)) target = leadForms[k];
+      }
       e.preventDefault();
-      selectPackage(d.package);
-      scrollToAudit();
+      selectPackage(target, d.package);
+      scrollToSection(target.section);
+      var first = target.form.elements.name;
       suppressStart = true; // only a real interaction counts as audit_form_start
-      try { firstField.focus({ preventScroll: true }); } catch (err) { firstField.focus(); }
+      try { first.focus({ preventScroll: true }); } catch (err) { first.focus(); }
       suppressStart = false;
     }
 
@@ -518,13 +547,13 @@
     for (var i = 0; i < sections.length; i++) io.observe(sections[i]);
 
     // the sticky button hides while the form or the contact block is on screen
-    var ctaTargets = { audit: false, contact: false };
-    ["audit", "contact"].forEach(function (id) {
+    var ctaTargets = { audit: false, consult: false, contact: false };
+    ["audit", "consult", "contact"].forEach(function (id) {
       var el = document.getElementById(id);
       if (!el) return;
       new IntersectionObserver(function (entries) {
         ctaTargets[id] = entries[0].isIntersecting;
-        document.body.classList.toggle("is-contact-visible", ctaTargets.audit || ctaTargets.contact);
+        document.body.classList.toggle("is-contact-visible", ctaTargets.audit || ctaTargets.consult || ctaTargets.contact);
       }).observe(el);
     });
   }

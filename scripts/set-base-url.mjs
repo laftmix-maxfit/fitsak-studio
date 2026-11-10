@@ -21,7 +21,9 @@ const pages = [
   { file: "index.html", path: "/", alt: "/ua/" },
   { file: "ua/index.html", path: "/ua/", alt: "/" },
   { file: "privacy/index.html", path: "/privacy/", alt: "/ua/privacy/" },
-  { file: "ua/privacy/index.html", path: "/ua/privacy/", alt: "/privacy/" }
+  { file: "ua/privacy/index.html", path: "/ua/privacy/", alt: "/privacy/" },
+  { file: "sites/index.html", path: "/sites/", alt: "/ua/sites/" },
+  { file: "ua/sites/index.html", path: "/ua/sites/", alt: "/sites/" }
 ];
 
 for (const p of pages) {
@@ -35,7 +37,9 @@ const urls = [
   { loc: "/", en: "/", uk: "/ua/" },
   { loc: "/ua/", en: "/", uk: "/ua/" },
   { loc: "/privacy/", en: "/privacy/", uk: "/ua/privacy/" },
-  { loc: "/ua/privacy/", en: "/privacy/", uk: "/ua/privacy/" }
+  { loc: "/ua/privacy/", en: "/privacy/", uk: "/ua/privacy/" },
+  { loc: "/sites/", en: "/sites/", uk: "/ua/sites/" },
+  { loc: "/ua/sites/", en: "/sites/", uk: "/ua/sites/" }
 ];
 const entry = (u) => `  <url>
     <loc>${newBase}${u.loc}</loc>

@@ -27,7 +27,7 @@
 <meta property="og:locale" content="uk_UA">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../css/style.css?v=6">
+<link rel="stylesheet" href="../css/style.css?v=7">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -78,6 +78,7 @@
       <span class="nav__links">
         <a href="#case">Кейс</a>
         <a href="#services">Послуги</a>
+        <a href="sites/" data-cta="header_sites">Сайти</a>
         <a href="#about">Про мене</a>
       </span>
       <a class="btn btn--small btn--primary nav__contact" href="#audit" data-cta="header_audit">Отримати аудит</a>
@@ -214,7 +215,7 @@
           <h3>Лендинг + аналітика</h3>
           <p class="card__price"><span>від</span>$500</p>
           <p>Перші 3 клієнти — $100 в обмін на чесний відгук. До 30.11.2026, передоплата 50%.</p>
-          <a class="btn btn--small" href="#audit" data-service="landing" data-package="landing">Обговорити</a>
+          <a class="btn btn--small" href="sites/" data-service="landing">Детальніше</a>
         </article>
         <article class="card">
           <h3>Ведення Google Ads</h3>
@@ -301,7 +302,7 @@
       <h2 class="h2">Безкоштовний аудит вашого сайту</h2>
       <p class="lead">Знайду 3–5 конкретних проблем сайту чи реклами і скажу, що вони вам коштують. Відповім протягом 24 годин.</p>
 
-      <form class="form" id="audit-form" novalidate>
+      <form class="form" id="audit-form" data-form-type="audit" data-subject="заявка на аудит" novalidate>
         <div class="field">
           <label for="f-name">Ім’я <span class="req" aria-hidden="true">*</span></label>
           <input id="f-name" name="name" type="text" required autocomplete="name" aria-describedby="f-name-err">
@@ -330,6 +331,9 @@
             <option value="repair">Ремонт сайту</option>
             <option value="landing">Лендинг + аналітика</option>
             <option value="ads">Ведення Google Ads</option>
+            <option value="site">Сайт 5–10 сторінок</option>
+            <option value="support">Підтримка</option>
+            <option value="consult">Безкоштовна консультація</option>
           </select>
           <p class="field__error" id="f-package-err" hidden></p>
         </div>
@@ -390,6 +394,6 @@
 </div>
 
 <script src="../js/config.js?v=4" defer></script>
-<script src="../js/app.js?v=5" defer></script>
+<script src="../js/app.js?v=6" defer></script>
 </body>
 </html>

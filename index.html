@@ -27,7 +27,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/style.css?v=6">
+<link rel="stylesheet" href="css/style.css?v=7">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -77,6 +77,7 @@
       <span class="nav__links">
         <a href="#case">Case study</a>
         <a href="#services">Services</a>
+        <a href="sites/" data-cta="header_sites">Websites</a>
         <a href="#about">About</a>
       </span>
       <a class="btn btn--small btn--primary nav__contact" href="#audit" data-cta="header_audit">Get audit</a>
@@ -214,7 +215,7 @@
           <h3>Landing page + analytics</h3>
           <p class="card__price"><span>from</span>$500</p>
           <p>First 3 clients — $100 in exchange for an honest review. Until 30 Nov 2026, 50% prepayment.</p>
-          <a class="btn btn--small" href="#audit" data-service="landing" data-package="landing">Discuss</a>
+          <a class="btn btn--small" href="sites/" data-service="landing">Details</a>
         </article>
         <article class="card">
           <h3>Google Ads management</h3>
@@ -301,7 +302,7 @@
       <h2 class="h2">Free audit of your site</h2>
       <p class="lead">I’ll find 3–5 specific problems with your site or ads and tell you what they cost you. Reply within 24 hours.</p>
 
-      <form class="form" id="audit-form" novalidate>
+      <form class="form" id="audit-form" data-form-type="audit" data-subject="заявка на аудит" novalidate>
         <div class="field">
           <label for="f-name">Name <span class="req" aria-hidden="true">*</span></label>
           <input id="f-name" name="name" type="text" required autocomplete="name" aria-describedby="f-name-err">
@@ -330,6 +331,9 @@
             <option value="repair">Site repair</option>
             <option value="landing">Landing page + analytics</option>
             <option value="ads">Google Ads management</option>
+            <option value="site">Website, 5–10 pages</option>
+            <option value="support">Support</option>
+            <option value="consult">Free consultation</option>
           </select>
           <p class="field__error" id="f-package-err" hidden></p>
         </div>
@@ -390,6 +394,6 @@
 </div>
 
 <script src="js/config.js?v=4" defer></script>
-<script src="js/app.js?v=5" defer></script>
+<script src="js/app.js?v=6" defer></script>
 </body>
 </html>

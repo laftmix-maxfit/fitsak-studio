@@ -312,7 +312,12 @@
       <button type="button" class="dialog__close" data-dialog-close aria-label="Закрити"><span aria-hidden="true">×</span></button>
     </div>
     <p class="dialog__lead">Напишіть, що за бізнес і що має робити сайт. Зв’яжуся протягом 24 годин у зручний вам спосіб.</p>
-    <form class="form" id="consult-form" data-form-type="consult" data-subject="консультація" novalidate>
+    <noscript><p class="noscript">Форма працює і без JavaScript. Також можна написати в Telegram: <a href="https://t.me/studiofits" target="_blank" rel="noopener">@studiofits</a></p></noscript>
+    <form class="form" id="consult-form" data-form-type="consult" data-subject="консультація" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
+      <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
+      <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
+      <input type="hidden" name="from_name" value="fitsak.com">
+      <input type="hidden" name="redirect" value="https://fitsak.com/ua/sites/?sent=1">
         <div class="field">
           <label for="c-name">Ім’я <span class="req" aria-hidden="true">*</span></label>
           <input id="c-name" name="name" type="text" required autocomplete="name" aria-describedby="c-name-err">
@@ -380,6 +385,6 @@
 </dialog>
 
 <script src="../../js/config.js?v=4" defer></script>
-<script src="../../js/app.js?v=6" defer></script>
+<script src="../../js/app.js?v=7" defer></script>
 </body>
 </html>

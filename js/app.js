@@ -57,6 +57,18 @@
     });
   }
 
+  // personal data in the address bar (a form that was submitted with GET): drop the query before anything,
+  // GA page_location included, can read it. Everything we need from it was read into params above.
+  if (params) {
+    var PII_KEYS = ["name", "contact", "website", "message", "business"];
+    for (var pk = 0; pk < PII_KEYS.length; pk++) {
+      if (params.has(PII_KEYS[pk])) {
+        try { window.history.replaceState(null, "", window.location.pathname + window.location.hash); } catch (e) { /* ignore */ }
+        break;
+      }
+    }
+  }
+
   function campaign(key) { return session("get", "fs_" + key) || ""; }
 
   /* ---------- analytics ---------- */
@@ -181,6 +193,10 @@
         audit: "Thank you! Request no. {id} received. I’ll reply within 24 hours.",
         consult: "Thank you! Request no. {id} received. I’ll write within 24 hours."
       },
+      successNoId: {
+        audit: "Thank you! Request received. I’ll reply within 24 hours.",
+        consult: "Thank you! Request received. I’ll write within 24 hours."
+      },
       errPre: "Couldn’t send. Try again or write on ",
       errMid: " / by "
     },
@@ -195,6 +211,10 @@
       success: {
         audit: "Дякую! Заявка № {id} отримана. Відповім протягом 24 годин.",
         consult: "Дякую! Заявка № {id} отримана. Напишу протягом 24 годин."
+      },
+      successNoId: {
+        audit: "Дякую! Заявка отримана. Відповім протягом 24 годин.",
+        consult: "Дякую! Заявка отримана. Напишу протягом 24 годин."
       },
       errPre: "Не вдалося надіслати. Спробуйте ще раз або напишіть у ",
       errMid: " / на "
@@ -304,7 +324,7 @@
     var type = form.getAttribute("data-form-type") === "consult" ? "consult" : "audit";
     // controls in page order (radios and the honeypot are not validated)
     var fields = Array.prototype.filter.call(form.elements, function (el) {
-      return el.name && el.name !== "botcheck" && el.type !== "radio" && el.type !== "submit" &&
+      return el.name && el.name !== "botcheck" && el.type !== "radio" && el.type !== "submit" && el.type !== "hidden" &&
         el.tagName !== "BUTTON" && el.tagName !== "FIELDSET";
     });
     var submitBtn = form.querySelector("[type=submit]");
@@ -338,6 +358,25 @@
       if (successBox) successBox.classList.remove("is-shown");
       if (successText) successText.textContent = "";
       fields.forEach(function (el) { showFieldError(el, ""); });
+    };
+
+    entry.showSuccess = function (msg) {
+      form.hidden = true;
+      entry.sent = true;
+      if (successText) {
+        successText.textContent = msg;
+      } else {
+        clearBox(successBox);
+        var p = document.createElement("p");
+        p.textContent = msg;
+        successBox.appendChild(p);
+      }
+      successBox.classList.add("is-shown");
+      if (successText) {
+        // the form just disappeared: keep keyboard and screen reader users inside the dialog
+        successBox.setAttribute("tabindex", "-1");
+        successBox.focus({ preventScroll: true });
+      }
     };
 
     form.addEventListener("submit", function (e) {
@@ -404,23 +443,7 @@
       }).then(function (ok) {
         finish();
         if (!ok) { showSendError(errorBox); return; }
-        form.hidden = true;
-        entry.sent = true;
-        var msg = T.success[type].replace("{id}", leadId);
-        if (successText) {
-          successText.textContent = msg;
-        } else {
-          clearBox(successBox);
-          var p = document.createElement("p");
-          p.textContent = msg;
-          successBox.appendChild(p);
-        }
-        successBox.classList.add("is-shown");
-        if (successText) {
-          // the form just disappeared: keep keyboard and screen reader users inside the dialog
-          successBox.setAttribute("tabindex", "-1");
-          successBox.focus({ preventScroll: true });
-        }
+        entry.showSuccess(T.success[type].replace("{id}", leadId));
         // no name, site, contact, business or message goes to analytics
         track("generate_lead", {
           form_package: pkg,
@@ -439,6 +462,7 @@
     var select = f.elements.package;
     var section = f.closest ? f.closest("section, dialog") : null;
     if (!select || !section) return;
+    f.noValidate = true; // app.js shows its own messages; without app.js the browser validates natively
     var entry = { form: f, section: section, select: select };
     leadForms.push(entry);
     initForm(entry);
@@ -495,6 +519,25 @@
       if (e.target === dialog && downOnBackdrop) dialog.close();
       downOnBackdrop = false;
     });
+  }
+
+  /* ---------- return from the no-JS form post (Web3Forms redirects here with ?sent=1) ---------- */
+  if (params && params.get("sent") === "1" && leadForms.length) {
+    var back = leadForms[0]; // one form per page
+    var backType = back.form.getAttribute("data-form-type") === "consult" ? "consult" : "audit";
+    if (back.section === dialog && dialog && typeof dialog.showModal === "function") {
+      document.body.classList.add("is-dialog-open");
+      dialog.showModal();
+    } else {
+      window.addEventListener("load", function () { scrollToSection(back.section); }, { once: true });
+    }
+    back.showSuccess(T.successNoId[backType]);
+    try {
+      var rest = new URLSearchParams(window.location.search);
+      rest.delete("sent");
+      var restText = rest.toString();
+      window.history.replaceState(null, "", window.location.pathname + (restText ? "?" + restText : "") + window.location.hash);
+    } catch (e) { /* ignore */ }
   }
 
   /* ---------- clicks ---------- */

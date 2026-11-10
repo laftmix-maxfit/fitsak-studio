@@ -302,7 +302,12 @@
       <h2 class="h2">Безкоштовний аудит вашого сайту</h2>
       <p class="lead">Знайду 3–5 конкретних проблем сайту чи реклами і скажу, що вони вам коштують. Відповім протягом 24 годин.</p>
 
-      <form class="form" id="audit-form" data-form-type="audit" data-subject="заявка на аудит" novalidate>
+      <noscript><p class="noscript">Форма працює і без JavaScript. Також можна написати в Telegram: <a href="https://t.me/studiofits" target="_blank" rel="noopener">@studiofits</a></p></noscript>
+      <form class="form" id="audit-form" data-form-type="audit" data-subject="заявка на аудит" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
+        <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
+        <input type="hidden" name="subject" value="Fitsak: заявка на аудит (no-JS)">
+        <input type="hidden" name="from_name" value="fitsak.com">
+        <input type="hidden" name="redirect" value="https://fitsak.com/ua/?sent=1">
         <div class="field">
           <label for="f-name">Ім’я <span class="req" aria-hidden="true">*</span></label>
           <input id="f-name" name="name" type="text" required autocomplete="name" aria-describedby="f-name-err">
@@ -394,6 +399,6 @@
 </div>
 
 <script src="../js/config.js?v=4" defer></script>
-<script src="../js/app.js?v=6" defer></script>
+<script src="../js/app.js?v=7" defer></script>
 </body>
 </html>

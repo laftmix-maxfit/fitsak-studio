@@ -102,7 +102,7 @@
         <a href="#case">Кейс</a>
         <a href="#faq">FAQ</a>
       </span>
-      <a class="btn btn--small btn--primary nav__contact" href="#consult" data-cta="header_consult">Консультація</a>
+      <a class="btn btn--small btn--primary nav__contact" href="#contact-fallback" data-open-consult data-cta="header_consult" data-package="consult">Консультація</a>
       <a class="lang" href="../../sites/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
     </nav>
   </div>
@@ -117,7 +117,7 @@
         <h1>Сайт, який приводить заявки, а не просто гарно виглядає</h1>
         <p class="hero__sub">Лендинг або сайт на 5–10 сторінок: дизайн, тексти, швидкість на телефоні, форма заявки й аналітика GA4 з першого дня.</p>
         <div class="actions">
-          <a class="btn btn--primary" href="#consult" data-cta="sites_hero" data-package="consult">Безкоштовна консультація</a>
+          <a class="btn btn--primary" href="#contact-fallback" data-open-consult data-cta="sites_hero" data-package="consult">Безкоштовна консультація</a>
           <a class="btn" href="#case">Дивитись кейс</a>
         </div>
       </div>
@@ -173,19 +173,19 @@
           <p class="card__price"><span>від</span>$500</p>
           <p>Одна сторінка під одну послугу чи рекламу. Від 2–3 днів.</p>
           <p class="card__fine">в обмін на чесний відгук, до 30.11.2026, передоплата 50%</p>
-          <a class="btn btn--small" href="#consult" data-cta="sites_pricing_landing" data-package="landing">Хочу лендинг</a>
+          <a class="btn btn--small" href="#contact-fallback" data-open-consult data-cta="sites_pricing_landing" data-package="landing">Хочу лендинг</a>
         </article>
         <article class="card">
           <h3>Сайт 5–10 сторінок</h3>
           <p class="card__price"><span>від</span>$900</p>
           <p>Головна, послуги, ціни, про вас, контакти, окремі сторінки під пошукові запити. До 14 днів.</p>
-          <a class="btn btn--small" href="#consult" data-cta="sites_pricing_site" data-package="site">Хочу сайт</a>
+          <a class="btn btn--small" href="#contact-fallback" data-open-consult data-cta="sites_pricing_site" data-package="site">Хочу сайт</a>
         </article>
         <article class="card">
           <h3>Підтримка</h3>
           <p class="card__price card__price--text"><span>щомісяця</span>ціна після консультації</p>
           <p>Правки текстів і цін, нові сторінки, аналітика, звіт щомісяця.</p>
-          <a class="btn btn--small" href="#consult" data-cta="sites_pricing_support" data-package="support">Обговорити</a>
+          <a class="btn btn--small" href="#contact-fallback" data-open-consult data-cta="sites_pricing_support" data-package="support">Обговорити</a>
         </article>
       </div>
       <p class="note">Терміни — якщо тексти й фото готові. Фінальна ціна й термін — після безкоштовної консультації.</p>
@@ -203,7 +203,7 @@
         <li>GA4 з ~20 подіями, форма скорочена до 4 полів, кнопки Telegram і Viber.</li>
         <li>5 заявок за перші 12 днів реклами, ~209 грн за заявку.</li>
       </ul>
-      <p class="case__link"><a href="../#case">Повний кейс</a> · Живий сайт: <a href="https://nonaschool.com.ua/guitar/" target="_blank" rel="noopener">https://nonaschool.com.ua/guitar/</a></p>
+      <p class="case__link"><a href="../#case">Повний кейс</a> · Живий сайт: <a href="https://nonaschool.com.ua/guitar/" target="_blank" rel="noopener">nonaschool.com.ua/guitar</a></p>
       <div class="shots">
         <figure class="shot shot--desktop">
           <img src="../../assets/nona-desktop.webp" width="1200" height="750" loading="lazy" decoding="async" alt="Лендинг NONA Music School з уроків гітари на десктопі: заголовок, безкоштовний пробний урок і кнопка запису">
@@ -214,7 +214,7 @@
           <figcaption>Та сама сторінка на мобільному (390 px)</figcaption>
           </figure>
       </div>
-      <p class="case__cta">Хочете так само? <a class="btn btn--primary" href="#consult" data-cta="sites_case" data-package="consult">Безкоштовна консультація</a></p>
+      <p class="case__cta">Хочете так само? <a class="btn btn--primary" href="#contact-fallback" data-open-consult data-cta="sites_case" data-package="consult">Безкоштовна консультація</a></p>
     </div>
   </section>
 
@@ -264,13 +264,55 @@
     </div>
   </section>
 
-  <section class="section" id="consult" data-section="consult">
+  <section class="section section--compact" id="contact-fallback" data-section="contact">
     <div class="wrap">
-      <p class="eyebrow">Безкоштовна консультація</p>
-      <h2 class="h2">Безкоштовна консультація щодо сайту</h2>
-      <p class="lead">Напишіть, що за бізнес і що має робити сайт. Зв’яжуся протягом 24 годин у зручний вам спосіб.</p>
+      <p class="eyebrow">Контакт</p>
+      <h2 class="h2">Напишіть мені напряму</h2>
+      <div class="contact__buttons">
+        <a class="btn btn--primary" href="https://www.fiverr.com/maxf_itsak" target="_blank" rel="noopener" data-fiverr-link data-contact="fiverr">Fiverr</a>
+        <a class="btn" href="#contact-fallback" data-email-link data-contact="email">Email</a>
+        <a class="btn" href="#contact-fallback" target="_blank" rel="noopener" data-telegram-link data-contact="telegram">Telegram</a>
+      </div>
+      <div class="email-row">
+        <code data-email-text></code>
+        <button type="button" class="btn btn--small" data-copy-email data-done="Скопійовано">Копіювати</button>
+      </div>
+      <noscript><p class="noscript">Email і Telegram потребують JavaScript. Мене завжди можна знайти на Fiverr.</p></noscript>
+    </div>
+  </section>
 
-      <form class="form" id="consult-form" data-form-type="consult" data-subject="консультація" novalidate>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Fitsak Studio — Maksym Fitsak</p>
+    <nav aria-label="Футер">
+      <a href="../privacy/">Конфіденційність</a>
+      <button type="button" class="linklike" data-consent-open>Налаштування cookies</button>
+      <a href="../">На головну</a>
+      <a href="../../sites/" hreflang="en" lang="en" data-lang-switch="en">English</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="sticky-cta"><a class="btn btn--primary" href="#contact-fallback" data-open-consult data-cta="sticky_consult" data-package="consult">Безкоштовна консультація</a></div>
+
+<div class="consent" id="consent" role="dialog" aria-label="Згода на cookies" hidden>
+  <p>Я використовую Google Analytics і вимірювання реклами Google, щоб бачити, що працює. Cookies ставляться лише якщо ви погодитесь. <a href="../privacy/">Детальніше</a></p>
+  <div class="consent__actions">
+    <button type="button" class="btn" data-consent="denied">Відхилити</button>
+    <button type="button" class="btn" data-consent="granted">Погодитись</button>
+  </div>
+</div>
+
+<dialog class="dialog" id="consult-dialog" aria-labelledby="consult-title">
+  <div class="dialog__box">
+    <div class="dialog__head">
+      <h2 class="dialog__title" id="consult-title">Безкоштовна консультація щодо сайту</h2>
+      <button type="button" class="dialog__close" data-dialog-close aria-label="Закрити"><span aria-hidden="true">×</span></button>
+    </div>
+    <p class="dialog__lead">Напишіть, що за бізнес і що має робити сайт. Зв’яжуся протягом 24 годин у зручний вам спосіб.</p>
+    <form class="form" id="consult-form" data-form-type="consult" data-subject="консультація" novalidate>
         <div class="field">
           <label for="c-name">Ім’я <span class="req" aria-hidden="true">*</span></label>
           <input id="c-name" name="name" type="text" required autocomplete="name" aria-describedby="c-name-err">
@@ -328,35 +370,14 @@
         </div>
         <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
         <div class="form-error" role="alert"></div>
-        <button class="btn btn--primary" type="submit">Записатися на консультацію</button>
+        <div class="form__submit"><button class="btn btn--primary" type="submit">Записатися на консультацію</button></div>
       </form>
-      <div class="form-success" role="status" aria-live="polite"></div>
+    <div class="form-success" role="status" aria-live="polite">
+      <p class="form-success__text"></p>
+      <button type="button" class="btn" data-dialog-close>Закрити</button>
     </div>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="wrap">
-    <p>© 2026 Fitsak Studio — Maksym Fitsak</p>
-    <nav aria-label="Футер">
-      <a href="../privacy/">Конфіденційність</a>
-      <button type="button" class="linklike" data-consent-open>Налаштування cookies</button>
-      <a href="../">На головну</a>
-      <a href="../../sites/" hreflang="en" lang="en" data-lang-switch="en">English</a>
-    </nav>
   </div>
-</footer>
-
-<div class="sticky-cta"><a class="btn btn--primary" href="#consult" data-cta="sticky_consult">Безкоштовна консультація</a></div>
-
-<div class="consent" id="consent" role="dialog" aria-label="Згода на cookies" hidden>
-  <p>Я використовую Google Analytics і вимірювання реклами Google, щоб бачити, що працює. Cookies ставляться лише якщо ви погодитесь. <a href="../privacy/">Детальніше</a></p>
-  <div class="consent__actions">
-    <button type="button" class="btn" data-consent="denied">Відхилити</button>
-    <button type="button" class="btn" data-consent="granted">Погодитись</button>
-  </div>
-</div>
+</dialog>
 
 <script src="../../js/config.js?v=4" defer></script>
 <script src="../../js/app.js?v=6" defer></script>

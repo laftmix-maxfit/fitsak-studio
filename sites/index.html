@@ -102,7 +102,7 @@
         <a href="#case">Case study</a>
         <a href="#faq">FAQ</a>
       </span>
-      <a class="btn btn--small btn--primary nav__contact" href="#consult" data-cta="header_consult">Consultation</a>
+      <a class="btn btn--small btn--primary nav__contact" href="#contact-fallback" data-open-consult data-cta="header_consult" data-package="consult">Consultation</a>
       <a class="lang" href="../ua/sites/" hreflang="uk" lang="uk" data-lang-switch="ua">UA</a>
     </nav>
   </div>
@@ -117,7 +117,7 @@
         <h1>A website that brings leads, not just looks good</h1>
         <p class="hero__sub">A landing page or a 5–10 page website: design, copy, phone speed, a lead form and GA4 analytics from day one.</p>
         <div class="actions">
-          <a class="btn btn--primary" href="#consult" data-cta="sites_hero" data-package="consult">Free consultation</a>
+          <a class="btn btn--primary" href="#contact-fallback" data-open-consult data-cta="sites_hero" data-package="consult">Free consultation</a>
           <a class="btn" href="#case">See case study</a>
         </div>
       </div>
@@ -173,19 +173,19 @@
           <p class="card__price"><span>from</span>$500</p>
           <p>One page for one service or ad campaign. From 2–3 days.</p>
           <p class="card__fine">in exchange for an honest review, until 30 Nov 2026, 50% prepayment</p>
-          <a class="btn btn--small" href="#consult" data-cta="sites_pricing_landing" data-package="landing">I want a landing page</a>
+          <a class="btn btn--small" href="#contact-fallback" data-open-consult data-cta="sites_pricing_landing" data-package="landing">I want a landing page</a>
         </article>
         <article class="card">
           <h3>Website, 5–10 pages</h3>
           <p class="card__price"><span>from</span>$900</p>
           <p>Home, services, prices, about you, contacts, separate pages for search queries. Up to 14 days.</p>
-          <a class="btn btn--small" href="#consult" data-cta="sites_pricing_site" data-package="site">I want a website</a>
+          <a class="btn btn--small" href="#contact-fallback" data-open-consult data-cta="sites_pricing_site" data-package="site">I want a website</a>
         </article>
         <article class="card">
           <h3>Support</h3>
           <p class="card__price card__price--text"><span>monthly</span>price after consultation</p>
           <p>Text and price edits, new pages, analytics, a monthly report.</p>
-          <a class="btn btn--small" href="#consult" data-cta="sites_pricing_support" data-package="support">Discuss</a>
+          <a class="btn btn--small" href="#contact-fallback" data-open-consult data-cta="sites_pricing_support" data-package="support">Discuss</a>
         </article>
       </div>
       <p class="note">Timelines assume your copy and photos are ready. Final price and timeline — after the free consultation.</p>
@@ -203,7 +203,7 @@
         <li>GA4 with ~20 events, the form cut to 4 fields, Telegram and Viber buttons.</li>
         <li>5 leads in the first 12 days of ads, ~209 UAH per lead.</li>
       </ul>
-      <p class="case__link"><a href="../#case">Full case study</a> · Live site: <a href="https://nonaschool.com.ua/guitar/" target="_blank" rel="noopener">https://nonaschool.com.ua/guitar/</a></p>
+      <p class="case__link"><a href="../#case">Full case study</a> · Live site: <a href="https://nonaschool.com.ua/guitar/" target="_blank" rel="noopener">nonaschool.com.ua/guitar</a></p>
       <div class="shots">
         <figure class="shot shot--desktop">
           <img src="../assets/nona-desktop.webp" width="1200" height="750" loading="lazy" decoding="async" alt="NONA Music School guitar landing page on desktop: headline, free trial lesson offer and enrolment button">
@@ -214,7 +214,7 @@
           <figcaption>Same page on mobile (390 px)</figcaption>
           </figure>
       </div>
-      <p class="case__cta">Want the same? <a class="btn btn--primary" href="#consult" data-cta="sites_case" data-package="consult">Free consultation</a></p>
+      <p class="case__cta">Want the same? <a class="btn btn--primary" href="#contact-fallback" data-open-consult data-cta="sites_case" data-package="consult">Free consultation</a></p>
     </div>
   </section>
 
@@ -264,13 +264,55 @@
     </div>
   </section>
 
-  <section class="section" id="consult" data-section="consult">
+  <section class="section section--compact" id="contact-fallback" data-section="contact">
     <div class="wrap">
-      <p class="eyebrow">Free consultation</p>
-      <h2 class="h2">Free website consultation</h2>
-      <p class="lead">Tell me about your business and what the site should do. I’ll get back to you within 24 hours in the way that suits you.</p>
+      <p class="eyebrow">Contact</p>
+      <h2 class="h2">Write to me directly</h2>
+      <div class="contact__buttons">
+        <a class="btn btn--primary" href="https://www.fiverr.com/maxf_itsak" target="_blank" rel="noopener" data-fiverr-link data-contact="fiverr">Fiverr</a>
+        <a class="btn" href="#contact-fallback" data-email-link data-contact="email">Email</a>
+        <a class="btn" href="#contact-fallback" target="_blank" rel="noopener" data-telegram-link data-contact="telegram">Telegram</a>
+      </div>
+      <div class="email-row">
+        <code data-email-text></code>
+        <button type="button" class="btn btn--small" data-copy-email data-done="Copied">Copy</button>
+      </div>
+      <noscript><p class="noscript">Email and Telegram details need JavaScript. You can always reach me on Fiverr.</p></noscript>
+    </div>
+  </section>
 
-      <form class="form" id="consult-form" data-form-type="consult" data-subject="консультація" novalidate>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>© 2026 Fitsak Studio — Maksym Fitsak</p>
+    <nav aria-label="Footer">
+      <a href="../privacy/">Privacy</a>
+      <button type="button" class="linklike" data-consent-open>Cookie settings</button>
+      <a href="../">Home</a>
+      <a href="../ua/sites/" hreflang="uk" lang="uk" data-lang-switch="ua">Українською</a>
+    </nav>
+  </div>
+</footer>
+
+<div class="sticky-cta"><a class="btn btn--primary" href="#contact-fallback" data-open-consult data-cta="sticky_consult" data-package="consult">Free consultation</a></div>
+
+<div class="consent" id="consent" role="dialog" aria-label="Cookie consent" hidden>
+  <p>I use Google Analytics and Google Ads measurement to see what works. Cookies are set only if you accept. <a href="../privacy/">Details</a></p>
+  <div class="consent__actions">
+    <button type="button" class="btn" data-consent="denied">Reject</button>
+    <button type="button" class="btn" data-consent="granted">Accept</button>
+  </div>
+</div>
+
+<dialog class="dialog" id="consult-dialog" aria-labelledby="consult-title">
+  <div class="dialog__box">
+    <div class="dialog__head">
+      <h2 class="dialog__title" id="consult-title">Free website consultation</h2>
+      <button type="button" class="dialog__close" data-dialog-close aria-label="Close"><span aria-hidden="true">×</span></button>
+    </div>
+    <p class="dialog__lead">Tell me about your business and what the site should do. I’ll get back to you within 24 hours in the way that suits you.</p>
+    <form class="form" id="consult-form" data-form-type="consult" data-subject="консультація" novalidate>
         <div class="field">
           <label for="c-name">Name <span class="req" aria-hidden="true">*</span></label>
           <input id="c-name" name="name" type="text" required autocomplete="name" aria-describedby="c-name-err">
@@ -328,35 +370,14 @@
         </div>
         <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
         <div class="form-error" role="alert"></div>
-        <button class="btn btn--primary" type="submit">Book a free consultation</button>
+        <div class="form__submit"><button class="btn btn--primary" type="submit">Book a free consultation</button></div>
       </form>
-      <div class="form-success" role="status" aria-live="polite"></div>
+    <div class="form-success" role="status" aria-live="polite">
+      <p class="form-success__text"></p>
+      <button type="button" class="btn" data-dialog-close>Close</button>
     </div>
-  </section>
-
-</main>
-
-<footer class="site-footer">
-  <div class="wrap">
-    <p>© 2026 Fitsak Studio — Maksym Fitsak</p>
-    <nav aria-label="Footer">
-      <a href="../privacy/">Privacy</a>
-      <button type="button" class="linklike" data-consent-open>Cookie settings</button>
-      <a href="../">Home</a>
-      <a href="../ua/sites/" hreflang="uk" lang="uk" data-lang-switch="ua">Українською</a>
-    </nav>
   </div>
-</footer>
-
-<div class="sticky-cta"><a class="btn btn--primary" href="#consult" data-cta="sticky_consult">Free consultation</a></div>
-
-<div class="consent" id="consent" role="dialog" aria-label="Cookie consent" hidden>
-  <p>I use Google Analytics and Google Ads measurement to see what works. Cookies are set only if you accept. <a href="../privacy/">Details</a></p>
-  <div class="consent__actions">
-    <button type="button" class="btn" data-consent="denied">Reject</button>
-    <button type="button" class="btn" data-consent="granted">Accept</button>
-  </div>
-</div>
+</dialog>
 
 <script src="../js/config.js?v=4" defer></script>
 <script src="../js/app.js?v=6" defer></script>

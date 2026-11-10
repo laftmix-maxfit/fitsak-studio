@@ -310,6 +310,7 @@
     var submitBtn = form.querySelector("[type=submit]");
     var errorBox = form.querySelector(".form-error");
     var successBox = entry.section.querySelector(".form-success");
+    var successText = successBox ? successBox.querySelector(".form-success__text") : null;
     var startSent = false;
     var sending = false;
     var submitLabel = submitBtn ? submitBtn.textContent : "";
@@ -327,6 +328,17 @@
       el.addEventListener("input", clear);
       el.addEventListener("change", clear);
     });
+
+    // back to a clean, visible form (used when the dialog is opened again after a sent request)
+    entry.sent = false;
+    entry.reset = function () {
+      form.reset();
+      form.hidden = false;
+      clearBox(errorBox);
+      if (successBox) successBox.classList.remove("is-shown");
+      if (successText) successText.textContent = "";
+      fields.forEach(function (el) { showFieldError(el, ""); });
+    };
 
     form.addEventListener("submit", function (e) {
       e.preventDefault();
@@ -393,11 +405,22 @@
         finish();
         if (!ok) { showSendError(errorBox); return; }
         form.hidden = true;
-        clearBox(successBox);
-        var p = document.createElement("p");
-        p.textContent = T.success[type].replace("{id}", leadId);
-        successBox.appendChild(p);
+        entry.sent = true;
+        var msg = T.success[type].replace("{id}", leadId);
+        if (successText) {
+          successText.textContent = msg;
+        } else {
+          clearBox(successBox);
+          var p = document.createElement("p");
+          p.textContent = msg;
+          successBox.appendChild(p);
+        }
         successBox.classList.add("is-shown");
+        if (successText) {
+          // the form just disappeared: keep keyboard and screen reader users inside the dialog
+          successBox.setAttribute("tabindex", "-1");
+          successBox.focus({ preventScroll: true });
+        }
         // no name, site, contact, business or message goes to analytics
         track("generate_lead", {
           form_package: pkg,
@@ -414,7 +437,7 @@
 
   each("form[data-form-type]", function (f) {
     var select = f.elements.package;
-    var section = f.closest ? f.closest("section") : null;
+    var section = f.closest ? f.closest("section, dialog") : null;
     if (!select || !section) return;
     var entry = { form: f, section: section, select: select };
     leadForms.push(entry);
@@ -426,12 +449,52 @@
     var wanted = params.get("package");
     if (wanted) {
       for (var li = 0; li < leadForms.length; li++) {
+        if (leadForms[li].section.tagName === "DIALOG") continue; // the dialog gets its package from the button that opens it
         if (selectPackage(leadForms[li], wanted)) {
           (function (sec) { window.addEventListener("load", function () { scrollToSection(sec); }, { once: true }); })(leadForms[li].section);
           break;
         }
       }
     }
+  }
+
+  /* ---------- consultation dialog ---------- */
+  var dialog = document.getElementById("consult-dialog");
+  var dialogEntry = null;
+  for (var di = 0; di < leadForms.length; di++) if (leadForms[di].section === dialog) dialogEntry = leadForms[di];
+  var dialogOpener = null;
+  var downOnBackdrop = false;
+
+  function openConsult(trigger) {
+    if (!dialog || !dialogEntry || typeof dialog.showModal !== "function") return false; // no support: the link falls back to #contact-fallback
+    if (dialog.open) return true;
+    if (dialogEntry.sent && dialogEntry.reset) dialogEntry.reset();
+    selectPackage(dialogEntry, trigger.getAttribute("data-package") || "consult");
+    dialogOpener = trigger;
+    document.body.classList.add("is-dialog-open");
+    dialog.showModal();
+    var first = dialogEntry.form.elements.name;
+    suppressStart = true; // only a real interaction counts as audit_form_start
+    try { first.focus({ preventScroll: true }); } catch (err) { first.focus(); }
+    suppressStart = false;
+    track("consult_open", { cta_location: trigger.getAttribute("data-cta") || "", form_package: dialogEntry.select.value });
+    return true;
+  }
+
+  if (dialog) {
+    // fires for Esc, the close buttons and a click on the backdrop; typed data stays in the form
+    dialog.addEventListener("close", function () {
+      document.body.classList.remove("is-dialog-open");
+      var back = dialogOpener;
+      dialogOpener = null;
+      if (back && typeof back.focus === "function") { try { back.focus(); } catch (err) { /* ignore */ } }
+    });
+    // close on a click outside the box; a drag that starts inside and ends outside must not close it
+    dialog.addEventListener("pointerdown", function (e) { downOnBackdrop = e.target === dialog; });
+    dialog.addEventListener("click", function (e) {
+      if (e.target === dialog && downOnBackdrop) dialog.close();
+      downOnBackdrop = false;
+    });
   }
 
   /* ---------- clicks ---------- */
@@ -480,14 +543,25 @@
       return;
     }
 
+    if (t.hasAttribute("data-dialog-close")) {
+      var dlg = t.closest("dialog");
+      if (dlg && dlg.close) dlg.close();
+      return;
+    }
+
     if (d.cta) track("cta_click", { cta_location: d.cta });
     if (d.service) track("service_click", { service_name: d.service });
     if (d.contact) track("contact_click", { channel: d.contact });
     if (d.langSwitch) track("language_switch", { to_language: d.langSwitch });
 
     // a package button picks the package in the form of this page, scrolls to it and focuses the first field
+    if (t.hasAttribute("data-open-consult") && openConsult(t)) {
+      e.preventDefault();
+      return;
+    }
+
     var href = t.getAttribute("href") || "";
-    if (d.package && leadForms.length && href.charAt(0) === "#") {
+    if (d.package && leadForms.length && href.charAt(0) === "#" && !t.hasAttribute("data-open-consult")) {
       var target = leadForms[0];
       for (var k = 0; k < leadForms.length; k++) {
         if (leadForms[k].section.id === href.slice(1)) target = leadForms[k];
@@ -547,13 +621,13 @@
     for (var i = 0; i < sections.length; i++) io.observe(sections[i]);
 
     // the sticky button hides while the form or the contact block is on screen
-    var ctaTargets = { audit: false, consult: false, contact: false };
-    ["audit", "consult", "contact"].forEach(function (id) {
+    var ctaTargets = { audit: false, contact: false };
+    ["audit", "contact"].forEach(function (id) {
       var el = document.getElementById(id);
       if (!el) return;
       new IntersectionObserver(function (entries) {
         ctaTargets[id] = entries[0].isIntersecting;
-        document.body.classList.toggle("is-contact-visible", ctaTargets.audit || ctaTargets.consult || ctaTargets.contact);
+        document.body.classList.toggle("is-contact-visible", ctaTargets.audit || ctaTargets.contact);
       }).observe(el);
     });
   }

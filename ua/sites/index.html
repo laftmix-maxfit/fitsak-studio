@@ -86,6 +86,7 @@
   ]
 }
 </script>
+<noscript><style>.js-only{display:none}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#main">Перейти до змісту</a>
@@ -270,14 +271,84 @@
       <h2 class="h2">Напишіть мені напряму</h2>
       <div class="contact__buttons">
         <a class="btn btn--primary" href="https://www.fiverr.com/maxf_itsak" target="_blank" rel="noopener" data-fiverr-link data-contact="fiverr">Fiverr</a>
-        <a class="btn" href="#contact-fallback" data-email-link data-contact="email">Email</a>
-        <a class="btn" href="#contact-fallback" target="_blank" rel="noopener" data-telegram-link data-contact="telegram">Telegram</a>
+        <a class="btn js-only" href="#contact-fallback" data-email-link data-contact="email">Email</a>
+        <a class="btn" href="https://t.me/studiofits" target="_blank" rel="noopener" data-telegram-link data-contact="telegram">Telegram</a>
       </div>
-      <div class="email-row">
+      <div class="email-row js-only">
         <code data-email-text></code>
         <button type="button" class="btn btn--small" data-copy-email data-done="Скопійовано">Копіювати</button>
       </div>
-      <noscript><p class="noscript">Email і Telegram потребують JavaScript. Мене завжди можна знайти на Fiverr.</p></noscript>
+      <noscript>
+        <p class="noscript">Форма працює і без JavaScript. Також можна написати в Telegram: <a href="https://t.me/studiofits" target="_blank" rel="noopener">@studiofits</a></p>
+        <h3 class="case__h nojs-title">Безкоштовна консультація щодо сайту</h3>
+        <p class="noscript">Напишіть, що за бізнес і що має робити сайт. Зв’яжуся протягом 24 годин у зручний вам спосіб.</p>
+            <form class="form" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
+      <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
+      <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
+      <input type="hidden" name="from_name" value="fitsak.com">
+      <input type="hidden" name="redirect" value="https://fitsak.com/ua/sites/?sent=1">
+        <div class="field">
+          <label for="n-name">Ім’я <span class="req" aria-hidden="true">*</span></label>
+          <input id="n-name" name="name" type="text" required autocomplete="name" aria-describedby="n-name-err">
+          <p class="field__error" id="n-name-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="n-contact">Telegram, Viber, телефон або email <span class="req" aria-hidden="true">*</span></label>
+          <input id="n-contact" name="contact" type="text" required autocapitalize="none" spellcheck="false" aria-describedby="n-contact-err">
+          <p class="field__error" id="n-contact-err" hidden></p>
+        </div>
+        <fieldset class="choice">
+          <legend>Як зручніше поговорити?</legend>
+          <div class="choice__row">
+            <label class="choice__opt"><input type="radio" name="preferred" value="telegram" checked><span>Telegram</span></label>
+            <label class="choice__opt"><input type="radio" name="preferred" value="viber"><span>Viber</span></label>
+            <label class="choice__opt"><input type="radio" name="preferred" value="call"><span>Дзвінок</span></label>
+            <label class="choice__opt"><input type="radio" name="preferred" value="email"><span>Email</span></label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="n-business">Чим займається ваш бізнес?</label>
+          <input id="n-business" name="business" type="text" maxlength="200" aria-describedby="n-business-err">
+          <p class="field__error" id="n-business-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="n-website">Поточний сайт (якщо є)</label>
+          <input id="n-website" name="website" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" aria-describedby="n-website-err">
+          <p class="field__error" id="n-website-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="n-message">Що має робити новий сайт?</label>
+          <textarea id="n-message" name="message" rows="4" maxlength="1000" aria-describedby="n-message-err"></textarea>
+          <p class="field__error" id="n-message-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="n-package">Пакет</label>
+          <select id="n-package" name="package" aria-describedby="n-package-err">
+            <option value="consult" selected>Безкоштовна консультація</option>
+            <option value="landing">Лендинг</option>
+            <option value="site">Сайт 5–10 сторінок</option>
+            <option value="support">Підтримка</option>
+            <option value="audit">Безкоштовний аудит</option>
+            <option value="deep_audit">Глибокий аудит Google Ads + GA4 (PDF)</option>
+            <option value="analytics">Аналітика під ключ</option>
+            <option value="repair">Ремонт сайту</option>
+            <option value="ads">Ведення Google Ads</option>
+          </select>
+          <p class="field__error" id="n-package-err" hidden></p>
+        </div>
+        <div class="field field--check">
+          <label class="check" for="n-consent">
+            <input id="n-consent" name="consent" type="checkbox" required aria-describedby="n-consent-err">
+            <span>Погоджуюсь на <a href="../privacy/" target="_blank" rel="noopener">обробку даних</a> для відповіді на заявку <span class="req" aria-hidden="true">*</span></span>
+          </label>
+          <p class="field__error" id="n-consent-err" hidden></p>
+        </div>
+        <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
+        <div class="form-error" role="alert"></div>
+        <button class="btn btn--primary" type="submit">Записатися на консультацію</button>
+      </form>
+
+      </noscript>
     </div>
   </section>
 
@@ -312,8 +383,7 @@
       <button type="button" class="dialog__close" data-dialog-close aria-label="Закрити"><span aria-hidden="true">×</span></button>
     </div>
     <p class="dialog__lead">Напишіть, що за бізнес і що має робити сайт. Зв’яжуся протягом 24 годин у зручний вам спосіб.</p>
-    <noscript><p class="noscript">Форма працює і без JavaScript. Також можна написати в Telegram: <a href="https://t.me/studiofits" target="_blank" rel="noopener">@studiofits</a></p></noscript>
-    <form class="form" id="consult-form" data-form-type="consult" data-subject="консультація" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
+        <form class="form" id="consult-form" data-form-type="consult" data-subject="консультація" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
       <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
       <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
       <input type="hidden" name="from_name" value="fitsak.com">
@@ -378,6 +448,7 @@
         <div class="form-error" role="alert"></div>
         <div class="form__submit"><button class="btn btn--primary" type="submit">Записатися на консультацію</button></div>
       </form>
+
     <div class="form-success" role="status" aria-live="polite">
       <p class="form-success__text"></p>
       <button type="button" class="btn" data-dialog-close>Закрити</button>

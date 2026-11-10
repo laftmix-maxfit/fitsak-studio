@@ -86,6 +86,7 @@
   ]
 }
 </script>
+<noscript><style>.js-only{display:none}</style></noscript>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -270,14 +271,84 @@
       <h2 class="h2">Write to me directly</h2>
       <div class="contact__buttons">
         <a class="btn btn--primary" href="https://www.fiverr.com/maxf_itsak" target="_blank" rel="noopener" data-fiverr-link data-contact="fiverr">Fiverr</a>
-        <a class="btn" href="#contact-fallback" data-email-link data-contact="email">Email</a>
-        <a class="btn" href="#contact-fallback" target="_blank" rel="noopener" data-telegram-link data-contact="telegram">Telegram</a>
+        <a class="btn js-only" href="#contact-fallback" data-email-link data-contact="email">Email</a>
+        <a class="btn" href="https://t.me/studiofits" target="_blank" rel="noopener" data-telegram-link data-contact="telegram">Telegram</a>
       </div>
-      <div class="email-row">
+      <div class="email-row js-only">
         <code data-email-text></code>
         <button type="button" class="btn btn--small" data-copy-email data-done="Copied">Copy</button>
       </div>
-      <noscript><p class="noscript">Email and Telegram details need JavaScript. You can always reach me on Fiverr.</p></noscript>
+      <noscript>
+        <p class="noscript">The form works without JavaScript too. You can also write on Telegram: <a href="https://t.me/studiofits" target="_blank" rel="noopener">@studiofits</a></p>
+        <h3 class="case__h nojs-title">Free website consultation</h3>
+        <p class="noscript">Tell me about your business and what the site should do. I’ll get back to you within 24 hours in the way that suits you.</p>
+            <form class="form" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
+      <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
+      <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
+      <input type="hidden" name="from_name" value="fitsak.com">
+      <input type="hidden" name="redirect" value="https://fitsak.com/sites/?sent=1">
+        <div class="field">
+          <label for="n-name">Name <span class="req" aria-hidden="true">*</span></label>
+          <input id="n-name" name="name" type="text" required autocomplete="name" aria-describedby="n-name-err">
+          <p class="field__error" id="n-name-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="n-contact">Telegram, Viber, phone or email <span class="req" aria-hidden="true">*</span></label>
+          <input id="n-contact" name="contact" type="text" required autocapitalize="none" spellcheck="false" aria-describedby="n-contact-err">
+          <p class="field__error" id="n-contact-err" hidden></p>
+        </div>
+        <fieldset class="choice">
+          <legend>How would you prefer to talk?</legend>
+          <div class="choice__row">
+            <label class="choice__opt"><input type="radio" name="preferred" value="telegram" checked><span>Telegram</span></label>
+            <label class="choice__opt"><input type="radio" name="preferred" value="viber"><span>Viber</span></label>
+            <label class="choice__opt"><input type="radio" name="preferred" value="call"><span>Call</span></label>
+            <label class="choice__opt"><input type="radio" name="preferred" value="email"><span>Email</span></label>
+          </div>
+        </fieldset>
+        <div class="field">
+          <label for="n-business">What does your business do?</label>
+          <input id="n-business" name="business" type="text" maxlength="200" aria-describedby="n-business-err">
+          <p class="field__error" id="n-business-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="n-website">Current website (if any)</label>
+          <input id="n-website" name="website" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" aria-describedby="n-website-err">
+          <p class="field__error" id="n-website-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="n-message">What should the new site do?</label>
+          <textarea id="n-message" name="message" rows="4" maxlength="1000" aria-describedby="n-message-err"></textarea>
+          <p class="field__error" id="n-message-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="n-package">Package</label>
+          <select id="n-package" name="package" aria-describedby="n-package-err">
+            <option value="consult" selected>Free consultation</option>
+            <option value="landing">Landing page</option>
+            <option value="site">Website, 5–10 pages</option>
+            <option value="support">Support</option>
+            <option value="audit">Free audit</option>
+            <option value="deep_audit">Deep Google Ads + GA4 audit (PDF)</option>
+            <option value="analytics">Turnkey analytics</option>
+            <option value="repair">Site repair</option>
+            <option value="ads">Google Ads management</option>
+          </select>
+          <p class="field__error" id="n-package-err" hidden></p>
+        </div>
+        <div class="field field--check">
+          <label class="check" for="n-consent">
+            <input id="n-consent" name="consent" type="checkbox" required aria-describedby="n-consent-err">
+            <span>I agree to the <a href="../privacy/" target="_blank" rel="noopener">processing of my data</a> to reply to my request <span class="req" aria-hidden="true">*</span></span>
+          </label>
+          <p class="field__error" id="n-consent-err" hidden></p>
+        </div>
+        <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
+        <div class="form-error" role="alert"></div>
+        <button class="btn btn--primary" type="submit">Book a free consultation</button>
+      </form>
+
+      </noscript>
     </div>
   </section>
 
@@ -312,8 +383,7 @@
       <button type="button" class="dialog__close" data-dialog-close aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
     <p class="dialog__lead">Tell me about your business and what the site should do. I’ll get back to you within 24 hours in the way that suits you.</p>
-    <noscript><p class="noscript">The form works without JavaScript too. You can also write on Telegram: <a href="https://t.me/studiofits" target="_blank" rel="noopener">@studiofits</a></p></noscript>
-    <form class="form" id="consult-form" data-form-type="consult" data-subject="консультація" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
+        <form class="form" id="consult-form" data-form-type="consult" data-subject="консультація" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
       <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
       <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
       <input type="hidden" name="from_name" value="fitsak.com">
@@ -378,6 +448,7 @@
         <div class="form-error" role="alert"></div>
         <div class="form__submit"><button class="btn btn--primary" type="submit">Book a free consultation</button></div>
       </form>
+
     <div class="form-success" role="status" aria-live="polite">
       <p class="form-success__text"></p>
       <button type="button" class="btn" data-dialog-close>Close</button>

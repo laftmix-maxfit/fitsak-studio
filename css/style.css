@@ -341,4 +341,4 @@ body.is-dialog-open .sticky-cta { display: none; }
 }
 
 del { color: var(--muted); }
-.card .card__promo { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }
+.badge del { color: inherit; opacity: 0.9; }

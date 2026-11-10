@@ -339,3 +339,6 @@ body.is-dialog-open .sticky-cta { display: none; }
   .form__submit .btn { width: 100%; }
   .dialog .form-success .btn { width: 100%; }
 }
+
+del { color: var(--muted); }
+.card .card__promo { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 12px; }

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Fitsak Studio — GA4 tracking, Google Ads &amp; fast landing pages</title>
-<meta name="description" content="Maksym Fitsak (Fitsak Studio) helps small businesses and online stores with GA4 conversion tracking, Google Ads cleanup and fast landing pages. Free audit, analytics from $150.">
+<meta name="description" content="Maksym Fitsak (Fitsak Studio) helps small businesses and online stores with GA4 conversion tracking, Google Ads cleanup and fast landing pages. Free audit, analytics from $100.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#f6f4ef" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101312" media="(prefers-color-scheme: dark)">
@@ -27,7 +27,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="css/style.css?v=7">
+<link rel="stylesheet" href="css/style.css?v=8">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -54,10 +54,11 @@
       "availableLanguage": ["Ukrainian", "English", "Czech"],
       "makesOffer": [
         { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Free audit" }, "priceSpecification": { "@type": "PriceSpecification", "price": 0, "priceCurrency": "USD" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Turnkey analytics" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 150, "priceCurrency": "USD" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Site repair" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 500, "priceCurrency": "USD" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Landing page + analytics" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 500, "priceCurrency": "USD" } },
-        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads management" } }
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Deep Google Ads + GA4 audit" }, "priceSpecification": { "@type": "PriceSpecification", "price": 50, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Turnkey analytics" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 100, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Landing page + analytics" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 250, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Site repair" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 300, "priceCurrency": "USD" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Google Ads management" }, "priceSpecification": { "@type": "PriceSpecification", "minPrice": 170, "priceCurrency": "USD" } }
       ]
     }
   ]
@@ -200,26 +201,32 @@
           <a class="btn btn--primary" href="#audit" data-service="audit" data-package="audit">Get audit</a>
         </article>
         <article class="card">
+          <h3>Deep Google Ads + GA4 audit</h3>
+          <p class="card__price">$50</p>
+          <p>A full review of your Google Ads account and GA4 setup: what wastes budget, what isn’t tracked, and a fix plan in a PDF.</p>
+          <a class="btn btn--small" href="#audit" data-service="deep_audit" data-package="deep_audit">Order</a>
+        </article>
+        <article class="card">
           <h3>Turnkey analytics</h3>
-          <p class="card__price"><span>from</span>$150</p>
+          <p class="card__price"><span>from</span>$100</p>
           <p>GA4/GTM, events from click to enquiry, checks and a report.</p>
           <a class="btn btn--small" href="#audit" data-service="analytics" data-package="analytics">Discuss</a>
         </article>
         <article class="card">
+          <h3>Landing page + analytics</h3>
+          <p class="card__price"><span>from</span>$250</p>
+          <p>First 3 clients — $100 instead of <del>$250</del> for an honest review. Until 30 Nov 2026, 50% prepayment.</p>
+          <a class="btn btn--small" href="sites/" data-service="landing">Details</a>
+        </article>
+        <article class="card">
           <h3>Site repair</h3>
-          <p class="card__price"><span>from</span>$500</p>
+          <p class="card__price"><span>from</span>$300</p>
           <p>Errors, mobile version, speed, forms and tracking. Before/after report.</p>
           <a class="btn btn--small" href="#audit" data-service="repair" data-package="repair">Discuss</a>
         </article>
         <article class="card">
-          <h3>Landing page + analytics</h3>
-          <p class="card__price"><span>from</span>$500</p>
-          <p>First 3 clients — $100 in exchange for an honest review. Until 30 Nov 2026, 50% prepayment.</p>
-          <a class="btn btn--small" href="sites/" data-service="landing">Details</a>
-        </article>
-        <article class="card">
           <h3>Google Ads management</h3>
-          <p class="card__price card__price--text"><span>monthly</span>price after audit</p>
+          <p class="card__price"><span>from</span>$170<span>/mo</span></p>
           <p>Campaigns, negative keywords, a monthly report.</p>
           <a class="btn btn--small" href="#audit" data-service="ads" data-package="ads">Discuss</a>
         </article>
@@ -332,6 +339,7 @@
           <label for="f-package">Package</label>
           <select id="f-package" name="package" aria-describedby="f-package-err">
             <option value="audit" selected>Free audit</option>
+            <option value="deep_audit">Deep Google Ads + GA4 audit (PDF)</option>
             <option value="analytics">Turnkey analytics</option>
             <option value="repair">Site repair</option>
             <option value="landing">Landing page + analytics</option>

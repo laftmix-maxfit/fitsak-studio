@@ -72,10 +72,12 @@
   function campaign(key) { return session("get", "fs_" + key) || ""; }
 
   /* ---------- analytics ---------- */
+  var saved = store("get", CONSENT_KEY); // "granted", "denied" or null while the visitor has not chosen
+
+  // events are always sent: while consent is denied Google strips identifiers itself (cookieless pings)
   function track(name, params) {
     try {
       if (typeof gtag !== "function") return;
-      if (gaOn && !gaLoaded) return; // no consent yet: nothing is queued or sent
       var p = params || {};
       p.page_language = LANG;
       if (store("get", INTERNAL_KEY) === "1") p.traffic_type = "internal";
@@ -90,6 +92,17 @@
     document.head.appendChild(s);
   }
 
+  // ad_personalization is never granted
+  function consentUpdate(state) {
+    gtag("consent", "update", {
+      analytics_storage: state,
+      ad_storage: state,
+      ad_user_data: state
+    });
+  }
+
+  // Consent Mode v2, advanced: gtag.js loads on every page. Everything is denied by default;
+  // a stored choice is applied before config, so the first page_view already carries the right state.
   function initGa() {
     window.dataLayer = window.dataLayer || [];
     if (typeof window.gtag !== "function") {
@@ -103,23 +116,7 @@
       wait_for_update: 500
     });
     gtag("set", "url_passthrough", true);
-  }
-
-  // ad_personalization is never granted
-  function consentUpdate(state) {
-    gtag("consent", "update", {
-      analytics_storage: state,
-      ad_storage: state,
-      ad_user_data: state
-    });
-  }
-
-  // gtag.js is fetched only after the visitor accepts; nothing from Google loads before that
-  var gaLoaded = false;
-  function loadGa() {
-    if (!gaOn || gaLoaded) return;
-    gaLoaded = true;
-    consentUpdate("granted");
+    if (saved === "granted") consentUpdate("granted");
     gtag("js", new Date());
     var conf = { page_language: LANG };
     if (store("get", INTERNAL_KEY) === "1") conf.traffic_type = "internal";
@@ -128,43 +125,77 @@
     loadScript("https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(gaId));
   }
 
+  // Microsoft Clarity. CLARITY_PRECONSENT true: the tag loads at once and stays cookieless until Accept;
+  // false: the tag is not loaded at all before Accept.
+  var clarityPre = cfg.CLARITY_PRECONSENT === true;
   var clarityLoaded = false;
+  function clarityConsent(granted) {
+    var v = granted ? "granted" : "denied";
+    window.clarity("consentv2", { ad_Storage: v, analytics_Storage: v });
+  }
   function setClarity(granted) {
     try {
-      if (granted && clarityOk && !clarityLoaded) {
+      if (!clarityOk) return;
+      if (!clarityLoaded) {
+        if (!granted && !clarityPre) return;
         window.clarity = window.clarity || function () {
           (window.clarity.q = window.clarity.q || []).push(arguments);
         };
+        clarityConsent(granted); // queued, so the tag reads the consent state before it does anything
         loadScript("https://www.clarity.ms/tag/" + encodeURIComponent(clarityId));
         clarityLoaded = true;
+        return;
       }
-      if (clarityLoaded && typeof window.clarity === "function") {
-        window.clarity("consent", granted);
-      }
+      clarityConsent(granted);
     } catch (e) { /* ignore */ }
   }
 
   if (gaOn) initGa();
+  setClarity(saved === "granted");
 
   /* ---------- consent banner ---------- */
   var banner = document.getElementById("consent");
+
+  // the page gets bottom padding equal to the banner, so the end of a form is never hidden under it
+  function syncBannerSpace() {
+    var h = banner && !banner.hidden ? banner.offsetHeight : 0;
+    root.style.setProperty("--consent-h", h + "px");
+  }
 
   function showBanner(show) {
     if (!banner) return;
     banner.hidden = !show;
     document.body.classList.toggle("has-consent", show);
+    syncBannerSpace();
+  }
+  window.addEventListener("resize", syncBannerSpace);
+
+  // Google does not delete its cookies when consent is withdrawn, so Reject removes them here
+  function dropCookies() {
+    try {
+      var host = window.location.hostname.split(".");
+      var domains = [""];
+      for (var i = 0; i < host.length - 1; i++) domains.push("." + host.slice(i).join("."));
+      domains.push(window.location.hostname);
+      document.cookie.split(";").forEach(function (pair) {
+        var name = pair.split("=")[0].trim();
+        if (!/^(_ga|_ga_.+|_gid|_gat.*|_gcl_.+|_clck|_clsk)$/.test(name)) return;
+        domains.forEach(function (d) {
+          document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/" + (d ? "; domain=" + d : "");
+        });
+      });
+    } catch (e) { /* ignore */ }
   }
 
   function applyConsent(state) {
+    saved = state;
     try {
-      if (state === "granted") loadGa();
-      else if (gaLoaded && typeof gtag === "function") consentUpdate("denied");
+      if (gaOn) consentUpdate(state === "granted" ? "granted" : "denied");
     } catch (e) { /* ignore */ }
     setClarity(state === "granted");
+    if (state !== "granted") dropCookies();
   }
 
-  var saved = store("get", CONSENT_KEY);
-  if (saved === "granted") { loadGa(); setClarity(true); }
   showBanner(saved !== "granted" && saved !== "denied");
 
   /* ---------- contacts from config ---------- */

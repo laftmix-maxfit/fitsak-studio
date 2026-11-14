@@ -27,7 +27,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../css/style.css?v=10">
+<link rel="stylesheet" href="../css/style.css?v=11">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -282,7 +282,7 @@
         <p class="noscript">The form works without JavaScript too. You can also write on Telegram: <a href="https://t.me/studiofits" target="_blank" rel="noopener">@studiofits</a></p>
         <h3 class="case__h nojs-title">Free website consultation</h3>
         <p class="noscript">Tell me about your business and what the site should do. I’ll get back to you within 24 hours in the way that suits you.</p>
-            <form class="form" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
+            <form class="form" data-clarity-mask="true" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
       <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
       <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
       <input type="hidden" name="from_name" value="fitsak.com">
@@ -344,10 +344,10 @@
 <div class="sticky-cta"><a class="btn btn--primary" href="#contact-fallback" data-open-consult data-cta="sticky_consult" data-package="consult">Free consultation</a></div>
 
 <div class="consent" id="consent" role="dialog" aria-label="Cookie consent" hidden>
-  <p>I use Google Analytics and Google Ads measurement to see what works. Cookies are set only if you accept. <a href="../privacy/">Details</a></p>
+  <p><span aria-hidden="true">🍪</span> We use cookies for analytics and ads. <a href="../privacy/">Details</a></p>
   <div class="consent__actions">
-    <button type="button" class="btn" data-consent="denied">Reject</button>
     <button type="button" class="btn" data-consent="granted">Accept</button>
+    <button type="button" class="btn" data-consent="denied">Reject</button>
   </div>
 </div>
 
@@ -358,7 +358,7 @@
       <button type="button" class="dialog__close" data-dialog-close aria-label="Close"><span aria-hidden="true">×</span></button>
     </div>
     <p class="dialog__lead">Tell me about your business and what the site should do. I’ll get back to you within 24 hours in the way that suits you.</p>
-        <form class="form" id="consult-form" data-form-type="consult" data-subject="консультація" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
+        <form class="form" data-clarity-mask="true" id="consult-form" data-form-type="consult" data-subject="консультація" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
       <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
       <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
       <input type="hidden" name="from_name" value="fitsak.com">
@@ -406,7 +406,7 @@
   </div>
 </dialog>
 
-<script src="../js/config.js?v=4" defer></script>
-<script src="../js/app.js?v=8" defer></script>
+<script src="../js/config.js?v=5" defer></script>
+<script src="../js/app.js?v=9" defer></script>
 </body>
 </html>

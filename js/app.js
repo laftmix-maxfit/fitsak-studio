@@ -206,11 +206,10 @@
   var email = String(cfg.CONTACT_EMAIL || "");
   var tg = String(cfg.CONTACT_TELEGRAM || "").replace(/^@/, "");
   each("[data-email-text]", function (el) { el.textContent = email; });
-  each("[data-email-link]", function (el) { el.href = "mailto:" + email; });
   each("[data-telegram-link]", function (el) { el.href = "https://t.me/" + encodeURIComponent(tg); });
   if (isSet(cfg.FIVERR_URL, "")) each("[data-fiverr-link]", function (el) { el.href = cfg.FIVERR_URL; });
 
-  /* ---------- lead forms: audit (main pages) and consultation (/sites/) ---------- */
+  /* ---------- lead forms: audit (main pages), consultation dialog and short contact form (/sites/) ---------- */
   var MSG = {
     en: {
       sending: "Sending…",
@@ -220,11 +219,13 @@
       tooLong: "Please keep it under {n} characters",
       success: {
         audit: "Thank you! Request no. {id} received. I’ll reply within 24 hours.",
-        consult: "Thank you! Request no. {id} received. I’ll write within 24 hours."
+        consult: "Thank you! Request no. {id} received. I’ll write within 24 hours.",
+        contact_inline: "Thank you! Request no. {id} received. I’ll write within 24 hours."
       },
       successNoId: {
         audit: "Thank you! Request received. I’ll reply within 24 hours.",
-        consult: "Thank you! Request received. I’ll write within 24 hours."
+        consult: "Thank you! Request received. I’ll write within 24 hours.",
+        contact_inline: "Thank you! Request received. I’ll write within 24 hours."
       },
       errPre: "Couldn’t send. Try again or write on ",
       errMid: " / by "
@@ -237,11 +238,13 @@
       tooLong: "Не більше {n} символів",
       success: {
         audit: "Дякую! Заявка № {id} отримана. Відповім протягом 24 годин.",
-        consult: "Дякую! Заявка № {id} отримана. Напишу протягом 24 годин."
+        consult: "Дякую! Заявка № {id} отримана. Напишу протягом 24 годин.",
+        contact_inline: "Дякую! Заявка № {id} отримана. Напишу протягом 24 годин."
       },
       successNoId: {
         audit: "Дякую! Заявка отримана. Відповім протягом 24 годин.",
-        consult: "Дякую! Заявка отримана. Напишу протягом 24 годин."
+        consult: "Дякую! Заявка отримана. Напишу протягом 24 годин.",
+        contact_inline: "Дякую! Заявка отримана. Напишу протягом 24 годин."
       },
       errPre: "Не вдалося надіслати. Спробуйте ще раз або напишіть у ",
       errMid: " / на "
@@ -263,6 +266,13 @@
     if (!entry || !entry.pkg || PACKAGES.indexOf(value) < 0) return false;
     entry.pkg.value = value;
     return true;
+  }
+
+  // data-form-type → form_type in analytics and in the lead email; anything unknown counts as "audit"
+  var FORM_TYPES = ["audit", "consult", "contact_inline"];
+  function formType(form) {
+    var t = form.getAttribute("data-form-type");
+    return FORM_TYPES.indexOf(t) >= 0 ? t : "audit";
   }
 
   function newLeadId() {
@@ -351,7 +361,7 @@
     var form = entry.form;
     var pkgInput = entry.pkg;
     var defaultPkg = pkgInput.getAttribute("value") || pkgInput.value;
-    var type = form.getAttribute("data-form-type") === "consult" ? "consult" : "audit";
+    var type = formType(form);
     // controls in page order (radios and the honeypot are not validated)
     var fields = Array.prototype.filter.call(form.elements, function (el) {
       return el.name && el.name !== "botcheck" && el.type !== "radio" && el.type !== "submit" && el.type !== "hidden" &&
@@ -528,6 +538,7 @@
     if (wanted) {
       for (var li = 0; li < leadForms.length; li++) {
         if (leadForms[li].section.tagName === "DIALOG") continue; // the dialog gets its package from the button that opens it
+        if (formType(leadForms[li].form) === "contact_inline") continue; // the short contact form has no package choice
         if (selectPackage(leadForms[li], wanted)) {
           (function (sec) { window.addEventListener("load", function () { scrollToSection(sec); }, { once: true }); })(leadForms[li].section);
           break;
@@ -577,8 +588,8 @@
 
   /* ---------- return from the no-JS form post (Web3Forms redirects here with ?sent=1) ---------- */
   if (params && params.get("sent") === "1" && leadForms.length) {
-    var back = leadForms[0]; // one form per page
-    var backType = back.form.getAttribute("data-form-type") === "consult" ? "consult" : "audit";
+    var back = leadForms[0]; // first form in page order: the audit form, or the short contact form on /sites/
+    var backType = formType(back.form);
     if (back.section === dialog && dialog && typeof dialog.showModal === "function") {
       document.body.classList.add("is-dialog-open");
       dialog.showModal();
@@ -649,6 +660,7 @@
     if (d.cta) track("cta_click", { cta_location: d.cta });
     if (d.service) track("service_click", { service_name: d.service });
     if (d.contact) track("contact_click", { channel: d.contact });
+    if (d.messenger) track("messenger_click", { channel: d.messenger }); // the main button of the contact block
     if (d.langSwitch) track("language_switch", { to_language: d.langSwitch });
 
     // a package button picks the package in the form of this page, scrolls to it and focuses the first field
@@ -718,13 +730,13 @@
     for (var i = 0; i < sections.length; i++) io.observe(sections[i]);
 
     // the sticky button hides while the form or the contact block is on screen
-    var ctaTargets = { audit: false, contact: false };
-    ["audit", "contact"].forEach(function (id) {
+    var ctaTargets = { audit: false, contact: false, "contact-fallback": false };
+    ["audit", "contact", "contact-fallback"].forEach(function (id) {
       var el = document.getElementById(id);
       if (!el) return;
       new IntersectionObserver(function (entries) {
         ctaTargets[id] = entries[0].isIntersecting;
-        document.body.classList.toggle("is-contact-visible", ctaTargets.audit || ctaTargets.contact);
+        document.body.classList.toggle("is-contact-visible", ctaTargets.audit || ctaTargets.contact || ctaTargets["contact-fallback"]);
       }).observe(el);
     });
   }

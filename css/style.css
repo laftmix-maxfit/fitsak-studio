@@ -161,6 +161,12 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .email-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .email-row code { font: 600 1rem/1.4 ui-monospace, "SFMono-Regular", Consolas, monospace; background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 8px 12px; overflow-wrap: anywhere; }
 .noscript { color: var(--muted); font-size: 0.9375rem; margin-top: 12px; }
+.contact__note { color: var(--muted); font-size: 0.875rem; margin-top: 22px; }
+.contact__note a { color: inherit; }
+.contact__or { color: var(--muted); margin-top: 4px; }
+.form.form--inline { max-width: 480px; margin-top: 14px; }
+.form--inline ~ .form-success { max-width: 480px; margin-top: 14px; }
+.form--inline ~ .email-row { margin-top: 28px; }
 
 /* footer */
 .site-footer { border-top: 1px solid var(--line); padding: 28px 0 96px; color: var(--muted); font-size: 0.9375rem; }

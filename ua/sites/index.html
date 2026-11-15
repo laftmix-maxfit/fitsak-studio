@@ -27,7 +27,7 @@
 <meta property="og:locale" content="uk_UA">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../../css/style.css?v=11">
+<link rel="stylesheet" href="../../css/style.css?v=12">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -270,60 +270,34 @@
       <p class="eyebrow">Контакт</p>
       <h2 class="h2">Напишіть мені напряму</h2>
       <div class="contact__buttons">
-        <a class="btn btn--primary" href="https://www.fiverr.com/maxf_itsak" target="_blank" rel="noopener" data-fiverr-link data-contact="fiverr">Fiverr</a>
-        <a class="btn js-only" href="#contact-fallback" data-email-link data-contact="email">Email</a>
-        <a class="btn" href="https://t.me/studiofits" target="_blank" rel="noopener" data-telegram-link data-contact="telegram">Telegram</a>
+        <a class="btn btn--primary" href="https://t.me/studiofits" target="_blank" rel="noopener" data-telegram-link data-messenger="telegram">Написати в Telegram</a>
       </div>
+      <p class="contact__or">Або залиште контакт — я напишу сам.</p>
+      <form class="form form--inline" data-clarity-mask="true" id="contact-form" data-form-type="contact_inline" data-subject="коротка форма" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
+        <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
+        <input type="hidden" name="subject" value="Fitsak: коротка форма (no-JS)">
+        <input type="hidden" name="from_name" value="fitsak.com">
+        <input type="hidden" name="redirect" value="https://fitsak.com/ua/sites/?sent=1">
+        <input type="hidden" name="package" value="consult">
+        <div class="field">
+          <label for="k-name">Ім’я <span class="req" aria-hidden="true">*</span></label>
+          <input id="k-name" name="name" type="text" required autocomplete="name" aria-describedby="k-name-err">
+          <p class="field__error" id="k-name-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="k-contact">Telegram, телефон або email <span class="req" aria-hidden="true">*</span></label>
+          <input id="k-contact" name="contact" type="text" required minlength="5" autocapitalize="none" spellcheck="false" aria-describedby="k-contact-err">
+          <p class="field__error" id="k-contact-err" hidden></p>
+        </div>
+        <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
+        <div class="form-error" role="alert"></div>
+        <div class="form__actions"><button class="btn" type="submit">Надіслати</button><p class="form__consent">Надсилаючи заявку, ви погоджуєтесь з <a href="../privacy/" target="_blank" rel="noopener">обробкою даних</a> для відповіді на неї.</p></div>
+      </form>
+      <div class="form-success" role="status" aria-live="polite"></div>
       <div class="email-row js-only">
         <code data-email-text></code>
         <button type="button" class="btn btn--small" data-copy-email data-done="Скопійовано">Копіювати</button>
       </div>
-      <noscript>
-        <p class="noscript">Форма працює і без JavaScript. Також можна написати в Telegram: <a href="https://t.me/studiofits" target="_blank" rel="noopener">@studiofits</a></p>
-        <h3 class="case__h nojs-title">Безкоштовна консультація щодо сайту</h3>
-        <p class="noscript">Напишіть, що за бізнес і що має робити сайт. Зв’яжуся протягом 24 годин у зручний вам спосіб.</p>
-            <form class="form" data-clarity-mask="true" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
-      <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
-      <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
-      <input type="hidden" name="from_name" value="fitsak.com">
-      <input type="hidden" name="redirect" value="https://fitsak.com/ua/sites/?sent=1">
-      <input type="hidden" name="package" value="consult">
-        <div class="field">
-          <label for="n-name">Ім’я <span class="req" aria-hidden="true">*</span></label>
-          <input id="n-name" name="name" type="text" required autocomplete="name" aria-describedby="n-name-err">
-          <p class="field__error" id="n-name-err" hidden></p>
-        </div>
-        <div class="field">
-          <label for="n-contact">Telegram, Viber, телефон або email <span class="req" aria-hidden="true">*</span></label>
-          <input id="n-contact" name="contact" type="text" required minlength="5" autocapitalize="none" spellcheck="false" aria-describedby="n-contact-err">
-          <p class="field__error" id="n-contact-err" hidden></p>
-        </div>
-        <div class="field">
-          <label for="n-website">Сайт (якщо є)</label>
-          <input id="n-website" name="website" type="text" inputmode="url" autocomplete="url" autocapitalize="none" spellcheck="false" aria-describedby="n-website-err">
-          <p class="field__error" id="n-website-err" hidden></p>
-        </div>
-        <details class="form-more">
-          <summary>Додати деталі (необов’язково)</summary>
-          <div class="form-more__body">
-        <div class="field">
-          <label for="n-business">Чим займається ваш бізнес?</label>
-          <input id="n-business" name="business" type="text" maxlength="200" aria-describedby="n-business-err">
-          <p class="field__error" id="n-business-err" hidden></p>
-        </div>
-        <div class="field">
-          <label for="n-message">Що має робити новий сайт?</label>
-          <textarea id="n-message" name="message" rows="4" maxlength="1000" aria-describedby="n-message-err"></textarea>
-          <p class="field__error" id="n-message-err" hidden></p>
-        </div>
-          </div>
-        </details>
-        <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
-        <div class="form-error" role="alert"></div>
-        <div class="form__actions"><button class="btn btn--primary" type="submit">Записатися на консультацію</button><p class="form__consent">Надсилаючи заявку, ви погоджуєтесь з <a href="../privacy/" target="_blank" rel="noopener">обробкою даних</a> для відповіді на неї.</p></div>
-      </form>
-
-      </noscript>
     </div>
   </section>
 
@@ -407,6 +381,6 @@
 </dialog>
 
 <script src="../../js/config.js?v=5" defer></script>
-<script src="../../js/app.js?v=11" defer></script>
+<script src="../../js/app.js?v=12" defer></script>
 </body>
 </html>

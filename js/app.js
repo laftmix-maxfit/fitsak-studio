@@ -216,7 +216,7 @@
       sending: "Sending…",
       required: "Please fill in this field",
       website: "Enter your site address, for example example.com",
-      contact: "Enter an email, a Telegram @username or a phone number",
+      contact: "Leave a phone number, a Telegram @username or an email so I can reply",
       tooLong: "Please keep it under {n} characters",
       success: {
         audit: "Thank you! Request no. {id} received. I’ll reply within 24 hours.",
@@ -233,7 +233,7 @@
       sending: "Надсилаю…",
       required: "Заповніть це поле",
       website: "Вкажіть адресу сайту, наприклад example.com",
-      contact: "Вкажіть email, @нік у Telegram або телефон",
+      contact: "Залиште телефон, @нік у Telegram або email — так я зможу відповісти",
       tooLong: "Не більше {n} символів",
       success: {
         audit: "Дякую! Заявка № {id} отримана. Відповім протягом 24 годин.",
@@ -279,26 +279,35 @@
     return "L" + Date.now().toString(36) + out;
   }
 
-  function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
-  function isTelegram(v) {
-    return /^@[A-Za-z0-9_]{5,32}$/.test(v) || /^(https?:\/\/)?(www\.)?t\.me\/[A-Za-z0-9_]{5,32}\/?$/i.test(v);
+  /* contact-rule:start (tests/contact.test.mjs reads this block; keep it free of outer variables) */
+  // Which rule accepts a contact value: "email", "telegram", "phone", "min5" (anything of 5+ characters:
+  // an odd lead is better than a lost one) or "" when it is empty or shorter than 5 characters.
+  function contactRule(value) {
+    var v = String(value == null ? "" : value).trim();
+    if (v.length < 5) return "";
+    if (/[^\s@]@[^\s@]+\.[^\s@]/.test(v)) return "email"; // an @ with a dot after it
+    if (/^@[A-Za-z0-9_]{5,32}$/.test(v) || /^(https?:\/\/)?(www\.)?t\.me\/[A-Za-z0-9_]{5,32}\/?$/i.test(v)) return "telegram";
+    // phone: 9-15 digits once spaces, brackets, hyphens, dots, "+" and messenger words are dropped
+    var rest = v.replace(/viber|вайбер|telegram|телеграм|тел\.?|tel\.?/gi, "").replace(/[\s()\-.+]/g, "");
+    if (/^\d{9,15}$/.test(rest)) return "phone";
+    if (/^[A-Za-z0-9_]{5,32}$/.test(v)) return "telegram"; // a username without @
+    return "min5";
   }
-  function isPhone(v) {
-    if (!/^\+?[\d\s\-()]+$/.test(v)) return false;
-    var digits = v.replace(/\D/g, "").length;
-    return digits >= 9 && digits <= 15;
-  }
+  /* contact-rule:end */
   function isSite(v) { return /^(https?:\/\/)?[^\s.\/]+\.[^\s]{2,}$/i.test(v); }
 
-  // returns an error message, or "" when the field is fine
+  // returns null when the field is fine, else { msg, type }; type goes to analytics (form_error), the value never does
   function fieldError(el) {
     var max = parseInt(el.getAttribute("maxlength"), 10);
-    if (max && el.value.length > max) return T.tooLong.replace("{n}", String(max));
+    if (max && el.value.length > max) return { msg: T.tooLong.replace("{n}", String(max)), type: "too_long" };
     var v = String(el.value || "").trim();
-    if (!v) return el.required ? T.required : ""; // optional fields may stay empty
-    if (el.name === "website" && !isSite(v)) return T.website;
-    if (el.name === "contact" && !(isEmail(v) || isTelegram(v) || isPhone(v))) return T.contact;
-    return "";
+    if (el.name === "contact") {
+      if (contactRule(v)) return null;
+      return { msg: T.contact, type: v ? "too_short" : "required" };
+    }
+    if (!v) return el.required ? { msg: T.required, type: "required" } : null; // optional fields may stay empty
+    if (el.name === "website" && !isSite(v)) return { msg: T.website, type: "format" };
+    return null;
   }
 
   function showFieldError(el, message) {
@@ -417,13 +426,16 @@
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       if (sending) return;
+      track("form_submit_click", { form_type: type }); // every submit attempt, before validation
       clearBox(errorBox);
 
       var firstBad = null;
       fields.forEach(function (el) {
-        var msg = fieldError(el);
-        showFieldError(el, msg);
-        if (msg && !firstBad) firstBad = el;
+        var err = fieldError(el);
+        showFieldError(el, err ? err.msg : "");
+        if (!err) return;
+        if (!firstBad) firstBad = el;
+        track("form_error", { form_type: type, field: el.name, error_type: err.type }); // field name and kind only
       });
       if (firstBad) {
         var closed = firstBad.closest("details");
@@ -460,7 +472,13 @@
       submitBtn.textContent = T.sending;
 
       var ctrl = typeof AbortController === "function" ? new AbortController() : null;
-      var timer = window.setTimeout(function () { if (ctrl) ctrl.abort(); }, 15000);
+      var timedOut = false;
+      var timer = window.setTimeout(function () { timedOut = true; if (ctrl) ctrl.abort(); }, 15000);
+      var sendFailed = function (reason) {
+        finish();
+        showSendError(errorBox);
+        track("form_submit_error", { form_type: type, reason: reason });
+      };
 
       var finish = function () {
         window.clearTimeout(timer);
@@ -469,7 +487,7 @@
         submitBtn.textContent = submitLabel;
       };
 
-      if (!/^[0-9a-f-]{30,40}$/i.test(key)) { finish(); showSendError(errorBox); return; }
+      if (!/^[0-9a-f-]{30,40}$/i.test(key)) { finish(); showSendError(errorBox); return; } // not configured: nothing was sent
 
       window.fetch("https://api.web3forms.com/submit", {
         method: "POST",
@@ -480,8 +498,8 @@
         return res.json().then(function (json) { return res.ok && json && json.success === true; },
           function () { return false; });
       }).then(function (ok) {
+        if (!ok) { sendFailed("http"); return; } // Web3Forms answered, but did not accept the request
         finish();
-        if (!ok) { showSendError(errorBox); return; }
         entry.showSuccess(T.success[type].replace("{id}", leadId));
         // no name, site, contact, business or message goes to analytics
         track("generate_lead", {
@@ -491,8 +509,7 @@
           lead_source: campaign("utm_source") || "direct"
         });
       }, function () {
-        finish();
-        showSendError(errorBox);
+        sendFailed(timedOut ? "timeout" : "network");
       });
     });
   }

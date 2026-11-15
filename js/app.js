@@ -216,16 +216,19 @@
       required: "Please fill in this field",
       website: "Enter your site address, for example example.com",
       contact: "Leave a phone number, a Telegram @username or an email so I can reply",
+      links: "Add a link or a name I can find you by: a website, Instagram or Google Maps",
       tooLong: "Please keep it under {n} characters",
       success: {
         audit: "Thank you! Request no. {id} received. I’ll reply within 24 hours.",
         consult: "Thank you! Request no. {id} received. I’ll write within 24 hours.",
-        contact_inline: "Thank you! Request no. {id} received. I’ll write within 24 hours."
+        contact_inline: "Thank you! Request no. {id} received. I’ll write within 24 hours.",
+        mockup: "Thank you! The mockup comes within 48 hours after I check the brief. If I have questions, I’ll write on Telegram."
       },
       successNoId: {
         audit: "Thank you! Request received. I’ll reply within 24 hours.",
         consult: "Thank you! Request received. I’ll write within 24 hours.",
-        contact_inline: "Thank you! Request received. I’ll write within 24 hours."
+        contact_inline: "Thank you! Request received. I’ll write within 24 hours.",
+        mockup: "Thank you! The mockup comes within 48 hours after I check the brief. If I have questions, I’ll write on Telegram."
       },
       errPre: "Couldn’t send. Try again or write on ",
       errMid: " / by "
@@ -235,16 +238,19 @@
       required: "Заповніть це поле",
       website: "Вкажіть адресу сайту, наприклад example.com",
       contact: "Залиште телефон, @нік у Telegram або email — так я зможу відповісти",
+      links: "Додайте посилання чи назву, за якою вас можна знайти: сайт, Instagram або Google Maps",
       tooLong: "Не більше {n} символів",
       success: {
         audit: "Дякую! Заявка № {id} отримана. Відповім протягом 24 годин.",
         consult: "Дякую! Заявка № {id} отримана. Напишу протягом 24 годин.",
-        contact_inline: "Дякую! Заявка № {id} отримана. Напишу протягом 24 годин."
+        contact_inline: "Дякую! Заявка № {id} отримана. Напишу протягом 24 годин.",
+        mockup: "Дякую! Макет — протягом 48 годин після перевірки брифу. Якщо будуть питання, напишу в Telegram."
       },
       successNoId: {
         audit: "Дякую! Заявка отримана. Відповім протягом 24 годин.",
         consult: "Дякую! Заявка отримана. Напишу протягом 24 годин.",
-        contact_inline: "Дякую! Заявка отримана. Напишу протягом 24 годин."
+        contact_inline: "Дякую! Заявка отримана. Напишу протягом 24 годин.",
+        mockup: "Дякую! Макет — протягом 48 годин після перевірки брифу. Якщо будуть питання, напишу в Telegram."
       },
       errPre: "Не вдалося надіслати. Спробуйте ще раз або напишіть у ",
       errMid: " / на "
@@ -261,7 +267,7 @@
   }
 
   // the package lives in <input type="hidden" name="package">; unknown values leave the default alone
-  var PACKAGES = ["audit", "deep_audit", "analytics", "repair", "landing", "ads", "site", "support", "consult"];
+  var PACKAGES = ["audit", "deep_audit", "analytics", "repair", "landing", "ads", "site", "support", "consult", "mockup"];
   function selectPackage(entry, value) {
     if (!entry || !entry.pkg || PACKAGES.indexOf(value) < 0) return false;
     entry.pkg.value = value;
@@ -269,7 +275,7 @@
   }
 
   // data-form-type → form_type in analytics and in the lead email; anything unknown counts as "audit"
-  var FORM_TYPES = ["audit", "consult", "contact_inline"];
+  var FORM_TYPES = ["audit", "consult", "contact_inline", "mockup"];
   function formType(form) {
     var t = form.getAttribute("data-form-type");
     return FORM_TYPES.indexOf(t) >= 0 ? t : "audit";
@@ -314,6 +320,7 @@
       return { msg: T.contact, type: v ? "too_short" : "required" };
     }
     if (!v) return el.required ? { msg: T.required, type: "required" } : null; // optional fields may stay empty
+    if (el.name === "links" && v.length < 5) return { msg: T.links, type: "too_short" }; // a URL, an @name, anything: no format check
     if (el.name === "website" && !isSite(v)) return { msg: T.website, type: "format" };
     return null;
   }
@@ -362,6 +369,15 @@
     var pkgInput = entry.pkg;
     var defaultPkg = pkgInput.getAttribute("value") || pkgInput.value;
     var type = formType(form);
+    // optional radio groups (the mockup brief): never validated; the chosen value, or "" when nothing is picked
+    var radioNames = [];
+    Array.prototype.forEach.call(form.elements, function (el) {
+      if (el.type === "radio" && el.name && radioNames.indexOf(el.name) < 0) radioNames.push(el.name);
+    });
+    function radioValue(name) {
+      var picked = form.querySelector('input[type=radio][name="' + name + '"]:checked');
+      return picked ? picked.value : "";
+    }
     // controls in page order (radios and the honeypot are not validated)
     var fields = Array.prototype.filter.call(form.elements, function (el) {
       return el.name && el.name !== "botcheck" && el.type !== "radio" && el.type !== "submit" && el.type !== "hidden" &&
@@ -378,7 +394,8 @@
     function formStart() {
       if (startSent || suppressStart) return;
       startSent = true;
-      track("audit_form_start", { form_package: pkgInput.value, form_type: type });
+      if (type === "mockup") track("mockup_form_start", { form_type: type });
+      else track("audit_form_start", { form_package: pkgInput.value, form_type: type });
     }
     form.addEventListener("focusin", formStart);
     form.addEventListener("input", formStart);
@@ -462,10 +479,6 @@
         access_key: key,
         subject: "Fitsak: " + (form.getAttribute("data-subject") || "заявка") + " (" + pkg + ")",
         from_name: "fitsak.com",
-        name: form.elements.name.value.trim(),
-        website: form.elements.website ? form.elements.website.value.trim() : "",
-        contact: form.elements.contact.value.trim(),
-        message: form.elements.message ? form.elements.message.value.trim() : "",
         package: pkg,
         form_type: type,
         page_language: LANG,
@@ -473,7 +486,9 @@
         source: leadSource(),
         gclid: campaign("gclid")
       };
-      if (form.elements.business) payload.business = form.elements.business.value.trim();
+      // the visible fields of this form, by their names, then the optional choices
+      fields.forEach(function (el) { payload[el.name] = el.value.trim(); });
+      radioNames.forEach(function (name) { payload[name] = radioValue(name); });
 
       sending = true;
       submitBtn.disabled = true;
@@ -509,13 +524,20 @@
         if (!ok) { sendFailed("http"); return; } // Web3Forms answered, but did not accept the request
         finish();
         entry.showSuccess(T.success[type].replace("{id}", leadId));
-        // no name, site, contact, business or message goes to analytics
-        track("generate_lead", {
+        // no name, site, contact, business or message goes to analytics: only fixed option values
+        var lead = {
           form_package: pkg,
           form_type: type,
           lead_id: leadId,
           lead_source: campaign("utm_source") || "direct"
-        });
+        };
+        if (type === "mockup") {
+          lead.lead_type = "mockup";
+          lead.site_goal = payload.site_goal || "none";
+          lead.launch = payload.launch || "none";
+          lead.budget = payload.budget || "none";
+        }
+        track("generate_lead", lead);
       }, function () {
         sendFailed(timedOut ? "timeout" : "network");
       });
@@ -587,8 +609,15 @@
   }
 
   /* ---------- return from the no-JS form post (Web3Forms redirects here with ?sent=1) ---------- */
-  if (params && params.get("sent") === "1" && leadForms.length) {
-    var back = leadForms[0]; // first form in page order: the audit form, or the short contact form on /sites/
+  var sentParam = params ? params.get("sent") : null;
+  var back = null;
+  if (sentParam === "1") back = leadForms[0] || null; // main pages: the audit form
+  else if (sentParam) {
+    for (var bi = 0; bi < leadForms.length; bi++) {
+      if (leadForms[bi].form.getAttribute("data-form-type") === sentParam) { back = leadForms[bi]; break; }
+    }
+  }
+  if (back) {
     var backType = formType(back.form);
     if (back.section === dialog && dialog && typeof dialog.showModal === "function") {
       document.body.classList.add("is-dialog-open");
@@ -730,13 +759,13 @@
     for (var i = 0; i < sections.length; i++) io.observe(sections[i]);
 
     // the sticky button hides while the form or the contact block is on screen
-    var ctaTargets = { audit: false, contact: false, "contact-fallback": false };
-    ["audit", "contact", "contact-fallback"].forEach(function (id) {
+    var ctaTargets = { audit: false, contact: false, "contact-fallback": false, mockup: false };
+    ["audit", "contact", "contact-fallback", "mockup"].forEach(function (id) {
       var el = document.getElementById(id);
       if (!el) return;
       new IntersectionObserver(function (entries) {
         ctaTargets[id] = entries[0].isIntersecting;
-        document.body.classList.toggle("is-contact-visible", ctaTargets.audit || ctaTargets.contact || ctaTargets["contact-fallback"]);
+        document.body.classList.toggle("is-contact-visible", ctaTargets.audit || ctaTargets.contact || ctaTargets["contact-fallback"] || ctaTargets.mockup);
       }).observe(el);
     });
   }

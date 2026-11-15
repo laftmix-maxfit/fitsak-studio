@@ -27,7 +27,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:locale:alternate" content="uk_UA">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../css/style.css?v=12">
+<link rel="stylesheet" href="../css/style.css?v=13">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -103,7 +103,7 @@
         <a href="#case">Case study</a>
         <a href="#faq">FAQ</a>
       </span>
-      <a class="btn btn--small btn--primary nav__contact" href="#contact-fallback" data-open-consult data-cta="header_consult" data-package="consult">Consultation</a>
+      <a class="btn btn--small btn--primary nav__contact" href="#mockup" data-cta="header_mockup"><span class="nav__long">Free mockup</span><span class="nav__short">Mockup</span></a>
       <a class="lang" href="../ua/sites/" hreflang="uk" lang="uk" data-lang-switch="ua">UA</a>
     </nav>
   </div>
@@ -115,12 +115,13 @@
     <div class="wrap hero__grid">
       <div>
         <p class="eyebrow">Turnkey websites — Fitsak Studio</p>
-        <h1>A website that brings leads, not just looks good</h1>
-        <p class="hero__sub">A landing page or a 5–10 page website: design, copy, phone speed, a lead form and GA4 analytics from day one.</p>
+        <h1>See your website before you pay</h1>
+        <p class="hero__sub">Fill in a short brief and within 48 hours I’ll send you a mockup of your site’s first screen. Free, with 1 round of edits. Like it — we build the site. Don’t — keep the mockup as an idea.</p>
         <div class="actions">
-          <a class="btn btn--primary" href="#contact-fallback" data-open-consult data-cta="sites_hero" data-package="consult">Free consultation</a>
-          <a class="btn" href="#case">See case study</a>
+          <a class="btn btn--primary" href="#mockup" data-cta="sites_hero_mockup">Get a free mockup</a>
         </div>
+        <p class="hero__fine">3 mockups a week, so each one gets proper attention.</p>
+        <p class="hero__alt"><a href="#contact-fallback" data-open-consult data-cta="sites_hero_consult" data-package="consult">Or a free consultation</a></p>
       </div>
       <aside class="proof" aria-label="Result highlight">
         <p class="proof__label">NONA · website from scratch</p>
@@ -128,6 +129,84 @@
         <p class="proof__note">in 12 days of ads, ~209 UAH per lead (<span class="nowrap">27 Oct – 7 Nov 2026</span>)</p>
         <a href="#case">Read the full case</a>
       </aside>
+    </div>
+  </section>
+
+  <section class="section" id="mockup" data-section="mockup">
+    <div class="wrap">
+      <p class="eyebrow">Free mockup</p>
+      <h2 class="h2">A short brief, and a mockup in 48 hours</h2>
+      <div class="mockup__grid">
+      <div class="mockup__main">
+      <form class="form" data-clarity-mask="true" id="mockup-form" data-form-type="mockup" data-subject="бриф на макет" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
+        <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
+        <input type="hidden" name="subject" value="Fitsak: бриф на макет (no-JS)">
+        <input type="hidden" name="from_name" value="fitsak.com">
+        <input type="hidden" name="redirect" value="https://fitsak.com/sites/?sent=mockup">
+        <input type="hidden" name="package" value="mockup">
+        <div class="field">
+          <label for="m-business">Business name <span class="req" aria-hidden="true">*</span></label>
+          <input id="m-business" name="business_name" type="text" required maxlength="200" autocomplete="organization" aria-describedby="m-business-err">
+          <p class="field__error" id="m-business-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="m-links">Website, Instagram or Google Maps <span class="req" aria-hidden="true">*</span></label>
+          <input id="m-links" name="links" type="text" required minlength="5" maxlength="300" autocapitalize="none" spellcheck="false" aria-describedby="m-links-err">
+          <p class="field__error" id="m-links-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="m-offer">What do you sell, and to whom? <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="m-offer" name="offer" rows="2" required maxlength="500" aria-describedby="m-offer-err"></textarea>
+          <p class="field__error" id="m-offer-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="m-contact">Telegram or email <span class="req" aria-hidden="true">*</span></label>
+          <input id="m-contact" name="contact" type="text" required minlength="5" autocapitalize="none" spellcheck="false" aria-describedby="m-contact-err">
+          <p class="field__error" id="m-contact-err" hidden></p>
+        </div>
+        <fieldset class="choice">
+          <legend>What should the site do? <span class="choice__hint">(optional)</span></legend>
+          <div class="choice__row">
+            <label class="choice__opt"><input type="radio" name="site_goal" value="leads"><span>Leads</span></label>
+            <label class="choice__opt"><input type="radio" name="site_goal" value="calls"><span>Calls</span></label>
+            <label class="choice__opt"><input type="radio" name="site_goal" value="sales"><span>Sales</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="choice">
+          <legend>When do you plan to launch? <span class="choice__hint">(optional)</span></legend>
+          <div class="choice__row">
+            <label class="choice__opt"><input type="radio" name="launch" value="this_month"><span>This month</span></label>
+            <label class="choice__opt"><input type="radio" name="launch" value="1_3_months"><span>In 1–3 months</span></label>
+            <label class="choice__opt"><input type="radio" name="launch" value="browsing"><span>Just looking</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="choice">
+          <legend>Approximate budget <span class="choice__hint">(optional)</span></legend>
+          <div class="choice__row">
+            <label class="choice__opt"><input type="radio" name="budget" value="lt5k"><span>under $100</span></label>
+            <label class="choice__opt"><input type="radio" name="budget" value="5k_15k"><span>$100–350</span></label>
+            <label class="choice__opt"><input type="radio" name="budget" value="gt15k"><span>$350+</span></label>
+          </div>
+        </fieldset>
+        <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
+        <div class="form-error" role="alert"></div>
+        <div class="form__actions"><button class="btn btn--primary" type="submit">Get my mockup</button><p class="form__consent">By sending the brief, you agree to the <a href="../privacy/" target="_blank" rel="noopener">processing of your data</a> to reply to it.</p></div>
+        <noscript><p class="noscript">The form works without JavaScript too. You can also write on Telegram: <a href="https://t.me/studiofits" target="_blank" rel="noopener">@studiofits</a></p></noscript>
+      </form>
+      <div class="form-success" role="status" aria-live="polite"></div>
+      </div>
+      <figure class="shot mockup__example">
+        <img src="../assets/nona-mobile.webp" width="390" height="844" loading="lazy" decoding="async" alt="First screen of the NONA Music School landing page on a phone">
+        <figcaption>Example: NONA’s first screen</figcaption>
+      </figure>
+      </div>
+      <h3 class="mockup__next">What happens next</h3>
+      <ol class="steps">
+        <li><h3>Brief</h3><p>2 minutes: about your business and what the site should do.</p></li>
+        <li><h3>Mockup in 48 hours</h3><p>The first screen of your site + 1 round of edits. Free.</p></li>
+        <li><h3>Website</h3><p>Landing page — from $250, from 2–3 days; 5–10 page website — from $450, up to 14 days.</p></li>
+      </ol>
+      <p class="note">First 3 clients — $100 instead of <del>$250</del> for an honest review, until 30 Nov 2026.</p>
     </div>
   </section>
 
@@ -174,13 +253,13 @@
           <p class="card__price"><span>from</span>$250</p>
           <p>One page for one service or ad campaign. From 2–3 days.</p>
           <p class="card__fine">in exchange for an honest review, until 30 Nov 2026, 50% prepayment</p>
-          <a class="btn btn--small" href="#contact-fallback" data-open-consult data-cta="sites_pricing_landing" data-package="landing">I want a landing page</a>
+          <a class="btn btn--small" href="#mockup" data-cta="sites_pricing_landing" data-package="landing">I want a landing page</a>
         </article>
         <article class="card">
           <h3>Website, 5–10 pages</h3>
           <p class="card__price"><span>from</span>$450</p>
           <p>Home, services, prices, about you, contacts, separate pages for search queries. Up to 14 days.</p>
-          <a class="btn btn--small" href="#contact-fallback" data-open-consult data-cta="sites_pricing_site" data-package="site">I want a website</a>
+          <a class="btn btn--small" href="#mockup" data-cta="sites_pricing_site" data-package="site">I want a website</a>
         </article>
         <article class="card">
           <h3>Support</h3>
@@ -238,6 +317,10 @@
       <h2 class="h2">Questions I hear most</h2>
       <div class="faq">
         <details class="faq__item">
+          <summary>Is the mockup really free?</summary>
+          <p>Yes. You owe nothing, even if you don’t order the site. The mockup stays with you.</p>
+        </details>
+        <details class="faq__item">
           <summary>Is the consultation really free?</summary>
           <p>Yes. It doesn’t commit you to anything: you get a plan and a price, and the decision is yours.</p>
         </details>
@@ -277,7 +360,7 @@
         <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
         <input type="hidden" name="subject" value="Fitsak: contact form (no-JS)">
         <input type="hidden" name="from_name" value="fitsak.com">
-        <input type="hidden" name="redirect" value="https://fitsak.com/sites/?sent=1">
+        <input type="hidden" name="redirect" value="https://fitsak.com/sites/?sent=contact_inline">
         <input type="hidden" name="package" value="consult">
         <div class="field">
           <label for="k-name">Name <span class="req" aria-hidden="true">*</span></label>
@@ -315,7 +398,7 @@
   </div>
 </footer>
 
-<div class="sticky-cta"><a class="btn btn--primary" href="#contact-fallback" data-open-consult data-cta="sticky_consult" data-package="consult">Free consultation</a></div>
+<div class="sticky-cta"><a class="btn btn--primary" href="#mockup" data-cta="sticky_mockup">Get my mockup</a></div>
 
 <div class="consent" id="consent" role="dialog" aria-label="Cookie consent" hidden>
   <p><span aria-hidden="true">🍪</span> We use cookies for analytics and ads. <a href="../privacy/">Details</a></p>
@@ -336,7 +419,7 @@
       <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
       <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
       <input type="hidden" name="from_name" value="fitsak.com">
-      <input type="hidden" name="redirect" value="https://fitsak.com/sites/?sent=1">
+      <input type="hidden" name="redirect" value="https://fitsak.com/sites/?sent=consult">
       <input type="hidden" name="package" value="consult">
         <div class="field">
           <label for="c-name">Name <span class="req" aria-hidden="true">*</span></label>
@@ -381,6 +464,6 @@
 </dialog>
 
 <script src="../js/config.js?v=5" defer></script>
-<script src="../js/app.js?v=12" defer></script>
+<script src="../js/app.js?v=13" defer></script>
 </body>
 </html>

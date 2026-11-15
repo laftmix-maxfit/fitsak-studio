@@ -27,7 +27,7 @@
 <meta property="og:locale" content="uk_UA">
 <meta property="og:locale:alternate" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="stylesheet" href="../../css/style.css?v=12">
+<link rel="stylesheet" href="../../css/style.css?v=13">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -103,7 +103,7 @@
         <a href="#case">Кейс</a>
         <a href="#faq">FAQ</a>
       </span>
-      <a class="btn btn--small btn--primary nav__contact" href="#contact-fallback" data-open-consult data-cta="header_consult" data-package="consult">Консультація</a>
+      <a class="btn btn--small btn--primary nav__contact" href="#mockup" data-cta="header_mockup"><span class="nav__long">Безкоштовний макет</span><span class="nav__short">Макет</span></a>
       <a class="lang" href="../../sites/" hreflang="en" lang="en" data-lang-switch="en">EN</a>
     </nav>
   </div>
@@ -115,12 +115,13 @@
     <div class="wrap hero__grid">
       <div>
         <p class="eyebrow">Сайти під ключ — Fitsak Studio</p>
-        <h1>Сайт, який приводить заявки, а не просто гарно виглядає</h1>
-        <p class="hero__sub">Лендинг або сайт на 5–10 сторінок: дизайн, тексти, швидкість на телефоні, форма заявки й аналітика GA4 з першого дня.</p>
+        <h1>Побачте свій сайт до того, як платити</h1>
+        <p class="hero__sub">Заповніть короткий бриф — за 48 годин надішлю макет першого екрана вашого сайту. Безкоштовно, з 1 правкою. Подобається — робимо сайт. Ні — макет лишається у вас як ідея.</p>
         <div class="actions">
-          <a class="btn btn--primary" href="#contact-fallback" data-open-consult data-cta="sites_hero" data-package="consult">Безкоштовна консультація</a>
-          <a class="btn" href="#case">Дивитись кейс</a>
+          <a class="btn btn--primary" href="#mockup" data-cta="sites_hero_mockup">Отримати безкоштовний макет</a>
         </div>
+        <p class="hero__fine">3 макети на тиждень — щоб кожен був зроблений уважно.</p>
+        <p class="hero__alt"><a href="#contact-fallback" data-open-consult data-cta="sites_hero_consult" data-package="consult">Або безкоштовна консультація</a></p>
       </div>
       <aside class="proof" aria-label="Ключовий результат">
         <p class="proof__label">NONA · сайт з нуля</p>
@@ -128,6 +129,84 @@
         <p class="proof__note">за 12 днів реклами, ~209 грн за заявку (<span class="nowrap">27.10–7.11.2026</span>)</p>
         <a href="#case">Читати кейс повністю</a>
       </aside>
+    </div>
+  </section>
+
+  <section class="section" id="mockup" data-section="mockup">
+    <div class="wrap">
+      <p class="eyebrow">Безкоштовний макет</p>
+      <h2 class="h2">Короткий бриф — і макет за 48 годин</h2>
+      <div class="mockup__grid">
+      <div class="mockup__main">
+      <form class="form" data-clarity-mask="true" id="mockup-form" data-form-type="mockup" data-subject="бриф на макет" method="post" action="https://api.web3forms.com/submit" accept-charset="UTF-8">
+        <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
+        <input type="hidden" name="subject" value="Fitsak: бриф на макет (no-JS)">
+        <input type="hidden" name="from_name" value="fitsak.com">
+        <input type="hidden" name="redirect" value="https://fitsak.com/ua/sites/?sent=mockup">
+        <input type="hidden" name="package" value="mockup">
+        <div class="field">
+          <label for="m-business">Назва бізнесу <span class="req" aria-hidden="true">*</span></label>
+          <input id="m-business" name="business_name" type="text" required maxlength="200" autocomplete="organization" aria-describedby="m-business-err">
+          <p class="field__error" id="m-business-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="m-links">Сайт, Instagram або Google Maps <span class="req" aria-hidden="true">*</span></label>
+          <input id="m-links" name="links" type="text" required minlength="5" maxlength="300" autocapitalize="none" spellcheck="false" aria-describedby="m-links-err">
+          <p class="field__error" id="m-links-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="m-offer">Що продаєте і кому? <span class="req" aria-hidden="true">*</span></label>
+          <textarea id="m-offer" name="offer" rows="2" required maxlength="500" aria-describedby="m-offer-err"></textarea>
+          <p class="field__error" id="m-offer-err" hidden></p>
+        </div>
+        <div class="field">
+          <label for="m-contact">Telegram або email <span class="req" aria-hidden="true">*</span></label>
+          <input id="m-contact" name="contact" type="text" required minlength="5" autocapitalize="none" spellcheck="false" aria-describedby="m-contact-err">
+          <p class="field__error" id="m-contact-err" hidden></p>
+        </div>
+        <fieldset class="choice">
+          <legend>Що має робити сайт? <span class="choice__hint">(необов’язково)</span></legend>
+          <div class="choice__row">
+            <label class="choice__opt"><input type="radio" name="site_goal" value="leads"><span>Заявки</span></label>
+            <label class="choice__opt"><input type="radio" name="site_goal" value="calls"><span>Дзвінки</span></label>
+            <label class="choice__opt"><input type="radio" name="site_goal" value="sales"><span>Продажі</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="choice">
+          <legend>Коли плануєте запуск? <span class="choice__hint">(необов’язково)</span></legend>
+          <div class="choice__row">
+            <label class="choice__opt"><input type="radio" name="launch" value="this_month"><span>Цього місяця</span></label>
+            <label class="choice__opt"><input type="radio" name="launch" value="1_3_months"><span>За 1–3 місяці</span></label>
+            <label class="choice__opt"><input type="radio" name="launch" value="browsing"><span>Просто дивлюсь</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="choice">
+          <legend>Орієнтовний бюджет <span class="choice__hint">(необов’язково)</span></legend>
+          <div class="choice__row">
+            <label class="choice__opt"><input type="radio" name="budget" value="lt5k"><span>до 5&nbsp;000&nbsp;грн</span></label>
+            <label class="choice__opt"><input type="radio" name="budget" value="5k_15k"><span>5&nbsp;000–15&nbsp;000&nbsp;грн</span></label>
+            <label class="choice__opt"><input type="radio" name="budget" value="gt15k"><span>15&nbsp;000+&nbsp;грн</span></label>
+          </div>
+        </fieldset>
+        <input type="checkbox" name="botcheck" hidden tabindex="-1" autocomplete="off">
+        <div class="form-error" role="alert"></div>
+        <div class="form__actions"><button class="btn btn--primary" type="submit">Отримати макет</button><p class="form__consent">Надсилаючи бриф, ви погоджуєтесь з <a href="../privacy/" target="_blank" rel="noopener">обробкою даних</a> для відповіді на нього.</p></div>
+        <noscript><p class="noscript">Форма працює і без JavaScript. Також можна написати в Telegram: <a href="https://t.me/studiofits" target="_blank" rel="noopener">@studiofits</a></p></noscript>
+      </form>
+      <div class="form-success" role="status" aria-live="polite"></div>
+      </div>
+      <figure class="shot mockup__example">
+        <img src="../../assets/nona-mobile.webp" width="390" height="844" loading="lazy" decoding="async" alt="Перший екран лендингу NONA Music School на телефоні">
+        <figcaption>Приклад: перший екран сайту NONA</figcaption>
+      </figure>
+      </div>
+      <h3 class="mockup__next">Що далі</h3>
+      <ol class="steps">
+        <li><h3>Бриф</h3><p>2 хвилини: про ваш бізнес і що має робити сайт.</p></li>
+        <li><h3>Макет за 48 годин</h3><p>Перший екран вашого сайту + 1 правка. Безкоштовно.</p></li>
+        <li><h3>Сайт</h3><p>Лендинг — від 10&nbsp;000&nbsp;грн, від 2–3 днів; сайт 5–10 сторінок — від 18&nbsp;000&nbsp;грн, до 14 днів.</p></li>
+      </ol>
+      <p class="note">Перші 3 клієнти — 4&nbsp;000&nbsp;грн замість <del>10&nbsp;000&nbsp;грн</del> за чесний відгук, до 30.11.2026.</p>
     </div>
   </section>
 
@@ -174,13 +253,13 @@
           <p class="card__price"><span>від</span>10&nbsp;000&nbsp;грн</p>
           <p>Одна сторінка під одну послугу чи рекламу. Від 2–3 днів.</p>
           <p class="card__fine">в обмін на чесний відгук, до 30.11.2026, передоплата 50%</p>
-          <a class="btn btn--small" href="#contact-fallback" data-open-consult data-cta="sites_pricing_landing" data-package="landing">Хочу лендинг</a>
+          <a class="btn btn--small" href="#mockup" data-cta="sites_pricing_landing" data-package="landing">Хочу лендинг</a>
         </article>
         <article class="card">
           <h3>Сайт 5–10 сторінок</h3>
           <p class="card__price"><span>від</span>18&nbsp;000&nbsp;грн</p>
           <p>Головна, послуги, ціни, про вас, контакти, окремі сторінки під пошукові запити. До 14 днів.</p>
-          <a class="btn btn--small" href="#contact-fallback" data-open-consult data-cta="sites_pricing_site" data-package="site">Хочу сайт</a>
+          <a class="btn btn--small" href="#mockup" data-cta="sites_pricing_site" data-package="site">Хочу сайт</a>
         </article>
         <article class="card">
           <h3>Підтримка</h3>
@@ -238,6 +317,10 @@
       <h2 class="h2">Часті запитання</h2>
       <div class="faq">
         <details class="faq__item">
+          <summary>Макет справді безкоштовний?</summary>
+          <p>Так. Ви нічого не винні, навіть якщо сайт не замовите. Макет лишається у вас.</p>
+        </details>
+        <details class="faq__item">
           <summary>Консультація справді безкоштовна?</summary>
           <p>Так. Ні до чого не зобов’язує: отримаєте план і ціну, а рішення за вами.</p>
         </details>
@@ -277,7 +360,7 @@
         <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
         <input type="hidden" name="subject" value="Fitsak: коротка форма (no-JS)">
         <input type="hidden" name="from_name" value="fitsak.com">
-        <input type="hidden" name="redirect" value="https://fitsak.com/ua/sites/?sent=1">
+        <input type="hidden" name="redirect" value="https://fitsak.com/ua/sites/?sent=contact_inline">
         <input type="hidden" name="package" value="consult">
         <div class="field">
           <label for="k-name">Ім’я <span class="req" aria-hidden="true">*</span></label>
@@ -315,7 +398,7 @@
   </div>
 </footer>
 
-<div class="sticky-cta"><a class="btn btn--primary" href="#contact-fallback" data-open-consult data-cta="sticky_consult" data-package="consult">Безкоштовна консультація</a></div>
+<div class="sticky-cta"><a class="btn btn--primary" href="#mockup" data-cta="sticky_mockup">Отримати макет</a></div>
 
 <div class="consent" id="consent" role="dialog" aria-label="Згода на cookies" hidden>
   <p><span aria-hidden="true">🍪</span> Ми використовуємо cookies для аналітики і реклами. <a href="../privacy/">Детальніше</a></p>
@@ -336,7 +419,7 @@
       <input type="hidden" name="access_key" value="07adbbb3-1f83-4a28-a5b3-984ccc03d5ba">
       <input type="hidden" name="subject" value="Fitsak: консультація (no-JS)">
       <input type="hidden" name="from_name" value="fitsak.com">
-      <input type="hidden" name="redirect" value="https://fitsak.com/ua/sites/?sent=1">
+      <input type="hidden" name="redirect" value="https://fitsak.com/ua/sites/?sent=consult">
       <input type="hidden" name="package" value="consult">
         <div class="field">
           <label for="c-name">Ім’я <span class="req" aria-hidden="true">*</span></label>
@@ -381,6 +464,6 @@
 </dialog>
 
 <script src="../../js/config.js?v=5" defer></script>
-<script src="../../js/app.js?v=12" defer></script>
+<script src="../../js/app.js?v=13" defer></script>
 </body>
 </html>

@@ -248,7 +248,7 @@ body.is-contact-visible .sticky-cta, body.has-consent .sticky-cta { display: non
 }
 
 /* audit form */
-#audit { scroll-margin-top: 64px; }
+#audit, #mockup { scroll-margin-top: 64px; }
 .form { display: grid; gap: 18px; max-width: 640px; margin-top: 28px; }
 .field { display: grid; gap: 6px; }
 .field label { font-weight: 600; font-size: 0.9375rem; }
@@ -358,4 +358,38 @@ del { color: var(--muted); }
 .form__submit .form__consent { margin-top: 8px; }
 @media (max-width: 719px) {
   .form__actions .btn { justify-self: stretch; }
+}
+
+/* /sites/: free mockup offer */
+.hero__fine { color: var(--muted); font-size: 0.875rem; margin-top: 12px; }
+.hero__alt { margin-top: 14px; }
+.hero__alt a { display: inline-block; padding: 6px 0; font-weight: 600; }
+.mockup__grid { display: grid; gap: 32px; }
+.mockup__main { min-width: 0; }
+.mockup__example { display: none; }
+.mockup__next { font-size: 1.25rem; margin-top: 48px; }
+.mockup__next + .steps { margin-top: 16px; }
+.choice { border: 0; padding: 0; margin: 0; min-width: 0; }
+.choice legend { padding: 0; margin-bottom: 8px; font-weight: 600; font-size: 0.9375rem; }
+.choice__hint { color: var(--muted); font-weight: 400; }
+.choice__row { display: grid; gap: 10px; }
+.choice__opt { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 8px 14px; background: var(--surface); border: 1.5px solid var(--muted); border-radius: 10px; cursor: pointer; }
+.choice__opt input { flex: none; width: 22px; height: 22px; margin: 0; accent-color: var(--accent); }
+.choice__opt:has(input:checked) { border-color: var(--accent); }
+#mockup .field textarea { min-height: 76px; }
+@media (min-width: 480px) {
+  .choice__row { grid-template-columns: repeat(3, 1fr); }
+}
+@media (min-width: 960px) {
+  .mockup__grid { grid-template-columns: minmax(0, 640px) 260px; gap: 64px; align-items: start; }
+  .mockup__example { display: block; margin-top: 28px; }
+  .mockup__example img { max-width: 260px; }
+}
+.nav__contact { white-space: nowrap; }
+.nav__short { display: none; }
+@media (max-width: 479px) {
+  .nav__long { display: none; }
+  .nav__short { display: inline; }
+  .choice__row { display: flex; flex-wrap: wrap; gap: 8px; }
+  .choice__opt { flex: 1 1 auto; min-height: 46px; padding: 8px 12px; }
 }

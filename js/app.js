@@ -216,7 +216,6 @@
       required: "Please fill in this field",
       website: "Enter your site address, for example example.com",
       contact: "Leave a phone number, a Telegram @username or an email so I can reply",
-      links: "Add a link or a name I can find you by: a website, Instagram or Google Maps",
       tooLong: "Please keep it under {n} characters",
       success: {
         audit: "Thank you! Request no. {id} received. I’ll reply within 24 hours.",
@@ -238,7 +237,6 @@
       required: "Заповніть це поле",
       website: "Вкажіть адресу сайту, наприклад example.com",
       contact: "Залиште телефон, @нік у Telegram або email — так я зможу відповісти",
-      links: "Додайте посилання чи назву, за якою вас можна знайти: сайт, Instagram або Google Maps",
       tooLong: "Не більше {n} символів",
       success: {
         audit: "Дякую! Заявка № {id} отримана. Відповім протягом 24 годин.",
@@ -320,7 +318,6 @@
       return { msg: T.contact, type: v ? "too_short" : "required" };
     }
     if (!v) return el.required ? { msg: T.required, type: "required" } : null; // optional fields may stay empty
-    if (el.name === "links" && v.length < 5) return { msg: T.links, type: "too_short" }; // a URL, an @name, anything: no format check
     if (el.name === "website" && !isSite(v)) return { msg: T.website, type: "format" };
     return null;
   }

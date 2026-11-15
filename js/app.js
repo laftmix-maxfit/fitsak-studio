@@ -279,7 +279,6 @@
     return "L" + Date.now().toString(36) + out;
   }
 
-  /* contact-rule:start (tests/contact.test.mjs reads this block; keep it free of outer variables) */
   // Which rule accepts a contact value: "email", "telegram", "phone", "min5" (anything of 5+ characters:
   // an odd lead is better than a lost one) or "" when it is empty or shorter than 5 characters.
   function contactRule(value) {
@@ -293,7 +292,6 @@
     if (/^[A-Za-z0-9_]{5,32}$/.test(v)) return "telegram"; // a username without @
     return "min5";
   }
-  /* contact-rule:end */
   function isSite(v) { return /^(https?:\/\/)?[^\s.\/]+\.[^\s]{2,}$/i.test(v); }
 
   // returns null when the field is fine, else { msg, type }; type goes to analytics (form_error), the value never does

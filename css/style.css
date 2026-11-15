@@ -393,3 +393,14 @@ del { color: var(--muted); }
   .choice__row { display: flex; flex-wrap: wrap; gap: 8px; }
   .choice__opt { flex: 1 1 auto; min-height: 46px; padding: 8px 12px; }
 }
+
+/* NONA case: four result cards, 2×2 on a phone, one row from 720 px */
+.metrics.metrics--four { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.metrics--four .metric { padding: 16px 14px; }
+.metrics--four .metric__num { font-size: clamp(1.6rem, 7.4vw, 2.6rem); }
+.metrics--four .metric__num small { display: inline-block; margin-left: 4px; }
+.metrics--four .metric__note { overflow-wrap: anywhere; }
+@media (min-width: 720px) {
+  .metrics.metrics--four { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+  .metrics--four .metric { padding: 22px; }
+}
